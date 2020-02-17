@@ -1,13 +1,13 @@
 package ingsoft1920.fnb.Model;
 
 public class MesaM {
-	
+
 	private int mesa_id;
 	private int num_mesa;
 	private int capacidad;
 	RestauranteM restaurante;
 	Boolean disponible;
-	
+
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
 		this.mesa_id = mesa_id;
 		this.num_mesa = num_mesa;
@@ -15,7 +15,7 @@ public class MesaM {
 		this.restaurante=null;
 		this.disponible=null;
 	}
-	
+
 	public MesaM(int mesa_id, int num_mesa, int capacidad, RestauranteM restaurante, boolean disponible) {
 		this.mesa_id = mesa_id;
 		this.num_mesa = num_mesa;
@@ -23,8 +23,8 @@ public class MesaM {
 		this.restaurante = restaurante;
 		this.disponible = disponible;
 	}
-	
-	
+
+
 	public int getMesa_id() {
 		return mesa_id;
 	}
@@ -61,6 +61,6 @@ public class MesaM {
 		return "MesaM [mesa_id=" + mesa_id + ", num_mesa=" + num_mesa + ", capacidad=" + capacidad + ", restaurante="
 				+ restaurante.getNombre() + ", disponible=" + disponible + "]";
 	}
-	
-	
+
+
 }

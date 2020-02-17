@@ -13,12 +13,12 @@ public class ConectorBBDD {
 	private static String usuario = "fnb"; 
 	private static String contrasena = "ingSoft20fnb.224";
 	private static String baseDeDatos = "fnb";
-	
+
 	public static Connection conectar (){
 		if (conn==null){
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-	
+
 				conn = DriverManager.getConnection("jdbc:mysql://"+servidor+"/"+baseDeDatos+"?" +       
 						"user="+usuario+"&password=" + contrasena +
 						"&useJDBCCompliantTimezoneShift=true&serverTimezone=UTC");
@@ -32,8 +32,8 @@ public class ConectorBBDD {
 		}
 		return conn;
 	}
-	
-		
+
+
 	public static void desconectar (){
 		if (conn!=null){
 			try {
@@ -44,6 +44,6 @@ public class ConectorBBDD {
 			conn = null;
 		}
 	}
-	
-	
+
+
 }

@@ -211,7 +211,7 @@ INSERT INTO mesa_ubicacion VALUES (1,1);
 
 INSERT INTO habitacion_ubicacion VALUES (1,2);
 
-INSERT INTO comanda VALUES (NULL,FALSE,1,3), (NULL,FALSE,2,NULL);
+INSERT INTO comanda VALUES (NULL,FALSE,1,3,CURDATE()), (NULL,FALSE,2,NULL,'2020-02-15 23:30:00');
 
 INSERT INTO tarea_comanda_ubicacion VALUES (1,1,1),(2,2,2);
 

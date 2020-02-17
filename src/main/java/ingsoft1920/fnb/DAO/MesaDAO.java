@@ -15,11 +15,11 @@ import ingsoft1920.fnb.Services.ConectorBBDD;
 public class MesaDAO {
 
 	private static Connection conn = null;
-	
+
 	public static List<MesaM> mesasDisp() {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
-		
+
 		List<MesaM> resultado= new ArrayList<MesaM>();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -27,12 +27,12 @@ public class MesaDAO {
 			stmt = conn.createStatement();
 			rs= stmt.executeQuery(
 					"SELECT  r.nombre AS nombre_rest, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa,m.capacidad AS capacidad,"
-					+ " CASE WHEN mesa_id in (SELECT mesa_id FROM mesa_ubicacion) THEN FALSE"
-					+ " ELSE TRUE"
-					+ " END as disponible"
-					+ " FROM mesa as m"
-					+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id;");
-			
+							+ " CASE WHEN mesa_id in (SELECT mesa_id FROM mesa_ubicacion) THEN FALSE"
+							+ " ELSE TRUE"
+							+ " END as disponible"
+							+ " FROM mesa as m"
+							+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id;");
+
 			while(rs.next()) {
 				RestauranteM restauranteTmp = new RestauranteM(rs.getString("nombre_rest"));
 				resultado.add(new MesaM(rs.getInt("mesa_id"), rs.getInt("num_mesa"), rs.getInt("capacidad"), restauranteTmp, rs.getBoolean("disponible")));
@@ -57,6 +57,6 @@ public class MesaDAO {
 		}
 		return resultado;
 	}
-	
-	
+
+
 }

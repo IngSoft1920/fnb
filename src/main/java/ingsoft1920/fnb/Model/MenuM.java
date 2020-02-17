@@ -5,7 +5,7 @@ public class MenuM {
 	private int menu_id;
 	private boolean disponible;
 	private String titulo;
-	
+
 	public MenuM(String titulo) {
 		this.titulo = titulo;
 	}
@@ -14,7 +14,7 @@ public class MenuM {
 		this.disponible = disponible;
 		this.titulo = titulo;
 	}
-	
+
 	public int getMenu_id() {
 		return menu_id;
 	}
@@ -33,6 +33,6 @@ public class MenuM {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
-	
+
+
 }

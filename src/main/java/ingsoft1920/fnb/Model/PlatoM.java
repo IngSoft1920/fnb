@@ -5,11 +5,11 @@ public class PlatoM {
 	private String tipo;
 	private int num_plato;
 	private String nombre;
-	private elemComandaM elemComanda;
+	private ElemComandaM elemComanda;
 	private MenuM menu;
 	private Plato_menuM plato_menu;
-	
-	public PlatoM(int plato_id, String tipo, int num_plato, String nombre, elemComandaM elemComanda) {
+
+	public PlatoM(int plato_id, String tipo, int num_plato, String nombre, ElemComandaM elemComanda) {
 		this.plato_id = plato_id;
 		this.tipo = tipo;
 		this.num_plato = num_plato;
@@ -25,6 +25,12 @@ public class PlatoM {
 		this.plato_menu = plato_menu;
 	}
 	
+	public PlatoM(int plato_id ,int num_plato, String nombre) {
+		this.plato_id = plato_id;
+		this.num_plato = num_plato;
+		this.nombre = nombre;
+	}
+
 	public int getPlato_id() {
 		return plato_id;
 	}
@@ -49,10 +55,10 @@ public class PlatoM {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public elemComandaM getElemComanda() {
+	public ElemComandaM getElemComanda() {
 		return elemComanda;
 	}
-	public void setElemComanda(elemComandaM elemComanda) {
+	public void setElemComanda(ElemComandaM elemComanda) {
 		this.elemComanda = elemComanda;
 	}
 	public MenuM getMenu() {
@@ -67,6 +73,6 @@ public class PlatoM {
 	public void setPlato_menu(Plato_menuM plato_menu) {
 		this.plato_menu = plato_menu;
 	}
-	
-	
-    }
+
+
+}

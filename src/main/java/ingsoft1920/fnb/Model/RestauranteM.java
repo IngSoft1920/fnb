@@ -7,14 +7,14 @@ public class RestauranteM {
 	private String nombre;
 	private LocalTime hora_apertura;
 	private LocalTime hora_clausura;
-	
+
 	public RestauranteM(int restaurante_id, String nombre, LocalTime hora_apertura, LocalTime hora_clausura) {
 		this.restaurante_id = restaurante_id;
 		this.nombre = nombre;
 		this.hora_apertura = hora_apertura;
 		this.hora_clausura = hora_clausura;
 	}
-	
+
 	public RestauranteM(String nombre) {
 		this.restaurante_id = -1;
 		this.nombre = nombre;
@@ -45,5 +45,5 @@ public class RestauranteM {
 	public void setHora_clausura(LocalTime hora_clausura) {
 		this.hora_clausura = hora_clausura;
 	}
-	
+
 }

@@ -1,27 +1,27 @@
 package ingsoft1920.fnb.Model;
 
-public class Plato_menuM {
+public class Item_menuM {
 
-	private PlatoM plato;
+	private ItemM item;
 	private MenuM menu;
 	private int precio;
 
-	public Plato_menuM(int precio) {
+	public Item_menuM(int precio) {
 		super();
 		this.precio = precio;
 	}
-	public Plato_menuM(PlatoM plato, MenuM menu, int precio) {
+	public Item_menuM(ItemM item, MenuM menu, int precio) {
 		super();
-		this.plato = plato;
+		this.item = item;
 		this.menu = menu;
 		this.precio = precio;
 	}
 
-	public PlatoM getPlato() {
-		return plato;
+	public ItemM getItem() {
+		return item;
 	}
-	public void setPlato(PlatoM plato) {
-		this.plato = plato;
+	public void setItem(ItemM item) {
+		this.item = item;
 	}
 	public MenuM getMenu() {
 		return menu;
@@ -35,6 +35,4 @@ public class Plato_menuM {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-
-
 }

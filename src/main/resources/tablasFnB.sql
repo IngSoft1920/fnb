@@ -43,7 +43,7 @@ CREATE TABLE comanda(
     estado_acabado BOOLEAN,
     ubicacion_id INT,
     tarea_cocinero_id INT,
-    
+    hora DATETIME,
     
     PRIMARY KEY(comanda_id)
 );

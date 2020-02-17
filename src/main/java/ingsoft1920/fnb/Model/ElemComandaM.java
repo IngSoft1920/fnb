@@ -1,10 +1,10 @@
 package ingsoft1920.fnb.Model;
 
-public class elemComandaM {
+public class ElemComandaM {
 
 	private int elemComanda_id;
-	
-	public elemComandaM(int elemComanda_id) {
+
+	public ElemComandaM(int elemComanda_id) {
 		super();
 		this.elemComanda_id = elemComanda_id;
 	}
