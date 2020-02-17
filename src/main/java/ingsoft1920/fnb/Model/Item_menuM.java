@@ -4,13 +4,13 @@ public class Item_menuM {
 
 	private ItemM item;
 	private MenuM menu;
-	private int precio;
+	private float precio;
 
-	public Item_menuM(int precio) {
+	public Item_menuM(float precio) {
 		super();
 		this.precio = precio;
 	}
-	public Item_menuM(ItemM item, MenuM menu, int precio) {
+	public Item_menuM(ItemM item, MenuM menu, float precio) {
 		super();
 		this.item = item;
 		this.menu = menu;
@@ -29,10 +29,10 @@ public class Item_menuM {
 	public void setMenu(MenuM menu) {
 		this.menu = menu;
 	}
-	public int getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
-	public void setPrecio(int precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 }

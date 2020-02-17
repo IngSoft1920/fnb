@@ -38,7 +38,7 @@ public class ItemDAO {
 
 			while(rs.next()) {
 				MenuM menuTmp = new MenuM(rs.getString("nombre_menu"));
-				Item_menuM item_menuTmp = new Item_menuM(rs.getInt("precio_item"));
+				Item_menuM item_menuTmp = new Item_menuM(rs.getFloat("precio_item"));
 				resultado.put(rs.getString("nombre_item"),new  ItemM(rs.getInt("item_id"), 
 						rs.getString("tipo_item"),rs.getString("nombre_item"), menuTmp, item_menuTmp));
 			}

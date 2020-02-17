@@ -38,7 +38,7 @@ public class PlatoDAO {
 
 			while(rs.next()) {
 				MenuM menuTmp = new MenuM(rs.getString("nombre_menu"));
-				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getInt("precio_plato"));
+				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getFloat("precio_plato"));
 				resultado.put(rs.getString("nombre_plato"),new PlatoM(rs.getInt("plato_id"), rs.getString("tipo_plato"), rs.getInt("num_plato"),
 						rs.getString("nombre_plato"), menuTmp, plato_menuTmp));
 			}
