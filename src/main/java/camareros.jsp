@@ -99,26 +99,16 @@
 				</a>
 
 				<p class="parrafo-post">Mesa
-				<form>
-					<input type="text" name="Clientes" placeholder="Escribe aqui">
-					<button class="boton">Ok</button>
+				<form method="POST" action="enviarComanda">
+					<input type="text" name="numMesa" placeholder="Escribe aqui"> <br>
+					<input type="submit" value="Enviar comanda">
 				</form>
-				</p>
-
-
-				
 			</article>
 
 		</section>
 
-
-		<form method="POST" action="enviarComanda">
-
-			<input type="submit" value="Enviar comanda">
-		</form>
-
 	</section>
-	</section>
+	
 
 
 
