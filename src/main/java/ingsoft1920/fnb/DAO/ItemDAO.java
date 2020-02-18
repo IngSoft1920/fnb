@@ -31,7 +31,8 @@ public class ItemDAO {
 							+ " JOIN item_menu as im ON i.item_id= im.item_id "
 							+ "JOIN menu as m ON m.menu_id = im.menu_id "
 							+ "JOIN restaurante as r ON r.restaurante_id= m.restaurante_id "
-							+ "WHERE r.nombre = ? and m.disponible=TRUE;");
+							+ "WHERE r.nombre = ? and m.disponible=TRUE "
+							+ "ORDER BY m.titulo,i.tipo;");
 
 			stmt.setString(1, nombre_rest);
 			rs=stmt.executeQuery();

@@ -25,13 +25,14 @@ public class PlatoDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato "
+					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato, "
 							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato"
 							+ " FROM plato as p"
 							+ " JOIN plato_menu as pm ON p.plato_id= pm.plato_id"
 							+ " JOIN menu as m ON m.menu_id = pm.menu_id"
 							+ " JOIN restaurante as r ON r.restaurante_id= m.restaurante_id"
-							+ " WHERE r.nombre = ? and m.disponible=TRUE;");
+							+ " WHERE r.nombre = ? and m.disponible=TRUE "
+							+ "ORDER BY  m.titulo,p.num_plato ;");
 
 			stmt.setString(1, nombre_rest);
 			rs=stmt.executeQuery();
