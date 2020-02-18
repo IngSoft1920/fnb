@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ import java.util.Map.Entry;
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
-import ingsoft1920.ejemplo.DAO.ComandaDAO;
-import ingsoft1920.ejemplo.Beans.bebidas;
-import ingsoft1920.ejemplo.Beans.platos;
+import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Beans.bebidas;
+import ingsoft1920.fnb.Beans.platos;
 
 @Component
 @SessionScope

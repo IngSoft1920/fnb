@@ -17,7 +17,8 @@
 <!--Para decodificación de caracteres especiales -->
 <title>CAMAREROS :</title>
 <!--Título-->
-<link rel="stylesheet" type="text/css" href="css/estilo1.css">
+<!--<link rel="stylesheet" type="text/css" href="css/estilo1.css">-->
+<style><%@include file="./css/estilo1.css"%></style>
 <!--carpeta donde se encuentra el estilo css-->
 <body>
 	<header class="header">

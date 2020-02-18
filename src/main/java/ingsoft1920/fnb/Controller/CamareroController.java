@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Controller;
+package ingsoft1920.fnb.Controller;
 
 import java.util.ArrayList;
 
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-import ingsoft1920.ejemplo.Beans.SignupBean;
-import ingsoft1920.ejemplo.Beans.platos;
-import ingsoft1920.ejemplo.Controller.*;
-import ingsoft1920.ejemplo.Model.*;
+import ingsoft1920.fnb.Beans.SignupBean;
+import ingsoft1920.fnb.Beans.platos;
+import ingsoft1920.fnb.Controller.*;
+import ingsoft1920.fnb.Model.*;
 
 
 

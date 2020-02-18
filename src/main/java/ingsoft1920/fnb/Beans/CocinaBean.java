@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;

@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Controller;
+package ingsoft1920.fnb.Controller;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ingsoft1920.ejemplo.Beans.ComandaBean;
-import ingsoft1920.ejemplo.Beans.bebidas;
-import ingsoft1920.ejemplo.Beans.platos;
+import ingsoft1920.fnb.Beans.ComandaBean;
+import ingsoft1920.fnb.Beans.bebidas;
+import ingsoft1920.fnb.Beans.platos;
 
 @Controller
 public class ComandaController {

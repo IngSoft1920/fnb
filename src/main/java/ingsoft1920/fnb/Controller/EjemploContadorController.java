@@ -1,7 +1,6 @@
-package ingsoft1920.fnb.Controllers;
+package ingsoft1920.fnb.Controller;
 
 import javax.validation.Valid;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

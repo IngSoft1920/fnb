@@ -2,6 +2,7 @@ package ingsoft1920.fnb.DAO;
 
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class PlatoDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato "
+					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato, "
 							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato"
 							+ " FROM plato as p"
 							+ " JOIN plato_menu as pm ON p.plato_id= pm.plato_id"

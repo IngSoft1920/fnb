@@ -1,9 +1,9 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import ingsoft1920.ejemplo.Model.UsuarioModel;
+import ingsoft1920.fnb.Model.UsuarioM;
 
 @Component
 //Esta etiqueta permite que el Bean se mantenga en memoria del servidor
@@ -11,7 +11,7 @@ import ingsoft1920.ejemplo.Model.UsuarioModel;
 @SessionScope 
 public class SesionBean {
 	int usuarioID;
-	public SesionBean(UsuarioModel usuarioModel) {
+	public SesionBean(UsuarioM usuarioModel) {
 		this.usuarioID=usuarioModel.getUsuarioID();
 	}
 	

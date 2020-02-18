@@ -1,8 +1,11 @@
 package ingsoft1920.fnb.Beans;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
+
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
@@ -27,6 +30,7 @@ public class EjemploContadorBean {
 	public void addOne() {
 		this.contadorVisitas++;
 		this.listaHoras.add(new Date().toString());
+		 
 	}
 	
 	public List<String> getListaHoras(){

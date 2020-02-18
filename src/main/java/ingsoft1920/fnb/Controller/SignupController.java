@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Controller;
+package ingsoft1920.fnb.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ingsoft1920.ejemplo.Beans.SesionBean;
-import ingsoft1920.ejemplo.Beans.SignupBean;
-import ingsoft1920.ejemplo.DAO.UsuarioDAO;
-import ingsoft1920.ejemplo.Model.UsuarioModel;
+import ingsoft1920.fnb.Beans.SesionBean;
+import ingsoft1920.fnb.Beans.SignupBean;
+import ingsoft1920.fnb.DAO.UsuarioDAO;
+import ingsoft1920.fnb.Model.UsuarioM;
 
 //Especificamos que la clase tiene métodos controladores
 @Controller
@@ -68,13 +68,13 @@ public class SignupController {
 			logger.info("Peticion de Signup recibida correctamente y con campos validos");
 			
 			//La clase UsuarioModel representa el modelo de datos que vamos a manejar en la aplicacion
-			UsuarioModel usuarioModel = new UsuarioModel(signupBean);
+			UsuarioM usuarioModel = new UsuarioM(signupBean);
 			
 			//La clase UsuarioDAO es el "punto de conexion" entre nuestro modelo de datos (UsuarioModel) y la base de datos
 			//con sus tablas correspondientes. Sera la encargada de "traducir" peticiones en forma de metodos Java en
 			//SELECT, INSERT, UPDATE, DELETE... de la base de datos. Por lo tanto, en las clases DAO reside TODA la logica 
 			//de base de datos, y no puede haber ninguna consulta SQL fuera de dichas clases
-			UsuarioModel respuesta = UsuarioDAO.signup(usuarioModel);
+			UsuarioM respuesta = UsuarioDAO.signup(usuarioModel);
 			if(respuesta!=null) {
 				//Puedo publicar un objeto, y dentro del jsp acceder a sus propiedades
 				SesionBean sesionBean = new SesionBean(respuesta);

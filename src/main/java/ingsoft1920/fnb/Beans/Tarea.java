@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 import java.sql.Date;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import ingsoft1920.ejemplo.Controller.CamareroController;
+import ingsoft1920.fnb.Controller.CamareroController;
 @Component
 public class NombreCantidaBean {
 	

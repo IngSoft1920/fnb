@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Controller;
+package ingsoft1920.fnb.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import ingsoft1920.ejemplo.Beans.DatoUsuarioBean;
+import ingsoft1920.fnb.Beans.DatoUsuarioBean;
 
 
 //Mas info sobre JSON y Spring aqui:
@@ -94,10 +94,10 @@ public class EjemploAPI {
 	
 	
 	
-	//EJEMPLOS MAS AVANZADOS, EN LOS QUE SPRING HACE GRAN PARTE DEL TRABAJO, PERO PUEDE LLEVAR
+	//fnbS MAS AVANZADOS, EN LOS QUE SPRING HACE GRAN PARTE DEL TRABAJO, PERO PUEDE LLEVAR
 	//A ERRORES RAROS QUE NO SON FACILES DE ENTENDER
 	
-	//Ejemplo devolviendo directamente un objeto de una clase. Spring intentara transformarlo
+	//fnb devolviendo directamente un objeto de una clase. Spring intentara transformarlo
 	//en JSON
 	@ResponseBody
 	@GetMapping("/datoUsuario2")
