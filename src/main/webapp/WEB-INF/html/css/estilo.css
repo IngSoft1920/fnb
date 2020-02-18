@@ -1,0 +1,85 @@
+*{
+  margin: 0;
+  padding: 0;
+
+}
+
+body{
+  background: #fff; <!-- blanco-->
+  font-family: calibri;
+
+}
+
+header{
+  background: #01a9db; <!-- la parte de arriba azul-->
+  width: 100%; <!-- ancho de 100% de la pantalla-->
+  height: 100px; <!-- alto de 100 pixeles -->
+  box-shadow: 0px 0px 30px; <!-- sombra 30 el tamaño de la sombra -->
+}
+
+#encabezado{ <!-- la parte del encabezado que hemos establecido antes-->
+  width: 80%; <!-- 80 % de pantalla-->
+  height: 30px; <!-- altura-->
+  margin: auto;
+  border: 1px solid #000; <!-- negro-->
+}
+
+#logo{
+  width: 30%;
+  height: auto; overflow: hidden; <!-- alto automático-->
+  float: left; <!-- elemento flotando hacia la izquierda-->
+  color: #fff;
+  font-size: 30px; <!-- 30 px tamaño de fuente-->
+  margin-top: 55px; <!-- margen superior-->
+}
+
+#menu{
+  width: 60%;
+  height: 40px;
+  border: 1px solid; <!--  borde y que sea sólido-->
+  float: right; <!-- elemento flotando hacia la izquierda-->
+  background: #006480
+}
+
+#menu ul{}
+
+#menu ul li{
+  list-style: none; <!-- quitar los puntos de cada cosa-->
+  display: inline-block; <!-- se va a alinear los elementos que le hemos puesto -->
+  margin-top: 10px;
+}
+
+#menu ul li .enlace{
+  text-decoration: none; <!-- quita el subrayado -->
+  padding: 10px 20px; <!-- pequeña separaci ón-->
+  font-size: 20px;
+  color: #fff
+
+}
+
+#menu ul li .enlace:hover{
+  background: #585858; <!-- color de fondo-->
+  color: #fff; <!-- color de texto-->
+  border-radius: 5px 5px 0px 0px; <!-- las esquinas-->
+}
+
+#menu ul li .activate-menu{
+  background: #585858;
+  color: #fff;
+  border-radius: 5px 5px 0px 0px;
+}
+
+/*---------contenido principal-----------*/
+#principal{
+  width: 80%;
+  height: auto; overflow: hidden;
+  border: 1px solid; /* si no le ponemos nada significa negro*/
+  margin: 10px auto;
+}
+
+#publicaciones{
+  width: 70%;
+  height: auto; overflow: hidden;
+  border: 1px solid red; /*significa que es rojo*/
+  margin-top: 10px;
+}
