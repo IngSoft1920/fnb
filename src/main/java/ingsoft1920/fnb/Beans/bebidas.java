@@ -1,4 +1,4 @@
-package ingsoft1920.ejemplo.Beans;
+package ingsoft1920.fnb.Beans;
 
 public class bebidas {
 	
