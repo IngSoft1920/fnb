@@ -20,7 +20,6 @@
 
 
 		<form method="POST" action="enviarComanda">
-			
 			<input type="submit" value="Enviar comanda">
 		</form>
 	</ul>

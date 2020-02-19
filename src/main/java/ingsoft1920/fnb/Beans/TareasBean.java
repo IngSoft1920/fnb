@@ -1,6 +1,7 @@
 package ingsoft1920.fnb.Beans;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,11 +16,26 @@ import ingsoft1920.fnb.DAO.ComandaDAO;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
 
+
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.tomcat.jni.Local;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 @Component
 @SessionScope
 public class TareasBean {
 
 	Map<Integer, Tarea> listaTareas;
+
 
 	public Map<Integer, Tarea> getListaTareas() {
 		return listaTareas;
@@ -59,8 +75,8 @@ public class TareasBean {
 		listaTareas.put(2, new Tarea(1, cantidades, bebidas, LocalDate.now()));
 		listaTareas.put(3, new Tarea(1, cantidades, bebidas, LocalDate.now()));
 		listaTareas.put(4, new Tarea(1, cantidades, bebidas, LocalDate.now()));
-		listaTareas.put(5, new Tarea(1, cantidades, bebidas, LocalDate.now()));
-		listaTareas.put(6, new Tarea(1, cantidades, bebidas, LocalDate.now()));
+		listaTareas.put(5, new Tarea(3, cantidades, bebidas, LocalDate.now()));
+		listaTareas.put(6, new Tarea(2, cantidades, bebidas, LocalDate.now()));
 		System.out.println(listaTareas.toString());
 
 	}

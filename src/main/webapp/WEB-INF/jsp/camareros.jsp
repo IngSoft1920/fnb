@@ -17,8 +17,9 @@
 <!--Para decodificación de caracteres especiales -->
 <title>CAMAREROS :</title>
 <!--Título-->
-<!--<link rel="stylesheet" type="text/css" href="css/estilo1.css">-->
-<style><%@include file="./css/estilo1.css"%></style>
+<!--link rel="stylesheet" type="text/css" href="./css/estilo1.css"-->
+<style><%@include file="./css/estilo1.css"%>
+</style>
 <!--carpeta donde se encuentra el estilo css-->
 <body>
 	<header class="header">
@@ -47,7 +48,14 @@
 				</a>
 				<c:forEach items="${comandaBean.getCantidades().entrySet()}"
 					var="item">
-					<li>${item.getKey()}-${item.getValue().getUnidades()}
+					<li><label>${item.getKey()} 
+						<c:set var="val" value="${item.getValue().getUnidades()}" /> 
+						<c:if
+							test="${val != '0'}">
+    									${item.getValue().getUnidades()}
+  									</c:if>
+  									</label>
+
 						<form method="POST" action="anadirItem">
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
@@ -74,7 +82,13 @@
 				</a>
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
-					<li>${item.getKey()}-${item.getValue().getUnidades()}
+					<li><label>${item.getKey()} 
+						<c:set var="val" value="${item.getValue().getUnidades()}" /> 
+						<c:if
+							test="${val != '0'}">
+    									${item.getValue().getUnidades()}
+  									</c:if>
+  									</label>
 						<form method="POST" action="anadirBebida">
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit"
@@ -100,26 +114,17 @@
 				</a>
 
 				<p class="parrafo-post">Mesa
-				<form>
-					<input type="text" name="Clientes" placeholder="Escribe aqui">
-					<button class="boton">Ok</button>
+				<form method="POST" action="enviarComanda">
+					<input type="hidden" name="fecha"> <input type="text"
+						name="numMesa" placeholder="Escribe aqui"> <br> <input
+						type="submit" value="Enviar comanda">
 				</form>
-				</p>
-
-
-				
 			</article>
 
 		</section>
 
-
-		<form method="POST" action="enviarComanda">
-
-			<input type="submit" value="Enviar comanda">
-		</form>
-
 	</section>
-	</section>
+
 
 
 

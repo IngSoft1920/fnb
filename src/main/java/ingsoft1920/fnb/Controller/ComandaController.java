@@ -13,21 +13,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ingsoft1920.fnb.Beans.ComandaBean;
-import ingsoft1920.fnb.Beans.bebidas;
-import ingsoft1920.fnb.Beans.platos;
+import ingsoft1920.ejemplo.Beans.ComandaBean;
+import ingsoft1920.ejemplo.Beans.bebidas;
+import ingsoft1920.ejemplo.Beans.platos;
 
 @Controller
 public class ComandaController {
 	@Autowired
 	ComandaBean comandaBean;
 	
-	@GetMapping("/camareros")
+	@RequestMapping("/camareros")
 	public String showPaginaComandaGet(Model model) {
 		
+		
 		model.addAttribute("comandaBean", comandaBean);
+		
+		System.out.println(comandaBean.getCantidades());
 		return "camareros";
 	}
 	
@@ -106,6 +110,10 @@ public class ComandaController {
 			entrada=it.next();
 			if(entrada.getId()==Integer.parseInt(nuevoPlato)) {
 				found=true;
+				if(entrada.getUnidades()==0) {
+					model.addAttribute("comandaBean", comandaBean);
+					return "camareros";
+				}
 				entrada.setUnidades(entrada.getUnidades()-1);
 				Set<String> keyList =comandaBean.getCantidades().keySet();
 				boolean foundKey=false;
@@ -162,6 +170,10 @@ public class ComandaController {
 			entrada=it.next();
 			if(entrada.getId()==Integer.parseInt(nuevoPlato)) {
 				found=true;
+				if(entrada.getUnidades()==0) {
+					model.addAttribute("comandaBean", comandaBean);
+					return "camareros";
+				}
 				entrada.setUnidades(entrada.getUnidades()-1);
 				Set<String> keyList =comandaBean.getBebidas().keySet();
 				boolean foundKey=false;
@@ -192,8 +204,6 @@ public class ComandaController {
 		
 		
 		model.addAttribute("comandaBean", comandaBean);
-		
-		
 		return "camareros";
 	}
 	

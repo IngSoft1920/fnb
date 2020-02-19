@@ -46,6 +46,22 @@ public class ComandaBean {
 			
 		}
 		ConectorBBDD.desconectar();
+		
+		/*List<String> listaPlatos = new ArrayList<String>();
+		List<String> listaBebida = new ArrayList<String>();
+
+		listaPlatos.add("lentejas");
+		listaPlatos.add("potaje");
+		listaBebida.add("Ron Barceló");
+		listaBebida.add("almirante");
+		cantidades = new HashMap<String, platos>();
+		bebidas = new HashMap<String, bebidas>();
+		
+		for (int i = 0; i < listaPlatos.size(); i++) {
+			this.cantidades.put(listaPlatos.get(i), new platos(idComida++, 0));
+			this.bebidas.put(listaBebida.get(i), new bebidas(idBebida++, 0));
+
+		}*/
 		System.out.println(bebidas.toString());
 		System.out.println(cantidades.toString());
 	}

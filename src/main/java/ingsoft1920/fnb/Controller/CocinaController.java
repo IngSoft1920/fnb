@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ingsoft1920.fnb.Beans.Tarea;
-import ingsoft1920.fnb.Beans.TareasBean;
-import ingsoft1920.fnb.Beans.platos;
+import ingsoft1920.ejemplo.Beans.Tarea;
+import ingsoft1920.ejemplo.Beans.TareasBean;
+import ingsoft1920.ejemplo.Beans.platos;
 
 @Controller
 public class CocinaController {
@@ -37,8 +37,9 @@ public class CocinaController {
 		tareasBean.setListaTareas(lis);
 
 		model.addAttribute("tareasBean", tareasBean);
+		System.out.println("--------------------");
 
-		return "webCocineros";
+		return "webCocinero";
 
 	}
 
