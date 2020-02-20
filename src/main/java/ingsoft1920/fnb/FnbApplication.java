@@ -1,4 +1,4 @@
-package ingsoft1920.fnb.FnbApplication;
+package ingsoft1920.fnb;
 
 import org.apache.logging.log4j.LogManager;
 
