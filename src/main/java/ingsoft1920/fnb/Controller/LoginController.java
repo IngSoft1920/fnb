@@ -24,7 +24,7 @@ public class LoginController {
 	TareasBean tareasBean;
 	ComandaBean comandaBean;
 	
-	@GetMapping("/login")
+	@GetMapping("/")
 	public String showPaginaLoginGet(Model model) {
 		
 		model.addAttribute("loginBean",loginBean);
