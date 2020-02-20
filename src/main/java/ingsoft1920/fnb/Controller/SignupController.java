@@ -1,6 +1,7 @@
 package ingsoft1920.fnb.Controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.validation.Valid;

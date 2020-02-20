@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Beans;
 
 import java.util.ArrayList;
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
