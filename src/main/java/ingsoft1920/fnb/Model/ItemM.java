@@ -53,6 +53,12 @@ public class ItemM {
 	public void setItem_menu(Item_menuM item_menu) {
 		this.item_menu = item_menu;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 
 
