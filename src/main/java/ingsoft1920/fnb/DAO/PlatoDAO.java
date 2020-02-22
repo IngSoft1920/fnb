@@ -32,7 +32,8 @@ public class PlatoDAO {
 							+ " JOIN plato_menu as pm ON p.plato_id= pm.plato_id"
 							+ " JOIN menu as m ON m.menu_id = pm.menu_id"
 							+ " JOIN restaurante as r ON r.restaurante_id= m.restaurante_id"
-							+ " WHERE r.nombre = ? and m.disponible=TRUE;");
+							+ " WHERE r.nombre = ? and m.disponible=TRUE"
+							+ " ORDER BY  m.titulo,p.num_plato ;");
 
 			stmt.setString(1, nombre_rest);
 			rs=stmt.executeQuery();

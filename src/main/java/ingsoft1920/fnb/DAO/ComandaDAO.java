@@ -32,7 +32,8 @@ public class ComandaDAO {
 							+ " JOIN comanda_elemComanda AS ce ON  c.comanda_id=ce.comanda_id "
 							+ "JOIN elemComanda AS e ON e.elemComanda_id = ce.elemComanda_id "
 							+ "JOIN plato AS p ON p.elemComanda_id = e.elemComanda_id "
-							+ "WHERE c.tarea_cocinero_id=? and estado_acabado = FALSE;");
+							+ "WHERE c.tarea_cocinero_id=? and estado_acabado = FALSE "
+							+ "ORDER BY c.hora;");
 
 			stmt.setInt(1, tareaCocina);
 			rs=stmt.executeQuery();
