@@ -19,7 +19,7 @@ import ingsoft1920.fnb.Beans.DatoUsuarioBean;
 public class EjemploAPI {
 	//OPCION MAS SIMPLE: TENEMOS QUE HACER MAS TRABAJO PERO TENEMOS MAS CONTROL SOBRE
 	//LO QUE OCURRE
-	
+
 	//Con la etiqueta responseBody estamos especificando que el string que devolvamos
 	//sera el cuerpo de la respuesta HTTP que daremos a la peticion
 	@ResponseBody
@@ -27,26 +27,26 @@ public class EjemploAPI {
 	public String getDatosUsuario1() {
 		//Instanciamos un nuevo objeto Json
 		JsonObject obj = new JsonObject();
-		
+
 		//Si estamos añadiedo propiedades (String, Number, Boolean, Character), utilizamos
 		//addProperty("nombrePropiedad",valor)
 		obj.addProperty("nombre", "Jorge");
 		obj.addProperty("apellido", "Vazquez");
 		obj.addProperty("email", "jorge.vazquez.acevedo@alumnos.upm.es");
-		
+
 		//Declaramos una nueva lista (array) en Json y añadimos elementos
 		JsonArray listaNotas = new JsonArray();
 		listaNotas.add(6);
 		listaNotas.add(9);
 		listaNotas.add(10);
-		
+
 		//Si estamos añadiendo un objeto Json (como es un array) a otro, tenemos que utilizar
 		//el metodo add("nombrePropiedad",valor)
 		obj.add("notas", listaNotas);
-		
+
 		//Obtenemos la representacion en String del objeto JSON y la enviamos como respuesta
 		return obj.getAsString();
-		
+
 		//Devolvera lo siguiente en el cuerpo de la respuesta
 		/*
 		 * {
@@ -57,7 +57,7 @@ public class EjemploAPI {
 		 * }
 		 */
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/procesaDatos1")
 	public String procesaDatos1(@RequestBody String req) {
@@ -71,10 +71,10 @@ public class EjemploAPI {
 		 * }
 		 */
 		//Este texto estaria en la variable req
-		
+
 		//Parseamos el texto a un JsonObject
 		JsonObject obj = (JsonObject) JsonParser.parseString(req);
-		
+
 		//Vamos accediendo a sus propiedades, y las guardamos en un objeto de nuestro modelo
 		//de datos
 		String nombre=obj.get("nombre").getAsString();
@@ -87,16 +87,16 @@ public class EjemploAPI {
 		}
 		DatoUsuarioBean datoUsuario = new DatoUsuarioBean(nombre,apellido,email,notasInt);
 		datoUsuario.doWhatEver();
-		
+
 		return "Procesado correctamente";
 	}
-	
-	
-	
-	
+
+
+
+
 	//fnbS MAS AVANZADOS, EN LOS QUE SPRING HACE GRAN PARTE DEL TRABAJO, PERO PUEDE LLEVAR
 	//A ERRORES RAROS QUE NO SON FACILES DE ENTENDER
-	
+
 	//fnb devolviendo directamente un objeto de una clase. Spring intentara transformarlo
 	//en JSON
 	@ResponseBody
@@ -106,15 +106,15 @@ public class EjemploAPI {
 		DatoUsuarioBean datosUsuario = new DatoUsuarioBean("jorge","vazquez","email",notas);
 		return datosUsuario;
 	}
-	
-	
+
+
 	@ResponseBody
 	@PostMapping("/procesaDatos")
 	//Spring automaticamente parsea el Json que viene a esa clase. Los nombres de los campos de la 
 	//clase y los de las propiedades que vienen en Json tienen que ser iguales
 	public String procesaDatos(@RequestBody DatoUsuarioBean datoUsuarioBean) {
 		datoUsuarioBean.doWhatEver();
-		
+
 		return "Procesado correctamente";
 	} 
 

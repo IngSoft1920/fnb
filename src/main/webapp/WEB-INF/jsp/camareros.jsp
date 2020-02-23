@@ -1,3 +1,4 @@
+<%@page import="org.apache.coyote.Request"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -14,6 +15,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
+	
 <meta charset="utf-8">
 <!--Para decodificación de caracteres especiales -->
 <title>CAMAREROS :</title>
@@ -61,8 +63,8 @@
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
-						</form>
-						<form method="POST" action="quitarItem">
+							</form>
+							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="-">
