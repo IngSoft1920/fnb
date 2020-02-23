@@ -28,6 +28,8 @@ public class CocinaController {
 
 	@GetMapping("/cocina")
 	public String showPaginaComandaGet(Model model) {
+		
+		tareasBean=new TareasBean();
 
 		model.addAttribute("tareasBean", tareasBean);
 		return "webCocinero";

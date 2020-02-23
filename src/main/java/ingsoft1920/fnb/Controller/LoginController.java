@@ -50,7 +50,7 @@ public class LoginController {
 			}
 			
 			model.addAttribute("tareasBean",tareasBean);
-			return "redirect:cocineros";
+			return "redirect:cocina";
 		case"afesio":
 			
 			if(!pass.equals("1234")) {

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TareaEmpleadoBean {
-	
+	public TareaEmpleadoBean(){}
 	public TareaEmpleadoBean(int id_incidencia) {
 		this.id_incidencia = id_incidencia;
 	}

@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Beans;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class Tarea {
 	int idMesa;
 	Map<String,platos> listaPlatos;
 	Map<String,bebidas> listaBebidas;
-	LocalDate hora;
+	LocalDateTime hora;
 	public int getIdMesa() {
 		return idMesa;
 	}
@@ -35,13 +36,13 @@ public class Tarea {
 	public void setListaBebidas(Map<String, bebidas> listaBebidas) {
 		this.listaBebidas = listaBebidas;
 	}
-	public LocalDate getHora() {
+	public LocalDateTime getHora() {
 		return hora;
 	}
-	public void setHora(LocalDate hora) {
+	public void setHora(LocalDateTime hora) {
 		this.hora = hora;
 	}
-	public Tarea(int idMesa, Map<String, platos> listaPlatos, Map<String, bebidas> listaBebidas, LocalDate hora) {
+	public Tarea(int idMesa, Map<String, platos> listaPlatos, Map<String, bebidas> listaBebidas, LocalDateTime hora) {
 		super();
 		this.idMesa = idMesa;
 		this.listaPlatos = listaPlatos;
@@ -50,15 +51,18 @@ public class Tarea {
 	}
 	
 	public void addPlato(String plato,int id) {
+		System.out.println(plato+"plato que le viene!!!!!!!!!!!!!!!!!!!!!!");
 		
 		if (listaPlatos.containsKey(plato)) {
 			platos p =listaPlatos.get(plato);
 			p.setUnidades(p.getUnidades()+1);
+			System.out.println("plato con nueva cantidad!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			listaPlatos.replace(plato, p);
+			//System.out.println(":------------:"+listaPlatos.toString());
 			
 			
 		}else {
-			
+			//System.out.println(":------------:"+listaPlatos.toString());
 			listaPlatos.put(plato, new platos(id,1));
 			
 		}

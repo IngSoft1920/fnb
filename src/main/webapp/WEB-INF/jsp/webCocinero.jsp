@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<meta http-equiv="refresh" content="5; URL= ${request.getURL()}">
 <html lan="es">
 <head>
 <meta charset="utf-8">
@@ -44,7 +45,7 @@
 			<article class="post">
 
 				
-						<h2 class="titulo-post">Mesa ${entry.getIdMesa()}</h2>
+						<h2 class="titulo-post">Comanda ${entry.getIdMesa()}</h2>
 						<form method="POST" action="quitarTarea">
 							 <input type="hidden" name="pedidoAtendido" value="${entry.getIdMesa()}">
 							<input type="submit" value="Tarea Lista"
@@ -58,6 +59,8 @@
 							
 								<p class="parrafo-post">${platos.getKey()} - ${platos.getValue().getUnidades()}</p>
 						</c:forEach>
+						
+						<p class="parrafo-post">${entry.getHora().getMinute()}</p>
 						<%/* 
 						<c:forEach
 							items="${entry.getValue().getListaBebidas().entrySet()}"

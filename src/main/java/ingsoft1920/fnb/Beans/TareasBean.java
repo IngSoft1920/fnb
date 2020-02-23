@@ -94,7 +94,7 @@ public class TareasBean {
 	 comandas=ComandaDAO.comandasTareaCocina(3);
 	 comandas.add(new ComandaM(-2));
 	 System.out.println("---------------------------------------------------------------------------+++-+-+-+");
-	 System.out.println(comandas.size());
+	 System.out.println("size="+comandas.size());
 	 ConectorBBDD.desconectar();
 	 int idAnterior=-1;
 	 Tarea tar = null;
@@ -121,7 +121,7 @@ public class TareasBean {
 		System.out.println(comandas.get(i).getPlato().getNombre());
 		
 		
-		 tar =  new Tarea(id_comanda, new HashMap<String, platos>(), new HashMap<String, bebidas>(), comandas.get(i).getHora().toLocalDate());
+		 tar =  new Tarea(id_comanda, new HashMap<String, platos>(), new HashMap<String, bebidas>(), comandas.get(i).getHora());
 		 tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id());
 		 idAnterior=id_comanda;
 		 
