@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Controller;
 
 import ingsoft1920.fnb.Model.*;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;  
 import org.springframework.stereotype.Controller; 
@@ -16,7 +17,9 @@ import com.google.gson.JsonParser;
 
 import ingsoft1920.fnb.DAO.PlatoDAO;
 import ingsoft1920.fnb.DAO.RestauranteDAO;
+import ingsoft1920.fnb.DAO.ComandaDAO;
 import ingsoft1920.fnb.DAO.ItemDAO;
+import ingsoft1920.fnb.DAO.MesaDAO;
 import ingsoft1920.fnb.DAO.Mesa_ubicacionDAO;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.PlatoM; 
@@ -186,7 +189,7 @@ public class ApisFnb {
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
 		String rest_nom = obj.get("rest_nom").getAsString(); 
 		int capacidad = obj.get("capacidad").getAsInt();
-		
+
 		JsonArray listaFechaReserva = new JsonArray(); 
 
 		//lista de items dentro del Map
@@ -197,10 +200,63 @@ public class ApisFnb {
 
 		JsonObject resJson = new JsonObject();
 		resJson.add("fecha_reserva", listaFechaReserva);  
-		
+
 		return resJson.toString();
 	}
 
+	/*
+	Entrada:
+	{
+		'servicio_id': int,
+		'fecha_hora': String,
+		'id_cliente': String[],
+		'tipoUbicacion': int,
+		'ubicacion': String,
+		'platos':String[],
+		'items':String[]
+	}
+	Donde:
+		- fecha_hora sigue el formato LocalDateTime [ yyyy-mm-ddThh:mm:ss ] 
+	 	- tipoUbicacion: 1 para hacer una reserva en un restaurante
+	 					 2 para hacer un pedido a una habitacion
+	 	- ubicacion: si tipoUbicacion=1 -> nombre del restaurante
+	 	 			 si tipoUbicacion=2 -> numero de habitacion
+	 	- platos e items: si tipoUbicacion=1 -> lista vacia en ambos
+	 	 				  si tipoUbicacion=2 -> lista con los nombres de los platos e items solicitados 
+	 	 				  						(si no se ha solicitado de un tipo puede ir vacia su lista)
+	 */ 
+	@ResponseBody 
+	@PostMapping("/nuevoServicio") 
+	public static void  nuevoServicio(@RequestBody String req){
 
+		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
+		int servicio_id = obj.get("servicio_id").getAsInt(); 
+		LocalDateTime fecha_hora = LocalDateTime.parse(obj.get("fecha_hora").getAsString());
+		JsonArray listaIdCliente = obj.get("id_cliente").getAsJsonArray();
+		int tipoUbicacion = obj.get("tipoUbicacion").getAsInt();
+		switch(tipoUbicacion) {
+		case 1: //CASO: Reserva Mesa
+			String rest_nomb= obj.get("ubicacion").getAsString();
+			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,listaIdCliente.size()).getMesa_id(), fecha_hora);
+			break;
+		case 2: //CASO: Pedido Habitacion
+			int habitacion_id = Integer.parseInt(obj.get("ubicacion").getAsString());
 
+			JsonArray listaPlatos = obj.get("platos").getAsJsonArray();
+			String platos[] = new String[listaPlatos.size()];
+			for(int i =0; i<platos.length; i++) {
+				platos[i]=listaPlatos.get(i).getAsString();
+			}
+
+			JsonArray listaItems = obj.get("items").getAsJsonArray();
+			String items[] = new String[listaItems.size()];
+			for(int i =0; i<items.length; i++) {
+				items[i]=listaItems.get(i).getAsString();
+			}
+
+			ComandaDAO.insertComandaHab(habitacion_id, fecha_hora, platos, items);
+			break;
+
+		}
+	}
 } 

@@ -10,7 +10,7 @@ public class MesaM {
 	private RestauranteM restaurante;
 	private Boolean disponible;
 
-	
+
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
 		this.mesa_id = mesa_id;
 		this.num_mesa = num_mesa;
@@ -27,6 +27,10 @@ public class MesaM {
 		this.disponible = disponible;
 	}
 
+
+	public MesaM(int mesa_id) {
+		this.mesa_id = mesa_id;
+	}
 
 	public int getMesa_id() {
 		return mesa_id;

@@ -29,7 +29,10 @@ public class MesaDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  r.nombre AS nombre_rest, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa,m.capacidad AS capacidad,"
-							+ " CASE WHEN mesa_id in (SELECT mesa_id FROM mesa_ubicacion WHERE ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30 )"
+							+ " CASE WHEN mesa_id in "
+							+ "(SELECT mesa_id "
+							+ "FROM mesa_ubicacion "
+							+ "WHERE ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30 )"
 							+ " THEN FALSE"
 							+ " ELSE TRUE"
 							+ " END as disponible"
@@ -64,8 +67,8 @@ public class MesaDAO {
 		return resultado;
 	}
 
-	
-	public static void alojarMesa(int mesa_id) {
+
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
 
@@ -75,9 +78,9 @@ public class MesaDAO {
 			stmt.execute();
 			stmt= conn.prepareStatement("INSERT INTO mesa_ubicacion VALUES (?, (SELECT MAX(ubicacion_id) FROM  ubicacion),?);");
 			stmt.setInt(1, mesa_id);
-			stmt.setObject(2, LocalDateTime.now());
+			stmt.setObject(2, fecha_hora == null ? LocalDateTime.now() : fecha_hora);
 			stmt.execute();
-			
+
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 		}finally {
@@ -92,7 +95,7 @@ public class MesaDAO {
 			}
 		}
 	}
-	
+
 	public static void desalojarMesa(int mesa_id) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
@@ -102,21 +105,22 @@ public class MesaDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"select ubicacion_id "
-					+ "from mesa_ubicacion"
-					+ " where mesa_id=? AND TIMESTAMPDIFF(MINUTE,?,fecha_reserva)>=-30 AND TIMESTAMPDIFF(MINUTE,?,fecha_reserva)<=0 ;");
-			
+							+ "from mesa_ubicacion"
+							+ " where mesa_id=? AND TIMESTAMPDIFF(MINUTE,?,fecha_reserva)>=-30"
+							+ " AND TIMESTAMPDIFF(MINUTE,?,fecha_reserva)<=0 ;");
+
 			stmt.setInt(1,mesa_id);
 			stmt.setObject(2, LocalDateTime.now());
 			stmt.setObject(3, LocalDateTime.now());
 			rs = stmt.executeQuery();
-			
+
 			if(rs.next())
 				ubicacion_id = rs.getInt("ubicacion_id");
 			if(ubicacion_id>0) {
 				stmt= conn.prepareStatement("DELETE FROM mesa_ubicacion WHERE ubicacion_id =?;");
 				stmt.setInt(1, ubicacion_id);
 				stmt.execute();
-				
+
 				stmt= conn.prepareStatement("DELETE FROM ubicacion WHERE ubicacion_id =?;");
 				stmt.setInt(1, ubicacion_id);
 				stmt.execute();
@@ -134,6 +138,57 @@ public class MesaDAO {
 				conn=null;
 			}
 		}
+	}
+
+
+	public static MesaM mesaDisp(String nom_rest,LocalDateTime fecha_hora, int capacidad) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		MesaM resultado= null;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT MIN(m.mesa_id) AS mesa_id " + 
+							"FROM mesa as m " + 
+							"JOIN restaurante as r ON m.restaurante_id=r.restaurante_id " + 
+							"WHERE r.nombre = ? and m.capacidad=? and mesa_id not in "
+							+ "(SELECT mu.mesa_id AS mesa_id "
+							+ "FROM mesa as m "
+							+ "JOIN restaurante as r ON m.restaurante_id=r.restaurante_id  "
+							+ "JOIN  mesa_ubicacion as mu ON  mu.mesa_id= m.mesa_id "
+							+ "WHERE r.nombre = ? and m.capacidad=? and mu.fecha_hora = ?);");
+
+			stmt.setString(1, nom_rest);
+			stmt.setInt(2, capacidad);
+			stmt.setString(3, nom_rest);
+			stmt.setInt(4, capacidad);
+			stmt.setObject(5, fecha_hora);
+			rs=stmt.executeQuery();
+
+			if(rs.next()) {
+				resultado= new MesaM(rs.getInt("mesa_id"));
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
 	}
 
 }
