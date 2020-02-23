@@ -135,51 +135,5 @@ public class MesaDAO {
 			}
 		}
 	}
-	
-	public static List<MesaM> horasNoDispRest(String nom_rest, int capacidad){
-		if (conn == null)
-			conn= ConectorBBDD.conectar();
-
-		List<MesaM> resultado= new ArrayList<MesaM>();
-
-
-		PreparedStatement stmt = null; 
-		ResultSet rs = null;
-		try {
-			stmt = conn.prepareStatement(
-					"SELECT mu.fecha_reserva AS fecha_reserva"
-					+ " FROM mesa as m"
-					+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id "
-					+ "JOIN  mesa_ubicacion as mu ON  mu.mesa_id= m.mesa_id"
-					+ " WHERE r.nombre = ? and m.capacidad=?;");
-
-			stmt.setString(1, nom_rest);
-			stmt.setInt(2, capacidad);
-			rs=stmt.executeQuery();
-
-
-			while(rs.next()) {
-				resultado.add(new MesaM(rs.getObject("fecha_reserva",LocalDateTime.class)));
-			}
-		}catch(SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-		}finally {
-			if (rs!=null){
-				try{rs.close();
-				}catch(SQLException sqlEx){}
-				rs=null;
-			}
-			if (stmt!=null){
-				try{stmt.close();
-				}catch(SQLException sqlEx){}
-				stmt=null;
-			}
-			if (conn!=null){
-				ConectorBBDD.desconectar();
-				conn=null;
-			}
-		}
-		return resultado;
-	}
 
 }

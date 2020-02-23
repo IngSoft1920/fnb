@@ -7,13 +7,9 @@ public class MesaM {
 	private int mesa_id;
 	private int num_mesa;
 	private int capacidad;
-	private LocalDateTime fecha_reserva;
 	private RestauranteM restaurante;
 	private Boolean disponible;
 
-	public MesaM(LocalDateTime fecha_reserva) {
-		this.fecha_reserva = fecha_reserva;
-	}
 	
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
 		this.mesa_id = mesa_id;
@@ -67,14 +63,6 @@ public class MesaM {
 	public String toString() {
 		return "MesaM [mesa_id=" + mesa_id + ", num_mesa=" + num_mesa + ", capacidad=" + capacidad + ", restaurante="
 				+ restaurante.getNombre() + ", disponible=" + disponible + "]";
-	}
-
-	public LocalDateTime getFecha_reserva() {
-		return fecha_reserva;
-	}
-
-	public void setFecha_reserva(LocalDateTime fecha_reserva) {
-		this.fecha_reserva = fecha_reserva;
 	}
 
 	public Boolean getDisponible() {
