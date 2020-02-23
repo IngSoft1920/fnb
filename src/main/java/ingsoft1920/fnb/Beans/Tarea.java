@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Beans;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Tarea {
@@ -48,5 +49,28 @@ public class Tarea {
 		this.hora = hora;
 	}
 	
-	public Tarea() {}
+	public void addPlato(String plato,int id) {
+		
+		if (listaPlatos.containsKey(plato)) {
+			platos p =listaPlatos.get(plato);
+			p.setUnidades(p.getUnidades()+1);
+			listaPlatos.replace(plato, p);
+			
+			
+		}else {
+			
+			listaPlatos.put(plato, new platos(id,1));
+			
+		}
+		
+		
+		
+	}
+	
+	public Tarea() {
+		
+		listaPlatos= new HashMap<String, platos>();
+		listaBebidas = new HashMap<String, bebidas>();
+	}
+
 }

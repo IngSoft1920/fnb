@@ -63,6 +63,7 @@
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
+							</form>
 							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
