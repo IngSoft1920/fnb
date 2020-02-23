@@ -30,15 +30,19 @@
 		</div>
 	</header>
 
-	<section id="principal">
+	
+				<c:set var="val" value="${tareasBean.getListaTareas().entrySet().isEmpty()}" /> 
+						<c:if
+							test="${val != false}">
+    									
+  									
+				<c:forEach
+				
+						items="${tareasBean.getListaTareas().entrySet()}" var="entry">
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post"> 
 				
-				<c:forEach
-						items="${tareasBean.getListaTareas().entrySet()}" var="entry">
-						
 						<h2 class="titulo-post">Mesa ${entry.getValue().getIdMesa()}</h2>
 						<form method="POST" action="quitarTarea">
 							 <input type="hidden" name="pedidoAtendido" value="${entry.getKey()}">
@@ -62,15 +66,18 @@
 
 							
 						</c:forEach>
-						
+								</article>
+			
+					</section>
 					</c:forEach>
-			</article>
-
-		</section>
+			</c:if>
+		
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post"> </a>
+				<a href="" class="enlace-post">
+					<h2 class="titulo-post">Mesa 3</h2>
+				</a>
 
 				<p class="parrafo-post">
 					Macarrones <input type="checkbox">
@@ -103,9 +110,7 @@
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post">
-					<h2 class="titulo-post">Mesa 3</h2>
-				</a>
+				<a href="" class="enlace-post"> </a>
 
 				<p class="parrafo-post">
 					Macarrones <input type="checkbox">
@@ -170,4 +175,5 @@
 			</article>
 
 		</section>
-	</section>
+	
+	</body>
