@@ -1,12 +1,15 @@
 package ingsoft1920.fnb.Model;
 
+import java.time.LocalDateTime;
+
 public class MesaM {
 
 	private int mesa_id;
 	private int num_mesa;
 	private int capacidad;
-	RestauranteM restaurante;
-	Boolean disponible;
+	private RestauranteM restaurante;
+	private Boolean disponible;
+
 
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
 		this.mesa_id = mesa_id;
@@ -24,6 +27,10 @@ public class MesaM {
 		this.disponible = disponible;
 	}
 
+
+	public MesaM(int mesa_id) {
+		this.mesa_id = mesa_id;
+	}
 
 	public int getMesa_id() {
 		return mesa_id;
@@ -60,6 +67,14 @@ public class MesaM {
 	public String toString() {
 		return "MesaM [mesa_id=" + mesa_id + ", num_mesa=" + num_mesa + ", capacidad=" + capacidad + ", restaurante="
 				+ restaurante.getNombre() + ", disponible=" + disponible + "]";
+	}
+
+	public Boolean getDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
 	}
 
 

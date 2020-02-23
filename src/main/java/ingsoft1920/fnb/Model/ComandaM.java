@@ -26,6 +26,9 @@ public class ComandaM {
 		this.plato = plato;
 	}
 	
+	public ComandaM(int comanda_id) {
+		this.comanda_id=comanda_id;
+	}
 	public int getComanda_id() {
 		return comanda_id;
 	}

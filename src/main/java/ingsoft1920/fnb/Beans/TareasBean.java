@@ -13,6 +13,8 @@ import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Model.ComandaM;
+import ingsoft1920.fnb.Services.ConectorBBDD;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
 
@@ -35,6 +37,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class TareasBean {
 
 	Map<Integer, Tarea> listaTareas;
+	List<List<ComandaM>> listaTar;
 
 
 	public Map<Integer, Tarea> getListaTareas() {
@@ -53,6 +56,7 @@ public class TareasBean {
 	public TareasBean() {
 
 		// query
+		/*
 		List<String> listaPlatos = new ArrayList<String>();
 		List<String> listaBebida = new ArrayList<String>();
 
@@ -77,10 +81,23 @@ public class TareasBean {
 		listaTareas.put(4, new Tarea(1, cantidades, bebidas, LocalDate.now()));
 		listaTareas.put(5, new Tarea(3, cantidades, bebidas, LocalDate.now()));
 		listaTareas.put(6, new Tarea(2, cantidades, bebidas, LocalDate.now()));
-		System.out.println(listaTareas.toString());
+		System.out.println(listaTareas.toString());*/
+		int i=0;
+		// tareas Cocina?
+		List<ComandaM> comandas=new ArrayList<ComandaM>();
+		ConectorBBDD.conectar();
 
+	 comandas=ComandaDAO.comandasTareaCocina(3);
+	 
+	 listaTar.add(comandas);
+	
+	ConectorBBDD.desconectar();
+	
+	
+	
+	
+	
 	}
-
 	@Override
 	public String toString() {
 		return "TareasBean [listaTareas=" + listaTareas + "]";

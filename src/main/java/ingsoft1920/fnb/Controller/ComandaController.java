@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ingsoft1920.fnb.Beans.ComandaBean;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
+import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Services.ConectorBBDD;
 
 @Controller
 public class ComandaController {
@@ -272,17 +274,26 @@ public class ComandaController {
 		
 		Map<String,Integer> listaBebidas=comandaBean.listabebidasApedir();
 		Map<String,Integer> listaMenu = comandaBean.listaMenuApedir();
-		
+		String[] platos =  new String[listaMenu.size()];
+		String[] items = new String[listaMenu.size()];
+				
+		int i=0;
 		for(Entry<String,Integer> elem : listaBebidas.entrySet()) {
 			
-			System.out.print(elem.toString()+" ");
+			items[i]=elem.getKey();
+			
+			
 		}
 		System.out.println("");
-		
 		for (Entry<String,Integer> elem : listaMenu.entrySet()) {
-		
-			System.out.println(elem.toString()+" ");
+			platos[i]=elem.getKey();
+			
 		}
+		
+		ConectorBBDD.conectar();
+		ComandaDAO.insertComanda(Integer.parseInt(numMesa), platos, items);
+		ConectorBBDD.desconectar();
+		
 		
 		this.comandaBean = new ComandaBean();
 		model.addAttribute("comandaBean",this.comandaBean);
