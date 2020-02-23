@@ -74,7 +74,7 @@ public class ComandaDAO {
 			stmt = conn.prepareStatement("UPDATE comanda SET estado_acabado=1 WHERE comanda_id=?;");
 			stmt.setInt(1, comanda_id);
 			stmt.executeUpdate();
-			
+
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 		}finally {
@@ -98,7 +98,7 @@ public class ComandaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"INSERT INTO comanda (esta_acabado, ubicacion_id,tarea_cocinero_id,hora) VALUES " + 
+					"INSERT INTO comanda (estado_acabado, ubicacion_id,tarea_cocinero_id,hora) VALUES " + 
 							"(FALSE, (SELECT ubicacion_id FROM mesa_ubicacion WHERE mesa_id = ?), ?,?);", Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setInt(1, mesa_id);
@@ -111,21 +111,49 @@ public class ComandaDAO {
 				resultado=new ComandaM(rs.getInt(1));
 
 			if(resultado != null) {
+				String param1 ="";
+				for (int i =0; i<platos.length-1;i++)
+					param1+="?,";
+				param1+="?";
+
+				String param2 ="";
+				for (int i =0; i<items.length-1;i++)
+					param2+="?,";
+				param2+="?";
 				stmt = conn.prepareStatement(
 						"INSERT INTO comanda_elemComanda " + 
 								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
 								"FROM elemComanda AS ec " + 
 								"JOIN plato AS p ON p.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM plato WHERE nombre in (?)) " + 
+								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM plato WHERE nombre in ("+param1+")) " + 
 								"UNION " + 
 								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
 								"FROM elemComanda AS ec " + 
 								"JOIN item AS i ON i.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM item WHERE nombre in (?));");
-				stmt.setInt(1,resultado.getComanda_id());
-				stmt.setArray(2, stmt.getConnection().createArrayOf("VARCHAR", platos));
-				stmt.setInt(3,resultado.getComanda_id());
-				stmt.setArray(4, stmt.getConnection().createArrayOf("VARCHAR", items));
+								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM item WHERE nombre in ("+param2+"));");
+
+				int i =1;
+				stmt.setInt(i++,resultado.getComanda_id());
+
+				if(platos.length==0)
+					stmt.setString(i++,"NULL");
+				else {
+					int j =i;
+					for(; i<platos.length+j;i++) 
+						stmt.setString(i, platos[i-j]);
+				}
+
+				stmt.setInt(i++,resultado.getComanda_id());
+
+				if(items.length==0)
+					stmt.setString(i++,"NULL");
+				else {
+					int k =i;
+					for(; i<items.length+k;i++) 
+						stmt.setString(i, items[i-k]);
+
+				}
+				stmt.execute();
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
@@ -167,9 +195,9 @@ public class ComandaDAO {
 			stmt.setInt(2, ubicacion_id);
 			stmt.setObject(3, fecha_hora == null ? LocalDateTime.now() : fecha_hora);
 			stmt.execute();
-			
+
 			stmt = conn.prepareStatement(
-					"INSERT INTO comanda (esta_acabado, ubicacion_id,tarea_cocinero_id,hora) VALUES " + 
+					"INSERT INTO comanda (estado_acabado, ubicacion_id,tarea_cocinero_id,hora) VALUES " + 
 							"(FALSE, ?, ?,?);", Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setInt(1, ubicacion_id);
@@ -182,21 +210,49 @@ public class ComandaDAO {
 				resultado=new ComandaM(rs.getInt(1));
 
 			if(resultado != null) {
+				String param1 ="";
+				for (int i =0; i<platos.length-1;i++)
+					param1+="?,";
+				param1+="?";
+
+				String param2 ="";
+				for (int i =0; i<items.length-1;i++)
+					param2+="?,";
+				param2+="?";
 				stmt = conn.prepareStatement(
 						"INSERT INTO comanda_elemComanda " + 
 								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
 								"FROM elemComanda AS ec " + 
 								"JOIN plato AS p ON p.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM plato WHERE nombre in (?)) " + 
+								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM plato WHERE nombre in ("+param1+")) " + 
 								"UNION " + 
 								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
 								"FROM elemComanda AS ec " + 
 								"JOIN item AS i ON i.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM item WHERE nombre in (?));");
-				stmt.setInt(1,resultado.getComanda_id());
-				stmt.setArray(2, stmt.getConnection().createArrayOf("VARCHAR", platos));
-				stmt.setInt(3,resultado.getComanda_id());
-				stmt.setArray(4, stmt.getConnection().createArrayOf("VARCHAR", items));
+								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM item WHERE nombre in ("+param2+"));");
+
+				int i =1;
+				stmt.setInt(i++,resultado.getComanda_id());
+
+				if(platos.length==0)
+					stmt.setString(i++,"NULL");
+				else {
+					int j =i;
+					for(; i<platos.length+j;i++) 
+						stmt.setString(i, platos[i-j]);
+				}
+
+				stmt.setInt(i++,resultado.getComanda_id());
+
+				if(items.length==0)
+					stmt.setString(i++,"NULL");
+				else {
+					int k =i;
+					for(; i<items.length+k;i++) 
+						stmt.setString(i, items[i-k]);
+
+				}
+				stmt.execute();
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
