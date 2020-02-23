@@ -1,6 +1,7 @@
 <%@page import="org.apache.coyote.Request"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html lan="es">
 <head>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
