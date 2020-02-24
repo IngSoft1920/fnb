@@ -15,6 +15,7 @@ public class EmpleadoBean {
 		this.nombre = nombre;
 		this.estado = estado;
 	}
+	public EmpleadoBean() {}
 	public int getId_empleado() {
 		return id_empleado;
 	}

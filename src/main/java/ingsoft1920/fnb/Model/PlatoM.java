@@ -1,6 +1,11 @@
 package ingsoft1920.fnb.Model;
 
 public class PlatoM {
+	@Override
+	public String toString() {
+		return "PlatoM [plato_id=" + plato_id + ", tipo=" + tipo + ", num_plato=" + num_plato + ", nombre=" + nombre
+				+ ", elemComanda=" + elemComanda + ", menu=" + menu + ", plato_menu=" + plato_menu + "]";
+	}
 	private int plato_id;
 	private String tipo;
 	private int num_plato;

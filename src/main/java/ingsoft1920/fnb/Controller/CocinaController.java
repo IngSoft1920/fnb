@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.validation.Valid;
 import ingsoft1920.fnb.Model.ComandaM;
+import ingsoft1920.fnb.Services.ConectorBBDD;
 import ingsoft1920.fnb.DAO.ComandaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ public class CocinaController {
 
 	@GetMapping("/cocina")
 	public String showPaginaComandaGet(Model model) {
+		
+		tareasBean=new TareasBean();
 
 		model.addAttribute("tareasBean", tareasBean);
 		return "webCocinero";
@@ -35,14 +38,20 @@ public class CocinaController {
 	@PostMapping("/quitarTarea")
 	public String quitarLista(@Valid @RequestParam("pedidoAtendido") String check, Model model) {
 		
-		List<ComandaM> l = ComandaDAO.comandasTareaCocina(0);
 		
-		Map<Integer,Tarea> lis=tareasBean.getListaTareas();
-		lis.remove(Integer.parseInt(check));
-		tareasBean.setListaTareas(lis);
+		
+		System.out.println(tareasBean.removeTask(Integer.parseInt(check)));
+		
+		
 
 		model.addAttribute("tareasBean", tareasBean);
 		System.out.println("--------------------");
+	
+		ConectorBBDD.conectar();
+		
+		ComandaDAO.completarComanda(Integer.parseInt(check));
+		
+		ConectorBBDD.desconectar();
 
 		return "webCocinero";
 

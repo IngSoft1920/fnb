@@ -4,6 +4,11 @@ import java.time.LocalDateTime;
 
 public class ComandaM {
 	
+	@Override
+	public String toString() {
+		return "ComandaM [comanda_id=" + comanda_id + ", estado_acabado=" + estado_acabado + ", ubicacion=" + ubicacion
+				+ ", tarea_cocinera=" + tarea_cocinera + ", hora=" + hora + ", plato=" + plato + "]";
+	}
 	private int comanda_id;
 	private Boolean estado_acabado;
 	private UbicacionM ubicacion;
