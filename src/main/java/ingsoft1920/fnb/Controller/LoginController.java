@@ -39,7 +39,7 @@ public class LoginController {
 		System.out.println(username);
 		System.out.println(pass);
 		switch (username) {
-		case "paco":
+		case "coc1":
 			
 			if(!pass.equals("1234")) {
 				loginBean.setHabilitated(true);
@@ -63,7 +63,7 @@ public class LoginController {
 			model.addAttribute("comandaBean",comandaBean);
 			return "redirect:camareros";
 			
-		case "pepe":
+		case "cam1":
 			
 			if(!pass.equals("1234")) {
 				loginBean.setHabilitated(true);
