@@ -41,7 +41,7 @@ public class ApisFnb {
 	} 
 	 */ 
 	@ResponseBody 
-	@GetMapping("/platosRest") 
+	@PostMapping("/platosRest") 
 	public static String platosRestAPI(@RequestBody String req){ 
 
 		// 
@@ -96,7 +96,7 @@ public class ApisFnb {
 	}
 	 */
 	@ResponseBody 
-	@GetMapping("/itemsRest") 
+	@PostMapping("/itemsRest") 
 	public static String itemsRest(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
@@ -183,7 +183,7 @@ public class ApisFnb {
 	Donde fecha_reserva sigue el formato LocalDateTime [ yyyy-mm-ddThh:mm:ss ]
 	 */ 
 	@ResponseBody 
-	@GetMapping("/checkReservRest") 
+	@PostMapping("/checkReservRest") 
 	public static String checkReservRest(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
