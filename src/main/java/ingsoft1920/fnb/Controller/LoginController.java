@@ -51,7 +51,7 @@ public class LoginController {
 			
 			model.addAttribute("tareasBean",tareasBean);
 			return "redirect:cocina";
-		case"afesio":
+		case"cam1":
 			
 			if(!pass.equals("1234")) {
 				loginBean.setHabilitated(true);
@@ -63,7 +63,7 @@ public class LoginController {
 			model.addAttribute("comandaBean",comandaBean);
 			return "redirect:camareros";
 			
-		case "cam1":
+		case "me1":
 			
 			if(!pass.equals("1234")) {
 				loginBean.setHabilitated(true);
