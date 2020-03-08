@@ -49,7 +49,7 @@ public class ApisEM {
 		List<EmpleadoBean> resultado = new ArrayList<EmpleadoBean>();
 		HttpClient client = null;
 		try {
-			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7002/empleadoTipo","GET");
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7002/empleadoTipo","POST");
 
 			JsonObject rqstJson = new JsonObject();
 			rqstJson.addProperty("id_rol", id_rol);
