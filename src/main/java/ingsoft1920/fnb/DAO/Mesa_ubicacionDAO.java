@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Mesa_ubicacionDAO {
 	
 	private static Connection conn;
 	
-	public static List<Mesa_ubicacionM> horasNoDispRest(String nombre_rest, int capacidad){
+	public static List<Mesa_ubicacionM> horasNoDispRest(String nombre_rest, int capacidad, LocalDate fecha){
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
 
@@ -31,10 +32,11 @@ public class Mesa_ubicacionDAO {
 					+ " FROM mesa as m"
 					+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id "
 					+ "JOIN  mesa_ubicacion as mu ON  mu.mesa_id= m.mesa_id"
-					+ " WHERE r.nombre = ? and m.capacidad=?;");
+					+ " WHERE r.nombre = ? and m.capacidad=? and DATE(mu.fecha_reserva)= ?;");
 
 			stmt.setString(1, nombre_rest);
 			stmt.setInt(2, capacidad);
+			stmt.setObject(3,fecha);
 			rs=stmt.executeQuery();
 
 
