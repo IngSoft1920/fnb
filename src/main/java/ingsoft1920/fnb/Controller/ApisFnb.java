@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Controller;
 
 import ingsoft1920.fnb.Model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;  
@@ -41,7 +42,7 @@ public class ApisFnb {
 	} 
 	 */ 
 	@ResponseBody 
-	@GetMapping("/platosRest") 
+	@PostMapping("/platosRest") 
 	public static String platosRestAPI(@RequestBody String req){ 
 
 		// 
@@ -96,7 +97,7 @@ public class ApisFnb {
 	}
 	 */
 	@ResponseBody 
-	@GetMapping("/itemsRest") 
+	@PostMapping("/itemsRest") 
 	public static String itemsRest(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
@@ -183,20 +184,34 @@ public class ApisFnb {
 	Donde fecha_reserva sigue el formato LocalDateTime [ yyyy-mm-ddThh:mm:ss ]
 	 */ 
 	@ResponseBody 
-	@GetMapping("/checkReservRest") 
+	@PostMapping("/checkReservRest") 
 	public static String checkReservRest(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
 		String rest_nom = obj.get("rest_nom").getAsString(); 
 		int capacidad = obj.get("capacidad").getAsInt();
-
+		LocalDate fecha = LocalDate.parse(obj.get("fecha").getAsString());
+				
 		JsonArray listaFechaReserva = new JsonArray(); 
 
 		//lista de items dentro del Map
-		List<Mesa_ubicacionM> listaFechas = Mesa_ubicacionDAO.horasNoDispRest(rest_nom, capacidad);
-		for (Mesa_ubicacionM fecha: listaFechas) {
-			listaFechaReserva.add(fecha.getFecha_reserva().toString());
-		}
+		List<Mesa_ubicacionM> listaFechas = Mesa_ubicacionDAO.horasNoDispRest(rest_nom, capacidad,fecha);
+		
+		RestauranteM rest = RestauranteDAO.horarioRest(rest_nom);
+		LocalDateTime fecha_limite = LocalDateTime.of(fecha,rest.getHora_clausura());
+		for(LocalDateTime fechas_dia = LocalDateTime.of(fecha,rest.getHora_apertura()); 
+				fechas_dia.isBefore(fecha_limite);fechas_dia=fechas_dia.plusMinutes(30)) {
+			boolean encontrado =false;
+			int i =0;
+			while(!encontrado & i<listaFechas.size()) {
+				encontrado = listaFechas.get(i).getFecha_reserva().equals(fechas_dia);
+				i++;
+			}
+			if(!encontrado)
+				listaFechaReserva.add(fechas_dia.toLocalTime().toString());
+			else
+				listaFechas.remove(i-1);
+		} 
 
 		JsonObject resJson = new JsonObject();
 		resJson.add("fecha_reserva", listaFechaReserva);  
