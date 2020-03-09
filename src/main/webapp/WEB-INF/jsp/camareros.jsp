@@ -115,13 +115,18 @@
 				<a href="" class="enlace-post">
 					<h2 class="titulo-post">Formulario a completar</h2>
 				</a>
-
+				<%! String t1; %>
+				<%
+				t1=request.getParameter("text1");
+				%>
 				<p class="parrafo-post">Mesa
 				<form method="POST" action="enviarComanda">
-					<input type="hidden" name="fecha"> <input type="text"
-						name="numMesa" placeholder="Escribe aqui"> <br> <input
+					<input type="hidden" name="fecha"> 
+					<input type="hidden" name="numMesa" value=<%=t1%>> <br> <input
 						type="submit" value="Enviar comanda">
 				</form>
+				
+				
 			</article>
 
 		</section>

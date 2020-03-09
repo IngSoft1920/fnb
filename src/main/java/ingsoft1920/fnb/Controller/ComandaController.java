@@ -34,7 +34,7 @@ public class ComandaController {
 	public String showPaginaComandaGet(Model model) {
 
 		model.addAttribute("comandaBean", comandaBean);
-
+		
 		System.out.println(comandaBean.getCantidades());
 		return "camareros";
 	}
