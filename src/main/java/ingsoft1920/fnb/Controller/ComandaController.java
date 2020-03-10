@@ -32,7 +32,8 @@ public class ComandaController {
 
 	@RequestMapping("/camareros")
 	public String showPaginaComandaGet(Model model) {
-
+		
+		
 		model.addAttribute("comandaBean", comandaBean);
 		
 		System.out.println(comandaBean.getCantidades());
@@ -40,7 +41,7 @@ public class ComandaController {
 	}
 
 	@PostMapping("/anadirItem")
-	public String anadirElementoComanda(@Valid @RequestParam("platoNuevo") String nuevoPlato, Model model) {
+	public String anadirElementoComanda(@Valid @RequestParam("platoNuevo") String nuevoPlato,@Valid @RequestParam("numMesa") String numMesa, Model model) {
 
 		/*
 		 * if(comandaBean.getCantidades().containsKey(nuevoPlato)) { int
@@ -78,14 +79,16 @@ public class ComandaController {
 
 			}
 		}
-
+		if(!numMesa.equals("null")) {
+		comandaBean.setNumMesa(Integer.parseInt(numMesa));
+		}
 		model.addAttribute("comandaBean", comandaBean);
-
+		
 		return "camareros";
 	}
 
 	@PostMapping("/quitarItem")
-	public String eliminarElementoComanda(@Valid @RequestParam("platoNuevo") String nuevoPlato, Model model) {
+	public String eliminarElementoComanda(@Valid @RequestParam("platoNuevo") String nuevoPlato,@Valid @RequestParam("numMesa") String numMesa, Model model) {
 
 		/*
 		 * if(comandaBean.getCantidades().containsKey(nuevoPlato)) { int
@@ -127,14 +130,16 @@ public class ComandaController {
 
 			}
 		}
-
+		if(!numMesa.equals("null")) {
+			comandaBean.setNumMesa(Integer.parseInt(numMesa));
+			}
 		model.addAttribute("comandaBean", comandaBean);
 
 		return "camareros";
 	}
 
 	@PostMapping("/quitarBebida")
-	public String eliminarBebidaComanda(@Valid @RequestParam("bebidaNueva") String nuevoPlato, Model model) {
+	public String eliminarBebidaComanda(@Valid @RequestParam("bebidaNueva") String nuevoPlato,@Valid @RequestParam("numMesa") String numMesa, Model model) {
 
 		/*
 		 * if(comandaBean.getCantidades().containsKey(nuevoPlato)) { int
@@ -176,13 +181,15 @@ public class ComandaController {
 
 			}
 		}
-
+		if(!numMesa.equals("null")) {
+			comandaBean.setNumMesa(Integer.parseInt(numMesa));
+			}
 		model.addAttribute("comandaBean", comandaBean);
 		return "camareros";
 	}
 
 	@PostMapping("/anadirBebida")
-	public String anadirBebidaComanda(@Valid @RequestParam("bebidaNueva") String nuevoPlato, Model model) {
+	public String anadirBebidaComanda(@Valid @RequestParam("bebidaNueva") String nuevoPlato,@Valid @RequestParam("numMesa") String numMesa, Model model) {
 
 		/*
 		 * if(comandaBean.getCantidades().containsKey(nuevoPlato)) { int
@@ -220,7 +227,9 @@ public class ComandaController {
 
 			}
 		}
-
+		if(!numMesa.equals("null")) {
+			comandaBean.setNumMesa(Integer.parseInt(numMesa));
+			}
 		model.addAttribute("comandaBean", comandaBean);
 
 		return "camareros";
@@ -280,6 +289,9 @@ public class ComandaController {
 		ConectorBBDD.desconectar();
 
 		this.comandaBean = new ComandaBean();
+		if(!numMesa.equals("null")) {
+			comandaBean.setNumMesa(Integer.parseInt(numMesa));
+			}
 		model.addAttribute("comandaBean", this.comandaBean);
 
 		return "camareros";

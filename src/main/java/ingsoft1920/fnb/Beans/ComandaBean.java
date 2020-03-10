@@ -33,6 +33,47 @@ public class ComandaBean {
 	 Map<String, platos> cantidades;
 	 Map<String, bebidas> bebidas;
 	String nombreRestaurante="Mamma Mia";
+	int numMesa;
+	public ArrayList<String> getListaPlatos() {
+		return listaPlatos;
+	}
+
+	public void setListaPlatos(ArrayList<String> listaPlatos) {
+		this.listaPlatos = listaPlatos;
+	}
+
+	public ArrayList<String> getListaBebida() {
+		return listaBebida;
+	}
+
+	public void setListaBebida(ArrayList<String> listaBebida) {
+		this.listaBebida = listaBebida;
+	}
+
+	public String getNombreRestaurante() {
+		return nombreRestaurante;
+	}
+
+	public void setNombreRestaurante(String nombreRestaurante) {
+		this.nombreRestaurante = nombreRestaurante;
+	}
+
+	public int getNumMesa() {
+		return numMesa;
+	}
+
+	public void setNumMesa(int numMesa) {
+		this.numMesa = numMesa;
+	}
+
+	public void setCantidades(Map<String, platos> cantidades) {
+		this.cantidades = cantidades;
+	}
+
+	public void setBebidas(Map<String, bebidas> bebidas) {
+		this.bebidas = bebidas;
+	}
+
 	int cantidadNueva;
 	
 	public ComandaBean() {
