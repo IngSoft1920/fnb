@@ -27,6 +27,10 @@
 <body>
 	<header class="header">
 		<!-- La parte de arriba de la página web-->
+		<%! String t1; %>
+				<%
+				t1=request.getParameter("text1");
+				%>
 		<div id="encabezado">
 			<div id="logo">PORTAL CAMAREROS</div>
 
@@ -63,11 +67,13 @@
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 							</form>
 							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="-">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 					</li>
 				</c:forEach>
@@ -96,11 +102,13 @@
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="-">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 					</li>
 				</c:forEach>
@@ -115,14 +123,11 @@
 				<a href="" class="enlace-post">
 					<h2 class="titulo-post">Formulario a completar</h2>
 				</a>
-				<%! String t1; %>
-				<%
-				t1=request.getParameter("text1");
-				%>
+				
 				<p class="parrafo-post">Mesa
 				<form method="POST" action="enviarComanda">
 					<input type="hidden" name="fecha"> 
-					<input type="hidden" name="numMesa" value=<%=t1%>> <br> <input
+					<input type="hidden" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
 						type="submit" value="Enviar comanda">
 				</form>
 				

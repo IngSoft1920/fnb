@@ -8,7 +8,8 @@
   <title> CAMAREROS  : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo1.css"> <!--carpeta donde se encuentra el estilo css-->
 
-
+<style><%@include file="./css/estilo1.css"%>
+</style>
 </head>
 
 <body>
