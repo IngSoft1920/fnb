@@ -19,6 +19,47 @@ public class RestauranteDAO {
 	
 	private static Connection conn;
 	
+	public static RestauranteM horarioRest(String nombre) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		RestauranteM resultado= null;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT hora_apertura, hora_clausura " + 
+					"FROM restaurante " + 
+					"WHERE nombre = ?;");
+			stmt.setString(1, nombre);
+			rs=stmt.executeQuery();
+
+			if(rs.next()) {
+				resultado = new RestauranteM(rs.getObject(1,LocalTime.class),rs.getObject(2,LocalTime.class));
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+
+	}
+	
+	
 	public static List<RestauranteM> infoRest(){
 		if (conn == null)
 			conn= ConectorBBDD.conectar();

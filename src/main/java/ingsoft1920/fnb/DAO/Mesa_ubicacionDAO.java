@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Mesa_ubicacionDAO {
 	
 	private static Connection conn;
 	
-	public static List<Mesa_ubicacionM> horasNoDispRest(String nombre_rest, int capacidad){
+	public static List<Mesa_ubicacionM> horasNoDispRest(String nombre_rest, int capacidad, LocalDate fecha){
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
 
@@ -31,10 +32,11 @@ public class Mesa_ubicacionDAO {
 					+ " FROM mesa as m"
 					+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id "
 					+ "JOIN  mesa_ubicacion as mu ON  mu.mesa_id= m.mesa_id"
-					+ " WHERE r.nombre = ? and m.capacidad=?;");
+					+ " WHERE r.nombre = ? and m.capacidad=? and DATE(mu.fecha_reserva)= ?;");
 
 			stmt.setString(1, nombre_rest);
 			stmt.setInt(2, capacidad);
+			stmt.setString(3,fecha.toString());
 			rs=stmt.executeQuery();
 
 
@@ -60,5 +62,12 @@ public class Mesa_ubicacionDAO {
 			}
 		}
 		return resultado;
+	}
+	
+	public static void main(String[]args) {
+		List<Mesa_ubicacionM> lista = horasNoDispRest("Mamma Mia" ,4 ,LocalDate.parse("2020-02-24"));
+		System.out.println(lista.size());
+		for (Mesa_ubicacionM m :lista)
+			System.out.println(m.getFecha_reserva());
 	}
 }

@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <html>
-<head>
-	Ejemplo Contador
-</head>
 <body>
+<head>
+
+	
+</head>
 	<div>
 	<!-- Podemos acceder a tipos basicos (String, int...) mediante esta etiqueta -->
 		<h1>
@@ -35,5 +35,34 @@
 		<input type="submit" value="Set Contador">
 		<br>
 	</form:form>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+ //Checks if there is any change on checkBox class
+$(function(){
+ $("#checkbox1").click(function () {
+	 
+    if ($(this).prop("checked")) {
+        $("#text1").val("jQuery");
+    }
+    else {
+        $("#text1").val("AndreaCorrupta");
+    }
+});
+} );
+</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+
+<body>
+<div>
+
+  <input type="text" id="text1" />
+<input type="checkbox" id="checkbox1" />checkbox
+
+</div>
+</head>
+</body>
 </body>
 </html>
