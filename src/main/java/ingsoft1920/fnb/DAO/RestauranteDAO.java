@@ -28,7 +28,7 @@ public class RestauranteDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT hora_apertura, hora_apertura " + 
+					"SELECT hora_apertura, hora_clausura " + 
 					"FROM restaurante " + 
 					"WHERE nombre = ?;");
 			stmt.setString(1, nombre);

@@ -175,13 +175,15 @@ public class ApisFnb {
 	Entrada:
 	{
 		'rest_nom': String,
-		'capacidad': int
+		'capacidad': int,
+		'fecha': String
 	}
 	Salida: 
 	{ 
-		'fecha_reserva': String[];
+		'horas_disp': String[];
 	} 
-	Donde fecha_reserva sigue el formato LocalDateTime [ yyyy-mm-ddThh:mm:ss ]
+	Donde fecha sigue el formato LocalDate [ yyyy-mm-dd ]
+	Donde horas_disp sigue el formato LocalTime [ hh:mm ]
 	 */ 
 	@ResponseBody 
 	@PostMapping("/checkReservRest") 
@@ -214,7 +216,7 @@ public class ApisFnb {
 		} 
 
 		JsonObject resJson = new JsonObject();
-		resJson.add("fecha_reserva", listaFechaReserva);  
+		resJson.add("horas_disp", listaFechaReserva);  
 
 		return resJson.toString();
 	}
