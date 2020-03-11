@@ -61,7 +61,7 @@ public class LoginController {
 			}
 			
 			model.addAttribute("comandaBean",comandaBean);
-			return "redirect:camareros";
+			return "redirect:mesas";
 			
 		case "me1":
 			
