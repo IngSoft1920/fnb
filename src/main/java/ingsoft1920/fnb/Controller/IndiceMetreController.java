@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class IndiceMetreController {
 	@RequestMapping("/indice")
-<<<<<<< HEAD
+
 	public String show1(Model model) {
 
 		return "WebMetre";
