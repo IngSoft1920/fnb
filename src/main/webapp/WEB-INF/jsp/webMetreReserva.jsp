@@ -7,7 +7,7 @@
   <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
   <title> METRERESERVA : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
-
+<style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 

@@ -2,12 +2,13 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <html lan="es">
 <head>
   <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
   <title> METRE  : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
-
+<style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 

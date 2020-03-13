@@ -1,6 +1,7 @@
 package ingsoft1920.fnb.Controller;
 
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,50 +19,19 @@ public class IndiceMetreController {
 
 		return "webMetreConfirmacion";
 	}
-	@RequestMapping("/metrerservas")
+	@RequestMapping("/metremesas")
 	public String show3(Model model) {
 		
 		return "webMetreMesasDisp";
 	}
-	@RequestMapping("/metremesas")
+	@RequestMapping("/metreReservas")
 	public String show4(Model model) {
 
 		return "webMetreReserva";
-=======
-	public String showPaginaComandaGet(Model model) {
 
-		model.addAttribute("comandaBean", comandaBean);
-
-		System.out.println(comandaBean.getCantidades());
-		return "camareros";
-	}
-	@RequestMapping("/metre")
-	public String showPaginaComandaGet(Model model) {
-
-		model.addAttribute("comandaBean", comandaBean);
-
-		System.out.println(comandaBean.getCantidades());
-		return "camareros";
-	}
-	@RequestMapping("/metrerservas")
-	public String showPaginaComandaGet(Model model) {
-
-		model.addAttribute("comandaBean", comandaBean);
-
-		System.out.println(comandaBean.getCantidades());
-		return "camareros";
-	}
-	@RequestMapping("/metremesas")
-	public String showPaginaComandaGet(Model model) {
-
-		model.addAttribute("comandaBean", comandaBean);
-
-		System.out.println(comandaBean.getCantidades());
-		return "camareros";
->>>>>>> PaginasWeb
 	}
 
-
+	
 
 
 }
