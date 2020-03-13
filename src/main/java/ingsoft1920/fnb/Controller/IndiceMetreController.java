@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class IndiceMetreController {
 	@RequestMapping("/indice")
+<<<<<<< HEAD
 	public String show1(Model model) {
 
 		return "WebMetre";
@@ -26,6 +27,38 @@ public class IndiceMetreController {
 	public String show4(Model model) {
 
 		return "webMetreReserva";
+=======
+	public String showPaginaComandaGet(Model model) {
+
+		model.addAttribute("comandaBean", comandaBean);
+
+		System.out.println(comandaBean.getCantidades());
+		return "camareros";
+	}
+	@RequestMapping("/metre")
+	public String showPaginaComandaGet(Model model) {
+
+		model.addAttribute("comandaBean", comandaBean);
+
+		System.out.println(comandaBean.getCantidades());
+		return "camareros";
+	}
+	@RequestMapping("/metrerservas")
+	public String showPaginaComandaGet(Model model) {
+
+		model.addAttribute("comandaBean", comandaBean);
+
+		System.out.println(comandaBean.getCantidades());
+		return "camareros";
+	}
+	@RequestMapping("/metremesas")
+	public String showPaginaComandaGet(Model model) {
+
+		model.addAttribute("comandaBean", comandaBean);
+
+		System.out.println(comandaBean.getCantidades());
+		return "camareros";
+>>>>>>> PaginasWeb
 	}
 
 
