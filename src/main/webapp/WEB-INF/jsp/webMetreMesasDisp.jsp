@@ -50,14 +50,17 @@
           </thead>
 
           <tbody>
-          <tr>
+
+			<c:forEach items="${listaReservasBean.getListaMesas()}"
+					var="item">
+                    <tr>
             <td><p class="parrafo-post1">
-              <strong><i>Mesa 1 </i></strong>
+              <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
 
             </p>
           </td>
             <td><p class="parrafo-post1">
-              <strong><i>8 </i></strong>
+              <strong><i> ${item.getCapacidad()}</i></strong>
 
             </p>
           </td>
@@ -65,13 +68,28 @@
             <td><p class="parrafo-post">
               <nav class="nav">
               <ul class="menu">
-              <li><a href="a">Asignar</a>
+               
+              <li><label id="lab1"> ${listaReservasBean.getMapAsign().get(item.getNum_mesa())}
+  									</label>
                   <ul class="submenu">
-                      <li><a href="a">Habitación 1</a>
-                      <li><a href="a">Habitación 2</a>
-                      <li><a href="a">Habitación 3</a>
-                      <li><a href="a">Habitación 4</a>
+                  
+                 <form action="asignarHab" method="GET">
+                      <li>
+                  	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+                      <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 1">Habitación 1</button>
+                      </form>  
+                     <form action="asignarHab" method="GET">
+                     <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 2">Habitación 2</button>
+                      </form><form action="asignarHab" method="GET">
+                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 3">Habitación 3</button>
+                      </form><form action="asignarHab" method="GET">
+                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 4<">Habitación 4</button>
+                      </form>  
                   </ul>
+                 
 
               </li>
               </ul>
@@ -80,123 +98,15 @@
             </td>
           </td>
             <td><p class="parrafo-post1">
-              <a href="" class="leer-mas"> OK </a>
-
+            <form method="POST" action="alojarMesa" >
+        	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+              <input type="submit" class="leer-mas" value="OK">
+				</form>
             </p>
           </td>
 
           </tr>
-          <tr>
-            <td><p class="parrafo-post1">
-              <strong><i>Mesa 2 </i></strong>
-
-            </p>
-          </td>
-            <td><p class="parrafo-post1">
-              <strong><i>2 </i></strong>
-
-            </p>
-          </td>
-
-            <td><p class="parrafo-post">
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Asignar</a>
-                  <ul class="submenu">
-                      <li><a href="a">Habitación 1</a>
-                      <li><a href="a">Habitación 2</a>
-                      <li><a href="a">Habitación 3</a>
-                      <li><a href="a">Habitación 4</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-              </p>
-            </td>
-          </td>
-            <td><p class="parrafo-post1">
-              <a href="" class="leer-mas"> OK </a>
-
-            </p>
-          </td>
-
-          </tr>
-          <tr>
-            <td><p class="parrafo-post1">
-              <strong><i>Mesa 3 </i></strong>
-
-            </p>
-          </td>
-            <td><p class="parrafo-post1">
-              <strong><i> 4 </i></strong>
-
-            </p>
-          </td>
-
-            <td><p class="parrafo-post">
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Asignar</a>
-                  <ul class="submenu">
-                      <li><a href="a">Habitación 1</a>
-                      <li><a href="a">Habitación 2</a>
-                      <li><a href="a">Habitación 3</a>
-                      <li><a href="a">Habitación 4</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-              </p>
-            </td>
-
-          </td>
-            <td><p class="parrafo-post1">
-              <a href="" class="leer-mas"> OK </a>
-
-            </p>
-          </td>
-
-          </tr>
-          <tr>
-            <td><p class="parrafo-post1">
-              <strong><i>Mesa 4 </i></strong>
-
-            </p>
-          </td>
-            <td><p class="parrafo-post1">
-              <strong><i>6 </i></strong>
-
-            </p>
-          </td>
-
-            <td><p class="parrafo-post">
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Asignar</a>
-                  <ul class="submenu">
-                      <li><a href="a">Habitación 1</a>
-                      <li><a href="a">Habitación 2</a>
-                      <li><a href="a">Habitación 3</a>
-                      <li><a href="a">Habitación 4</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-              </p>
-            </td>
-
-          </td>
-            <td><p class="parrafo-post1">
-              <a href="" class="leer-mas"> OK </a>
-
-            </p>
-          </td>
-
-          </tr>
-
+		</c:forEach>
           </tbody>
         </table>
 

@@ -4,7 +4,9 @@ package ingsoft1920.fnb.Beans;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,7 @@ import ingsoft1920.fnb.Model.MesaM;
 @Component
 public class ListaReservasBean {
 	List<MesaM> listaMesas;
+	Map<Integer,String> mapAsign;
 	//ArrayList<reservas>listareservas;
 	//JSONObject rs;
 
@@ -26,20 +29,30 @@ public class ListaReservasBean {
 	}
 	
 	public ListaReservasBean() {
+		
 		listaMesas= new ArrayList<MesaM>();
 		List<MesaM> list = MesaDAO.mesasDisp();
-		
+		mapAsign =  new HashMap<Integer, String>();
 		for (MesaM mesa : list) {
 			if(mesa.isDisponible()) {
 			listaMesas.add(mesa);
+			mapAsign.put(mesa.getNum_mesa(),"Asignar");
 			}
 		}
 		
 	}
 
+	public Map<Integer, String> getMapAsign() {
+		return mapAsign;
+	}
+
+	public void setMapAsign(Map<Integer, String> mapAsign) {
+		this.mapAsign = mapAsign;
+	}
+
 	@Override
 	public String toString() {
-		return "ListaReservasBean [listaMesas=" + listaMesas + "]";
+		return "ListaReservasBean [listaMesas=" + listaMesas + ", mapAsign=" + mapAsign + "]";
 	}
 
 	public List<MesaM> getListaMesas() {
