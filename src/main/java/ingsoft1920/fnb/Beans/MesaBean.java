@@ -43,7 +43,7 @@ public class MesaBean {
 			List<MesaM> list = MesaDAO.mesasDisp();
 			
 			for (MesaM mesa : list) {
-				if(mesa.isDisponible()) {
+				if(!mesa.isDisponible()) {
 				listaMesas.add(mesa.getMesa_id());
 				}
 			}

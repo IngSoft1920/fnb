@@ -36,7 +36,7 @@ public class Mesa_ubicacionDAO {
 
 			stmt.setString(1, nombre_rest);
 			stmt.setInt(2, capacidad);
-			stmt.setObject(3,fecha);
+			stmt.setString(3,fecha.toString());
 			rs=stmt.executeQuery();
 
 
@@ -62,5 +62,12 @@ public class Mesa_ubicacionDAO {
 			}
 		}
 		return resultado;
+	}
+	
+	public static void main(String[]args) {
+		List<Mesa_ubicacionM> lista = horasNoDispRest("Mamma Mia" ,4 ,LocalDate.parse("2020-02-24"));
+		System.out.println(lista.size());
+		for (Mesa_ubicacionM m :lista)
+			System.out.println(m.getFecha_reserva());
 	}
 }

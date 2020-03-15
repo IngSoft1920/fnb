@@ -43,6 +43,7 @@
 					
 	<li><label>Mesa ${item} </label>
 	<script type="text/javascript">
+	
 	$(function(){
 		var m=${item};
 		 $("#"+m).click(function () {
@@ -51,9 +52,7 @@
 		    	var i=$(this).attr("id");
 		        $("#text1").val(""+i);
 		    }
-		    else {
-		        $("#text1").val("Angular");
-		    }
+		   
 		});
 		} );
 	</script>
