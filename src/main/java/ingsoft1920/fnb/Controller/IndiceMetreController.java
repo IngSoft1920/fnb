@@ -106,9 +106,12 @@ public class IndiceMetreController {
 	
 	
 	@GetMapping("/confirmar")
-	public String confirmar(@Valid @RequestParam("idMesa") String idMesa,Model model){
+	public String confirmar(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("habitacion") String habitacion,Model model){
 		
-		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now());
+		int habitaciones[]= new int[1];
+		habitaciones[0]=Integer.parseInt(""+habitacion.charAt(11));
+		System.out.println("habitacion_---------"+habitaciones[0]);
+		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones);
 		model.addAttribute("portalMetreBean", portalMetreBean);
 		
 		return "redirect:indice";

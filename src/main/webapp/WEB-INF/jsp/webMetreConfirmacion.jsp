@@ -58,6 +58,7 @@
             <input type="submit" class="leer-mas1" value="Denegar"> 
             </form>
             <form action="confirmar" method="get">
+            <input type="hidden" name="habitacion" value="${confirmacionBean.getHab()}">
              <input type=hidden name="idMesa" value="${confirmacionBean.getMesa()}">
             <input
              type=submit class="leer-mas1" value="confirmar">
