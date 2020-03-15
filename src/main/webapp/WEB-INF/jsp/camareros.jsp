@@ -91,7 +91,7 @@
 				</a>
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
-					<li><label>${item.getKey()} ${item.getValue().getUnidades()}
+					<li><label>${item.getKey()} 
 						 
 						<c:if
 							test="${val != '0'}">
@@ -103,7 +103,7 @@
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
-								<input type="text" name="numMesa" value=<%=t1%>> <br>
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
@@ -128,7 +128,7 @@
 				<p class="parrafo-post">Mesa
 				<form method="POST" action="enviarComanda">
 					<input type="hidden" name="fecha"> 
-					<input type="text" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
+					<input type="hidden" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
 						type="submit" value="Enviar comanda">
 				</form>
 				
