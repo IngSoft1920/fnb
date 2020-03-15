@@ -68,30 +68,49 @@ public class MesaDAO {
 	}
 
 
-	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora) {
-		if (conn == null)
-			conn= ConectorBBDD.conectar();
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] habitaciones_id) {
+		if(mesa_id>0) {
 
-		PreparedStatement stmt = null; 
-		try {
-			stmt = conn.prepareStatement("INSERT INTO ubicacion VALUES (NULL);");
-			stmt.execute();
-			stmt= conn.prepareStatement("INSERT INTO mesa_ubicacion VALUES (?, (SELECT MAX(ubicacion_id) FROM  ubicacion),?);");
-			stmt.setInt(1, mesa_id);
-			stmt.setObject(2, fecha_hora == null ? LocalDateTime.now() : fecha_hora);
-			stmt.execute();
+			if (conn == null)
+				conn= ConectorBBDD.conectar();
 
-		}catch(SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-		}finally {
-			if (stmt!=null){
-				try{stmt.close();
-				}catch(SQLException sqlEx){}
-				stmt=null;
-			}
-			if (conn!=null){
-				ConectorBBDD.desconectar();
-				conn=null;
+			PreparedStatement stmt = null; 
+			try {
+				stmt = conn.prepareStatement("INSERT INTO ubicacion VALUES (NULL);");
+				stmt.execute();
+				stmt= conn.prepareStatement(
+						"INSERT INTO mesa_ubicacion VALUES (?, (SELECT MAX(ubicacion_id) FROM  ubicacion),?);");
+				stmt.setInt(1, mesa_id);
+				stmt.setString(2, fecha_hora == null ? LocalDateTime.now().toString() : fecha_hora.toString());
+				stmt.execute();
+				
+				String param1 ="";
+				for (int i =0; i<habitaciones_id.length-1;i++)
+					param1+="(?,?),";
+				param1+="(?,?)";
+				
+				stmt= conn.prepareStatement(
+						"INSERT INTO mesa_habitacion VALUES"+param1+";");
+				
+				for (int i =1,j=0; i<=(2*habitaciones_id.length);i+=2,j++) {
+					stmt.setInt(i,mesa_id);
+					stmt.setInt(i+1,habitaciones_id[j]);
+				}
+				
+				stmt.execute();
+				
+			}catch(SQLException ex) {
+				System.out.println("SQLException: " + ex.getMessage());
+			}finally {
+				if (stmt!=null){
+					try{stmt.close();
+					}catch(SQLException sqlEx){}
+					stmt=null;
+				}
+				if (conn!=null){
+					ConectorBBDD.desconectar();
+					conn=null;
+				}
 			}
 		}
 	}
@@ -110,8 +129,8 @@ public class MesaDAO {
 							+ " AND TIMESTAMPDIFF(MINUTE,?,fecha_reserva)<=0 ;");
 
 			stmt.setInt(1,mesa_id);
-			stmt.setObject(2, LocalDateTime.now());
-			stmt.setObject(3, LocalDateTime.now());
+			stmt.setString(2, LocalDateTime.now().toString());
+			stmt.setString(3, LocalDateTime.now().toString());
 			rs = stmt.executeQuery();
 
 			if(rs.next())
@@ -158,13 +177,13 @@ public class MesaDAO {
 							+ "FROM mesa as m "
 							+ "JOIN restaurante as r ON m.restaurante_id=r.restaurante_id  "
 							+ "JOIN  mesa_ubicacion as mu ON  mu.mesa_id= m.mesa_id "
-							+ "WHERE r.nombre = ? and m.capacidad=? and mu.fecha_hora = ?);");
+							+ "WHERE r.nombre = ? and m.capacidad=? and mu.fecha_reserva = ?);");
 
 			stmt.setString(1, nom_rest);
 			stmt.setInt(2, capacidad);
 			stmt.setString(3, nom_rest);
 			stmt.setInt(4, capacidad);
-			stmt.setObject(5, fecha_hora);
+			stmt.setString(5, fecha_hora.toString());
 			rs=stmt.executeQuery();
 
 			if(rs.next()) {

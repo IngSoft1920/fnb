@@ -226,9 +226,10 @@ public class ApisFnb {
 	{
 		'servicio_id': int,
 		'fecha_hora': String,
-		'id_cliente': String[],
+		'num_clientes': int,
 		'tipoUbicacion': int,
 		'ubicacion': String,
+		'habitaciones_id': int[]
 		'platos':String[],
 		'items':String[]
 	}
@@ -249,12 +250,17 @@ public class ApisFnb {
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
 		int servicio_id = obj.get("servicio_id").getAsInt(); 
 		LocalDateTime fecha_hora = LocalDateTime.parse(obj.get("fecha_hora").getAsString());
-		JsonArray listaIdCliente = obj.get("id_cliente").getAsJsonArray();
+		int num_clientes = obj.get("num_clientes").getAsInt();
+		JsonArray listaHabitaciones = obj.get("habitaciones_id").getAsJsonArray();
 		int tipoUbicacion = obj.get("tipoUbicacion").getAsInt();
 		switch(tipoUbicacion) {
 		case 1: //CASO: Reserva Mesa
+			int habitaciones[] = new int[listaHabitaciones.size()];
+			for(int i =0; i<habitaciones.length; i++) {
+				habitaciones[i]=listaHabitaciones.get(i).getAsInt();
+			}
 			String rest_nomb= obj.get("ubicacion").getAsString();
-			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,listaIdCliente.size()).getMesa_id(), fecha_hora);
+			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,num_clientes).getMesa_id(), fecha_hora,habitaciones);
 			break;
 		case 2: //CASO: Pedido Habitacion
 			int habitacion_id = Integer.parseInt(obj.get("ubicacion").getAsString());
