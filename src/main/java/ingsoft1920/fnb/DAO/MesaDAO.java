@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.RestauranteM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
@@ -39,7 +40,7 @@ public class MesaDAO {
 							+ " FROM mesa as m"
 							+ " JOIN restaurante as r ON m.restaurante_id=r.restaurante_id;");
 
-			stmt.setObject(1, LocalDateTime.now());
+			stmt.setString(1, LocalDateTime.now().toString());
 			rs=stmt.executeQuery();
 
 			while(rs.next()) {
@@ -75,13 +76,19 @@ public class MesaDAO {
 				conn= ConectorBBDD.conectar();
 
 			PreparedStatement stmt = null; 
+			ResultSet rs = null;
+			ComandaM resultado= null;
 			try {
-				stmt = conn.prepareStatement("INSERT INTO ubicacion VALUES (NULL);");
+				stmt = conn.prepareStatement("INSERT INTO ubicacion VALUES (NULL);",Statement.RETURN_GENERATED_KEYS);
 				stmt.execute();
+				rs=stmt.getGeneratedKeys();
+				if(rs.next())
+					resultado=new ComandaM(rs.getInt(1));
 				stmt= conn.prepareStatement(
-						"INSERT INTO mesa_ubicacion VALUES (?, (SELECT MAX(ubicacion_id) FROM  ubicacion),?);");
+						"INSERT INTO mesa_ubicacion VALUES (?,?,?);");
 				stmt.setInt(1, mesa_id);
-				stmt.setString(2, fecha_hora == null ? LocalDateTime.now().toString() : fecha_hora.toString());
+				stmt.setInt(2,resultado.getComanda_id());
+				stmt.setString(3, fecha_hora == null ? LocalDateTime.now().toString() : fecha_hora.toString());
 				stmt.execute();
 				
 				String param1 ="";
@@ -210,4 +217,13 @@ public class MesaDAO {
 		return resultado;
 	}
 
+	public static void main(String[]args) {
+		
+		List<MesaM> lista = mesasDisp();
+		for(MesaM m:lista)
+			System.out.println(m);
+	}
+	
+	
+	
 }

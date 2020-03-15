@@ -54,10 +54,11 @@
 						items="${ListaMesasDispBean.getLista()}" var="entry">
 		<section id="publicaciones">
 			<article class="post">
+			     </c:forEach>
 			
 				</c:if>
 				
-          
+         
   </article>
 </section>
   </section>
