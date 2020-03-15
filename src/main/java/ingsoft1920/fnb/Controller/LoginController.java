@@ -74,7 +74,7 @@ public class LoginController {
 			
 			model.addAttribute("metreBean",null);
 			////parte de luis
-			return "redirect:metremesas";
+			return "redirect:indice";
 		default:
 			
 			loginBean.setHabilitated(true);

@@ -41,7 +41,7 @@
       <c:forEach items="${mesaBean.getListaMesas()}"
 					var="item">
 					
-	<li><label>Mesa ${item} </label>
+	
 	<script type="text/javascript">
 	
 	$(function(){
@@ -56,21 +56,57 @@
 		});
 		} );
 	</script>
-	
-<input type="checkbox" id="${item}" />checkbox
-	
-	</c:forEach>
-
-
-  	<form action="camareros" method="post">
-	<input type="hidden"  id="text1" name="text1" />
-	<br>
-    <input TYPE="SUBMIT" value="Submit">
-	 </form>
+	<form action="camareros" method="post">
+	<input type="submit" class="leer-mas" id="${item}" value="Mesa ${item}"/>
+	<input type="hidden"  id="text1" name="text1" value="${item}" />
 	 <%
 				String textMesa=request.getParameter("text1");
 				
 				%>
+	
+	</form>
+	</c:forEach>
+
+
+  	
+	
+    </article>
+
+  </section>
+  <section id="publicaciones">
+    <article class="post">
+
+      <a href="" class="enlace-post">
+        <h2 class="titulo-post"> Tareas pendientes </h2>
+      </a>
+
+
+        <p class="parrafo-post">
+          <input type="checkbox">
+          Llevar comanda habitación 1
+
+        </p>
+
+        <p class="parrafo-post">
+          <input type="checkbox">
+        Llevar comanda habitación 2
+
+        </p>
+
+        <p class="parrafo-post">
+          <input type="checkbox">
+        Llevar comanda habitación 3
+
+        </p>
+
+        <p class="parrafo-post">
+          <input type="checkbox">
+        Llevar comanda habitación 4
+
+
+        </p>
+
+
     </article>
 
   </section>

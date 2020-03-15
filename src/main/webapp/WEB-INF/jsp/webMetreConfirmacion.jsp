@@ -7,7 +7,7 @@
   <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
   <title> METRECONFIRMACION : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
-
+<style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 
@@ -37,26 +37,31 @@
         </a>
 
         <p class="parrafo-post">
-          MESA 1
+          MESA ${confirmacionBean.getMesa()}
           </p>
 
           <p class="parrafo-post">
 
-          8 personas
+          ${confirmacionBean.getNumPersonas()} personas
 
           </p>
 
           <p class="parrafo-post">
 
-          Habitación 1
-          Habitación 3
+          ${confirmacionBean.getHab()}
 
           </p>
 
           <p class="parrafo-post">
-            <a href="" class="leer-mas1"> Denegar </a>
-            <a href="" class="leer-mas1"> Confirmar </a>
-
+          <form action="denegar" method="get">
+          
+            <input type="submit" class="leer-mas1" value="Denegar"> 
+            </form>
+            <form action="confirmar" method="get">
+             <input type=hidden name="idMesa" value="${confirmacionBean.getMesa()}">
+            <input
+             type=submit class="leer-mas1" value="confirmar">
+			</form>
           </p>
 
 

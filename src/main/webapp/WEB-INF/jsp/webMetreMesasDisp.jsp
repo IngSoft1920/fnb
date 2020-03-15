@@ -70,7 +70,7 @@
               <nav class="nav">
               <ul class="menu">
                
-              <li><a href="a" id="lab1" > ${listaReservasBean.getMapAsign().get(item.getNum_mesa())}</a>
+              <li><a href="a" name="habitacion" id="habitacion" > ${listaReservasBean.getMapAsign().get(item.getNum_mesa())}</a>
   									</label>
                   <ul class="submenu">
                   
@@ -101,7 +101,7 @@
               <td><p class="parrafo-post">
               <nav class="nav">
               <ul class="menu">
-              <li><a href="a">${listaReservasBean.getMapAsignRes().get(item.getNum_mesa())}</a>                  
+              <li><a href="a" name="Reserva" value="${listaReservasBean.getMapAsignRes().get(item.getNum_mesa())}">${listaReservasBean.getMapAsignRes().get(item.getNum_mesa())}</a>                  
               <ul class="submenu">
                        <form action="asignarRev" method="GET">
                       

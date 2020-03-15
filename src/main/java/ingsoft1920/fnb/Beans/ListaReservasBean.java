@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import ingsoft1920.fnb.Controller.ApisFnb;
 import ingsoft1920.fnb.DAO.MesaDAO;
@@ -17,6 +18,7 @@ import ingsoft1920.fnb.Model.MesaM;
 
 
 @Component
+@SessionScope
 public class ListaReservasBean {
 	List<MesaM> listaMesas;
 	Map<Integer,String> mapAsign;
@@ -73,6 +75,26 @@ public class ListaReservasBean {
 
 	public void setListaMesas(List<MesaM> listaMesas) {
 		this.listaMesas = listaMesas;
+	}
+	public int findCap(int id) {
+		
+		
+		int i=0;
+		boolean found=false;
+		while(i<listaMesas.size() && !found) {
+			
+			if(listaMesas.get(i).getMesa_id()==id){
+				
+				found=true;
+			}else {
+			
+			i++;
+			}
+		}
+		
+		return i;
+		
+		
 	}
 	
 	/*public ListaReservasBean() {

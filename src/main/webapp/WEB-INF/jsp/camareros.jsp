@@ -1,4 +1,4 @@
-<%@page import="org.apache.coyote.Request"%>
+8<%@page import="org.apache.coyote.Request"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -91,18 +91,19 @@
 				</a>
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
-					<li><label>${item.getKey()} 
+					<li><label>${item.getKey()} ${item.getValue().getUnidades()}
 						 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}
   									</c:if>
+  									
   									</label>
 						<form method="POST" action="anadirBebida">
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit"
 								value="+">
-								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
+								<input type="text" name="numMesa" value=<%=t1%>> <br>
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
@@ -127,7 +128,7 @@
 				<p class="parrafo-post">Mesa
 				<form method="POST" action="enviarComanda">
 					<input type="hidden" name="fecha"> 
-					<input type="hidden" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
+					<input type="text" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
 						type="submit" value="Enviar comanda">
 				</form>
 				

@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ingsoft1920.fnb.Beans.ListaReservasBean;
+import ingsoft1920.fnb.Beans.confirmacionBean;
 import ingsoft1920.fnb.DAO.MesaDAO;
 import ingsoft1920.fnb.Model.MesaM;
-
+import ingsoft1920.fnb.Beans.portalMetreBean;
 @Controller
 
 public class IndiceMetreController {
 	
 	@Autowired
 	ListaReservasBean listaReservasBean;
+	confirmacionBean confirmacionBean;
+	portalMetreBean portalMetreBean;
 	
 	@RequestMapping("/indice")
 
@@ -60,12 +63,18 @@ public class IndiceMetreController {
 	@PostMapping("/alojarMesa")
 	public String alojarMesa(@Valid @RequestParam("idMesa") String idMesa,Model model) {
 		
-		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now());
 		
-		this.listaReservasBean=new ListaReservasBean();
-		model.addAttribute("listaReservasBean",listaReservasBean);
+		confirmacionBean= new confirmacionBean();
+		confirmacionBean.setHab(listaReservasBean.getMapAsign().get(Integer.parseInt(idMesa)));
+		confirmacionBean.setNumPersonas(listaReservasBean.getListaMesas().get(listaReservasBean.findCap(Integer.parseInt(idMesa))).getCapacidad());
+		confirmacionBean.setMesa(Integer.parseInt(idMesa));
+		model.addAttribute("confirmacionBean",confirmacionBean);
 		
-		return "webMetreMesasDisp";
+		
+		
+		
+		
+		return "webMetreConfirmacion";
 	}
 	
 	@GetMapping("/asignarHab")
@@ -85,6 +94,28 @@ public class IndiceMetreController {
 		
 		return "webMetreMesasDisp";
 	}
+	
+	@GetMapping("/denegar")
+	public String denegar(Model model){
+		
+		model.addAttribute("listaReservasBean",listaReservasBean);
+		
+		
+		return "redirect:metremesas";
+	}
+	
+	
+	@GetMapping("/confirmar")
+	public String confirmar(@Valid @RequestParam("idMesa") String idMesa,Model model){
+		
+		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now());
+		model.addAttribute("portalMetreBean", portalMetreBean);
+		
+		return "redirect:indice";
+	}
+	
+	
+	
 
 
 }

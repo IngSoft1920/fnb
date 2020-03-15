@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <html lan="es">
 <head>
   <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
@@ -39,251 +38,16 @@
           <h2 class="titulo-post">Reserva</h2>
         </a>
 
-        <table border="1">
-          <thead>
-          <tr>
-            <th>Hora</th>
-            <th>Nº personas</th>
-            <th>Nombre</th>
-            <th>Estado</th>
-          </tr>
-          </thead>
+        <p class="parrafo-post">
+          <a href="metreReservas" class="leer-mas"> Hacer una reserva </a>
+        </p>
 
-          <tbody>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a></li>
-                      <li><a href="a">Ocupada</a></li>
-                      <li><a href="a">Disponible</a></li>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-            <td>
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a">Estado</a>
-                  <ul class="submenu">
-                      <li><a href="a">Reservada</a>
-                      <li><a href="a">Ocupada</a>
-                      <li><a href="a">Disponible</a>
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <p class="parrafo-post">
+          <a href="metremesas" class="leer-mas"> Mesas disponibles </a>
+        </p>
 
       </article>
-</section>
+    </section>
 
     <section id="publicaciones">
       <article class="post">
@@ -393,7 +157,7 @@
         <tr>
           <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
           <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-    
+
 
         </tr>
 
