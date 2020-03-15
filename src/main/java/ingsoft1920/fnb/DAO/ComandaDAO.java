@@ -96,20 +96,25 @@ public class ComandaDAO {
 		ComandaM resultado= null;
 		PreparedStatement stmt = null; 
 		ResultSet rs = null;
+		System.out.println(mesa_id);
+		
 		try {
 			stmt = conn.prepareStatement(
 					"INSERT INTO comanda (estado_acabado, ubicacion_id,tarea_cocinero_id,hora) VALUES " + 
-							"(FALSE, (SELECT ubicacion_id FROM mesa_ubicacion WHERE mesa_id = ?), ?,?);", Statement.RETURN_GENERATED_KEYS);
+							"(FALSE, "
+							+ "(SELECT ubicacion_id FROM mesa_ubicacion WHERE mesa_id = ? AND ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30)"
+							+ " , ?,?);", Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setInt(1, mesa_id);
+			stmt.setString(2, LocalDateTime.now().toString());
 			//TODO usar tarea_cocinero de DHO
-			stmt.setInt(2, 3);
-			stmt.setObject(3, LocalDateTime.now());
+			stmt.setInt(3, 3);
+			stmt.setString(4, LocalDateTime.now().toString());
 			stmt.execute();
 			rs=stmt.getGeneratedKeys();
 			if(rs.next())
 				resultado=new ComandaM(rs.getInt(1));
-
+			
 			if(resultado != null) {
 				String param1 ="";
 				for (int i =0; i<platos.length-1;i++)
