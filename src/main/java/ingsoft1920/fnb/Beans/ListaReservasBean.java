@@ -20,8 +20,17 @@ import ingsoft1920.fnb.Model.MesaM;
 public class ListaReservasBean {
 	List<MesaM> listaMesas;
 	Map<Integer,String> mapAsign;
+	Map<Integer,String> mapAsignRes;
 	//ArrayList<reservas>listareservas;
 	//JSONObject rs;
+
+	public Map<Integer, String> getMapAsignRes() {
+		return mapAsignRes;
+	}
+
+	public void setMapAsignRes(Map<Integer, String> mapAsignRes) {
+		this.mapAsignRes = mapAsignRes;
+	}
 
 	public ListaReservasBean(List<MesaM> listaMesas) {
 		super();
@@ -33,10 +42,12 @@ public class ListaReservasBean {
 		listaMesas= new ArrayList<MesaM>();
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
+		mapAsignRes= new HashMap<Integer, String>();
 		for (MesaM mesa : list) {
 			if(mesa.isDisponible()) {
 			listaMesas.add(mesa);
 			mapAsign.put(mesa.getNum_mesa(),"Asignar");
+			mapAsignRes.put(mesa.getNum_mesa(), "Asignar reserva");
 			}
 		}
 		
@@ -52,7 +63,8 @@ public class ListaReservasBean {
 
 	@Override
 	public String toString() {
-		return "ListaReservasBean [listaMesas=" + listaMesas + ", mapAsign=" + mapAsign + "]";
+		return "ListaReservasBean [listaMesas=" + listaMesas + ", mapAsign=" + mapAsign + ", mapAsignRes=" + mapAsignRes
+				+ "]";
 	}
 
 	public List<MesaM> getListaMesas() {

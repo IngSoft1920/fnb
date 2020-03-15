@@ -69,9 +69,18 @@ public class IndiceMetreController {
 	}
 	
 	@GetMapping("/asignarHab")
-	public String quitarMesa(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("hab1") String hab1,Model model) {
+	public String asignarHab(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("hab1") String hab1,Model model) {
 		
 		this.listaReservasBean.getMapAsign().put(Integer.parseInt(idMesa), hab1);
+		model.addAttribute("listaReservasBean",listaReservasBean);
+		
+		return "webMetreMesasDisp";
+	}
+	
+	@GetMapping("/asignarRev")
+	public String asignarReserva(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("rev") String rev,Model model) {
+		
+		this.listaReservasBean.getMapAsignRes().put(Integer.parseInt(idMesa), rev);
 		model.addAttribute("listaReservasBean",listaReservasBean);
 		
 		return "webMetreMesasDisp";
