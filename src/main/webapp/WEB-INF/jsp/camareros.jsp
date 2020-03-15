@@ -1,4 +1,4 @@
-<%@page import="org.apache.coyote.Request"%>
+8<%@page import="org.apache.coyote.Request"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -92,11 +92,12 @@
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
 					<li><label>${item.getKey()} 
-						<c:set var="val" value="${item.getValue().getUnidades()}" /> 
+						 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}
   									</c:if>
+  									
   									</label>
 						<form method="POST" action="anadirBebida">
 							<input type="hidden" name="bebidaNueva"

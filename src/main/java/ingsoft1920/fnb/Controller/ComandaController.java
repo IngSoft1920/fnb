@@ -283,10 +283,10 @@ public class ComandaController {
 		
 		System.out.println( Arrays.toString(GetStringArray(items))+"+---------12345");
 		System.out.println(Arrays.toString(GetStringArray(platos))+"+123456");
-		ConectorBBDD.conectar();
+
 		ComandaDAO.insertComanda(Integer.parseInt(numMesa),GetStringArray(platos), GetStringArray(items));
 		
-		ConectorBBDD.desconectar();
+
 
 		this.comandaBean = new ComandaBean();
 		if(!numMesa.equals("null")) {
@@ -294,7 +294,7 @@ public class ComandaController {
 			}
 		model.addAttribute("comandaBean", this.comandaBean);
 
-		return "camareros";
+		return "redirect:mesas";
 	}
 	private static String[] GetStringArray(List<String> platos) 
     { 
