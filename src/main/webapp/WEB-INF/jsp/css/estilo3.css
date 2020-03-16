@@ -224,6 +224,12 @@ header{
   color: #0489B1;
 
 }
+
+table tr:nth-child(3) {
+	color: #fff;
+	background-color: #ff0000;
+}
+
 #sidebar{
   float: right;
   width: 28%;
