@@ -1,80 +1,110 @@
+<%@page import="ingsoft1920.fnb.Beans.ComandaBean"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
-
-  </head>
-  <body>
+   
+  
+    <meta charset="utf-8"/>
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+  
+  
+  <label>esto funciona</label>
   
   	<script type="text/javascript">
-
+	
   	var x=55;
     var y=55;
     var capacidad=1;
     var barrera=true;
     
-
+	var nom = [];
     var mesa1={
       x:350,
       y:250,
-      color:'blanco'
+      color:'blanco',
+      id:1
     };
     var mesa2={
       x:350,
       y:350,
-      color:'blanco'
+      color:'blanco',
+      id:2
     };
     var mesa3={
       x:350,
       y:450,
-      color:'blanco'
+      color:'blanco',
+      id:3
     };
     var mesa4={
       x:500,
       y:250,
-      color:'blanco'
+      color:'blanco',
+      id:4
     };
     var mesa5={
       x:500,
       y:350,
-      color:'blanco'
+      color:'blanco',
+      id:5
     };
     var mesa6={
       x:500,
       y:450,
-      color:'blanco'
+      color:'blanco',
+      id:6
     };
     var mesa7={
       x:640,
       y:355,
-      color:'blanco'
+      color:'blanco',
+      id:7
     };
     var mesa8={
       x:640,
       y:455,
-      color:'blanco'
+      color:'blanco',
+      id:8
     };
     var mesa9={
       x:640,
       y:250,
-      color:'blanco'
+      color:'blanco',
+      id:9
     };
     var mesa10={
       x:750,
       y:350,
-      color:'blanco'
+      color:'blanco',
+      id:10
     };
     var mesa11={
       x:840,
       y:250,
-      color:'blanco'
+      color:'blanco',
+      id:11
     };    
     
+    //var consulta=${luisBean.prueba()};
+    
+    
+    
+    var miMapa = new Map();
+    var i=0;
+   // for (i = 0; i < consulta.size(); i++) {
+    	 
+    	//miMapa.set(consulta[i].getNum_mesa(),consulta[i].getDisponible());
+    	
+    //	}
+    
+  
+    
     function setup() {
-    	createCanvas(10000, 10000);
+    	createCanvas(3000, 3000);
     	background(255,255,255);//Blanco
     }
     function draw(){
@@ -215,9 +245,12 @@
     		text('ASEOS',380,90);
     		text('COCINA',1050,105);
     		text('COMEDOR',690,200);
-    		
+    		//text(miMapa.get(1),100,100);
     	
         }
+    	
+    	
+		
     	
      
     }
@@ -427,9 +460,12 @@
     	}
    }
 
-
+	
     
   
     </script>
+    <script type="text/javascript" src="sketch.js"></script>
+    
+    </head>
   </body>
 </html>
