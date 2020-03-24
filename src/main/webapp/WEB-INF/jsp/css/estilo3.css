@@ -225,10 +225,7 @@ header{
 
 }
 
-table tr:nth-child(3) {
-	color: #fff;
-	background-color: #f17c73;
-}
+
 
 #sidebar{
   float: right;

@@ -53,6 +53,7 @@
 
 			<c:forEach items="${listaReservasBean.getListaMesas()}"
 					var="item">
+			<c:if test="${item.getDisponible()==true}">
                     <tr>
             <td><p class="parrafo-post1">
               <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
@@ -107,6 +108,40 @@
           </td>
 
           </tr>
+          </c:if>
+          
+          <c:if test="${item.getDisponible()==false}">
+          
+          <tr bgcolor="#f17c73">
+            <td><p class="parrafo-post1">
+              <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
+				
+            </p>
+          </td>
+            <td><p class="parrafo-post1">
+              <strong><i> ${item.getCapacidad()}</i></strong>
+
+            </p>
+          </td>
+
+            <td>
+               
+             
+                 
+
+              
+            
+            </td>
+            
+       
+            <td>
+            
+          </td>
+
+          </tr>
+          
+          </c:if>
+          
 		</c:forEach>
           </tbody>
         </table>
