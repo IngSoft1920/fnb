@@ -56,7 +56,7 @@
                     <tr>
             <td><p class="parrafo-post1">
               <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
-
+				
             </p>
           </td>
             <td><p class="parrafo-post1">
