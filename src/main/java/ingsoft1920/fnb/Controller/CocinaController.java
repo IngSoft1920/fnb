@@ -41,8 +41,7 @@ public class CocinaController {
 		
 		
 		System.out.println(tareasBean.removeTask(Integer.parseInt(check)));
-		
-		
+			
 
 		model.addAttribute("tareasBean", tareasBean);
 		System.out.println("--------------------");
