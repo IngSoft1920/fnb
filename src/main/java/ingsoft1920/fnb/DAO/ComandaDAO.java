@@ -1,9 +1,7 @@
 package ingsoft1920.fnb.DAO;
 
 
-import java.sql.Array;
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -248,8 +246,10 @@ public class ComandaDAO {
 				resultado=new ComandaM(rs.getInt(1));
 
 			if(resultado != null) {
+
 				String param1 ="";
-				for (int i =0; i<platos.length-1;i++)
+				int num =0;
+				for (int i =0; i<platos.length-1;i++) 
 					param1+="?,";
 				param1+="?";
 
@@ -258,37 +258,60 @@ public class ComandaDAO {
 					param2+="?,";
 				param2+="?";
 				stmt = conn.prepareStatement(
-						"INSERT INTO comanda_elemComanda " + 
-								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
-								"FROM elemComanda AS ec " + 
-								"JOIN plato AS p ON p.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM plato WHERE nombre in ("+param1+")) " + 
+						"SELECT nombre, elemComanda_id FROM plato WHERE nombre in ("+param1+") " + 
 								"UNION " + 
-								"SELECT ? as comanda_id, ec.elemComanda_id as elemComanda_id " + 
-								"FROM elemComanda AS ec " + 
-								"JOIN item AS i ON i.elemComanda_id= ec.elemComanda_id " + 
-								"WHERE ec.elemComanda_id in (SELECT elemComanda_id FROM item WHERE nombre in ("+param2+"));");
-
+								"SELECT nombre, elemComanda_id FROM item WHERE nombre in ("+param2+");");
 				int i =1;
-				stmt.setInt(i++,resultado.getComanda_id());
+
+				Map<String,Integer> contador= new HashMap<String,Integer>();
+				Integer n;
 
 				if(platos.length==0)
 					stmt.setString(i++,"NULL");
 				else {
 					int j =i;
-					for(; i<platos.length+j;i++) 
+					for(; i<platos.length+j;i++) {
 						stmt.setString(i, platos[i-j]);
+						n= contador.get(platos[i-j]);
+						contador.put(platos[i-j], n==null? 1:n+1);
+					}
 				}
-
-				stmt.setInt(i++,resultado.getComanda_id());
 
 				if(items.length==0)
 					stmt.setString(i++,"NULL");
 				else {
 					int k =i;
-					for(; i<items.length+k;i++) 
+					for(; i<items.length+k;i++) {
 						stmt.setString(i, items[i-k]);
+						n= contador.get(items[i-k]);
+						contador.put(items[i-k], n==null? 1:n+1);
+					}
 
+				}
+				rs=stmt.executeQuery();
+
+				rs.last();
+				int lon =rs.getRow();
+				System.out.println(lon);	
+
+				String param3 ="";
+				for(i=0; i<lon-1; i++) {
+					param3 += "(?,?,?),";
+				}
+				param3 += "(?,?,?)";
+				System.out.println(param3);
+				stmt = conn.prepareStatement(
+						"INSERT INTO comanda_elemComanda VALUES " + param3);
+				i=1;
+				if 	(rs.first()) {
+					do {
+						System.out.println(i);
+						stmt.setInt(i++, resultado.getComanda_id());
+						System.out.println(i);
+						stmt.setInt(i++, rs.getInt("elemComanda_id"));
+						System.out.println(i);
+						stmt.setInt(i++,contador.get(rs.getString("nombre")));
+					}while(rs.next());
 				}
 				stmt.execute();
 			}
