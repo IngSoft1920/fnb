@@ -92,7 +92,7 @@
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
 					<li><label>${item.getKey()} 
-						 
+						 <c:set var="val" value="${item.getValue().getUnidades()}" /> 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}

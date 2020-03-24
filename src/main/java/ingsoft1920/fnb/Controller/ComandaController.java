@@ -207,6 +207,7 @@ public class ComandaController {
 			if (entrada.getId() == Integer.parseInt(nuevoPlato)) {
 				found = true;
 				entrada.setUnidades(entrada.getUnidades() + 1);
+				
 				Set<String> keyList = comandaBean.getBebidas().keySet();
 				boolean foundKey = false;
 				String key = null;

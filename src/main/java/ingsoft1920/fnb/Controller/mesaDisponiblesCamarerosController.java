@@ -15,9 +15,7 @@ public class mesaDisponiblesCamarerosController {
 	
 	@RequestMapping("/mesas")
 	public String showPaginaComandaGet(Model model) {
-		
-		mesaBean = new MesaBean();
-		
+		mesaBean=new MesaBean();
 		model.addAttribute("mesaBean", mesaBean);
 		return "mesasDisponiblesCamareros";
 	}
