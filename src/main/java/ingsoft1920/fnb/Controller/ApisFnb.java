@@ -225,6 +225,7 @@ public class ApisFnb {
 	Entrada:
 	{
 		'servicio_id': int,
+		'reserva_id': int,
 		'fecha_hora': String,
 		'num_clientes': int,
 		'tipoUbicacion': int,
@@ -248,7 +249,8 @@ public class ApisFnb {
 	public static void  nuevoServicio(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
-		int servicio_id = obj.get("servicio_id").getAsInt(); 
+		int servicio_id = obj.get("servicio_id").getAsInt();
+		int reserva_id = obj.get("reserva_id").getAsInt(); 
 		LocalDateTime fecha_hora = LocalDateTime.parse(obj.get("fecha_hora").getAsString());
 		int num_clientes = obj.get("num_clientes").getAsInt();
 		JsonArray listaHabitaciones = obj.get("habitaciones_id").getAsJsonArray();
