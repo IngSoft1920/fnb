@@ -46,12 +46,13 @@ public class ListaReservasBean {
 		mapAsign =  new HashMap<Integer, String>();
 		mapAsignRes= new HashMap<Integer, String>();
 		for (MesaM mesa : list) {
-			if(mesa.isDisponible()) {
+			if(mesa.getRestaurante().getNombre().equals("Mamma Mia")) {
 			listaMesas.add(mesa);
 			mapAsign.put(mesa.getNum_mesa(),"Asignar");
 			mapAsignRes.put(mesa.getNum_mesa(), "Asignar reserva");
 			}
 		}
+		
 		
 	}
 

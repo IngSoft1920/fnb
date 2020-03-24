@@ -104,6 +104,7 @@ public class TareasBean {
 	 
 	 
 	 id_comanda=comandas.get(i).getComanda_id();
+	 comandas.get(0).getPlato().getElemComanda().getN_elem();
 	 System.out.println(id_comanda);
 	 
 	 if (comandas.get(i).getComanda_id()==-2) {
@@ -122,16 +123,20 @@ public class TareasBean {
 		
 		
 		 tar =  new Tarea(id_comanda, new HashMap<String, platos>(), new HashMap<String, bebidas>(), comandas.get(i).getHora());
-		 tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id());
-		 idAnterior=id_comanda;
+		 tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem());
 		 
+		 
+		 idAnterior=id_comanda;
+	
 		
 		 System.out.println("la bestia"+tar.toString());
 	}else {
 		
-		tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id());
+		
+		tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem());
 		System.out.println(comandas.get(i).getPlato().getPlato_id());
 		System.out.println(comandas.get(i).getPlato().getNombre());
+		
 	}
 	
 	  

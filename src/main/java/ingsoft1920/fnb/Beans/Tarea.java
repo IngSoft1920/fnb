@@ -50,10 +50,11 @@ public class Tarea {
 		this.hora = hora;
 	}
 	
-	public void addPlato(String plato,int id) {
+	public void addPlato(String plato,int id,int cantidad) {
 		System.out.println(plato+"plato que le viene!!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(cantidad+"plato que le viene!!!!!!!!!!!!!!!!!!!!!!");
 		
-		if (listaPlatos.containsKey(plato)) {
+		/*if (listaPlatos.containsKey(plato)) {
 			platos p =listaPlatos.get(plato);
 			p.setUnidades(p.getUnidades()+1);
 			System.out.println("plato con nueva cantidad!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -66,7 +67,9 @@ public class Tarea {
 			listaPlatos.put(plato, new platos(id,1));
 			
 		}
+		*/
 		
+		listaPlatos.put(plato,new platos(id, cantidad));
 		
 		
 	}

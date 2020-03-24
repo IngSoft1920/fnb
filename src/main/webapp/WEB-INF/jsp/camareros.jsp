@@ -51,7 +51,7 @@
 			<article class="post">
 
 				<a href="" class="enlace-post">
-					<h2 class="titulo-post">Menu</h2>
+					<h2 class="titulo-post">Platos</h2>
 				</a>
 				<c:forEach items="${comandaBean.getCantidades().entrySet()}"
 					var="item">
@@ -65,13 +65,13 @@
 
 						<form method="POST" action="anadirItem">
 							<input type="hidden" name="platoNuevo"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="+">
 								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 							</form>
 							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
 								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
@@ -101,13 +101,13 @@
   									</label>
 						<form method="POST" action="anadirBebida">
 							<input type="hidden" name="bebidaNueva"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="+">
 								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
 								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
@@ -136,7 +136,20 @@
 			</article>
 
 		</section>
+<section id="sidebar">
+  <section id="informacion">
+    <h2 class="encabezado-sidebar"> Información </h2>
+    <h4> Adrián José García</h4>
+    <p> Alérgico a la fruta y legumbres. </p>
 
+    <h4> Miriam Sánchez</h4>
+    <p> Alérgica al gluten. </p>
+
+
+
+  </section>
+
+</section>
 	</section>
 
 

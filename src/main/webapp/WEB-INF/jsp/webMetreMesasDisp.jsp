@@ -44,7 +44,6 @@
            <th>Mesas</th>
             <th>Nº personas</th>
             <th>Asignación mesas</th>
-            <th>Asignación reserva</th>
             <th>Confirmación</th>
 
           </tr>
@@ -54,10 +53,11 @@
 
 			<c:forEach items="${listaReservasBean.getListaMesas()}"
 					var="item">
+			<c:if test="${item.getDisponible()==true}">
                     <tr>
             <td><p class="parrafo-post1">
               <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
-
+				
             </p>
           </td>
             <td><p class="parrafo-post1">
@@ -98,34 +98,7 @@
               </p>
             </td>
             
-              <td><p class="parrafo-post">
-              <nav class="nav">
-              <ul class="menu">
-              <li><a href="a" name="Reserva" value="${listaReservasBean.getMapAsignRes().get(item.getNum_mesa())}">${listaReservasBean.getMapAsignRes().get(item.getNum_mesa())}</a>                  
-              <ul class="submenu">
-                       <form action="asignarRev" method="GET">
-                      
-                  	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                      <li><button name="rev" class="leer-mas"  value="Reserva 1">Reserva 1</button>
-                      </form>  
-                     <form action="asignarRev" method="GET">
-                     <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li><button name="rev" class="leer-mas"  value="Reserva 2">Reserva 2</button>
-                      </form><form action="asignarRev" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                     <li><button name="rev" class="leer-mas"  value="Reserva 3">Reserva 3</button>
-                      </form><form action="asignarRev" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="rev" class="leer-mas"  value="Reserva 4<">Reserva 4</button>
-                      </form> 
-                  </ul>
-
-              </li>
-              </ul>
-              </nav>
-              </p>
-            </td>
-          </td>
+       
             <td><p class="parrafo-post1">
             <form method="POST" action="alojarMesa" >
         	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
@@ -135,6 +108,40 @@
           </td>
 
           </tr>
+          </c:if>
+          
+          <c:if test="${item.getDisponible()==false}">
+          
+          <tr bgcolor="#f17c73">
+            <td><p class="parrafo-post1">
+              <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
+				
+            </p>
+          </td>
+            <td><p class="parrafo-post1">
+              <strong><i> ${item.getCapacidad()}</i></strong>
+
+            </p>
+          </td>
+
+            <td>
+               
+             
+                 
+
+              
+            
+            </td>
+            
+       
+            <td>
+            
+          </td>
+
+          </tr>
+          
+          </c:if>
+          
 		</c:forEach>
           </tbody>
         </table>
