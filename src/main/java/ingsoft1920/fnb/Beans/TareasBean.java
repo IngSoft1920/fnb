@@ -104,7 +104,7 @@ public class TareasBean {
 	 
 	 
 	 id_comanda=comandas.get(i).getComanda_id();
-	 comandas.get(0).getPlato().getElemComanda().getN_elem();
+	 //comandas.get(0).getPlato().getElemComanda().getN_elem();
 	 System.out.println(id_comanda);
 	 
 	 if (comandas.get(i).getComanda_id()==-2) {
