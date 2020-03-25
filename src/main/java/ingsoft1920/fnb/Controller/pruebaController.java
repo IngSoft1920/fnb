@@ -16,6 +16,9 @@ public class pruebaController {
 	@GetMapping("/prueba")
 	public String pruebaontroller(Model model) {
 		
+		luisMesa = new luisBean();
+		
+		
 		model.addAttribute("luisMesa", luisMesa);
 		
 		return "dibujomesasprueba";

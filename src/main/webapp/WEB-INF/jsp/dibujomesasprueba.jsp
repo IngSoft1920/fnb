@@ -89,7 +89,14 @@
       id:11
     };    
     
-    //var consulta=${luisBean.prueba()};
+    var consulta= new Array();
+    
+    <c:forEach items="${luisBean.getListaMesas()}" var="country"> 
+    countryDetails = new Object();
+    countryDetails.id = ${country.getMesa_id()};
+    countryDetails.op = ${country.getDisponible()};
+    consulta.push(countryDetails);
+</c:forEach> 
     
     
     
@@ -245,7 +252,7 @@
     		text('ASEOS',380,90);
     		text('COCINA',1050,105);
     		text('COMEDOR',690,200);
-    		//text(miMapa.get(1),100,100);
+    	
     	
         }
     	
