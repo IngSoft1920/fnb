@@ -5,7 +5,7 @@
 <html lan="es">
 <head>
   <meta charset="utf-8">	<!--Para decodificaci�n de caracteres especiales -->
-  <title> METRECONFIRMACION : </title> <!--T�tulo-->
+  <title> METRECONFIRMACION : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
@@ -21,7 +21,7 @@
       <div id="menu">
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
-          <li><a href="#" class="enlace">Confirmaci�n</a></li>
+          <li><a href="#" class="enlace">Confirmación</a></li>
 
 
         </ul>
@@ -33,7 +33,7 @@
     <section id="publicaciones">
       <article class="post">
         
-          <h2 class="titulo-post">Confirmar asignaci�n</h2>
+          <h2 class="titulo-post">Confirmar asignación</h2>
         
 
         <p class="parrafo-post">
@@ -75,12 +75,12 @@
 
     <section id="sidebar">
       <section id="informacion">
-        <h2 class="encabezado-sidebar"> Informaci�n </h2>
-        <h4> Adri�n Jos� Garc�a</h4>
-        <p> Al�rgico a la fruta y legumbres. </p>
+        <h2 class="encabezado-sidebar"> Información </h2>
+        <h4> Adrián José García</h4>
+        <p> Alérgico a la fruta y legumbres. </p>
 
-        <h4> Miriam S�nchez</h4>
-        <p> Al�rgica al gluten. </p>
+        <h4> Miriam Sánchez</h4>
+        <p> Alérgica al gluten. </p>
 
 
 
