@@ -75,12 +75,12 @@
 
     <section id="sidebar">
       <section id="informacion">
-        <h2 class="encabezado-sidebar"> Informaciï¿½n </h2>
-        <h4> Adriï¿½n Josï¿½ Garcï¿½a</h4>
-        <p> Alï¿½rgico a la fruta y legumbres. </p>
+        <h2 class="encabezado-sidebar"> Información </h2>
+        <h4> Adrián José García</h4>
+        <p> Alérgico a la fruta y legumbres. </p>
 
-        <h4> Miriam Sï¿½nchez</h4>
-        <p> Alï¿½rgica al gluten. </p>
+        <h4> Miriam Sánchez</h4>
+        <p> Alérgica al gluten. </p>
 
 
 
