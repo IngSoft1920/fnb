@@ -4,15 +4,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lan="es">
 <head>
-  <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
-  <title> METRECONFIRMACION : </title> <!--Título-->
+  <meta charset="utf-8">	<!--Para decodificaciï¿½n de caracteres especiales -->
+  <title> METRECONFIRMACION : </title> <!--Tï¿½tulo-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 
 <body>
-  <header class="header"> <!-- La parte de arriba de la página web-->
+  <header class="header"> <!-- La parte de arriba de la pï¿½gina web-->
     <div id="encabezado">
       <div id="logo">
         PORTAL METRE
@@ -21,7 +21,7 @@
       <div id="menu">
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
-          <li><a href="#" class="enlace">Confirmación</a></li>
+          <li><a href="#" class="enlace">Confirmaciï¿½n</a></li>
 
 
         </ul>
@@ -32,9 +32,9 @@
   <section id="principal">
     <section id="publicaciones">
       <article class="post">
-        <a href="" class="enlace-post">
-          <h2 class="titulo-post">Confirmar asignación</h2>
-        </a>
+        
+          <h2 class="titulo-post">Confirmar asignaciï¿½n</h2>
+        
 
         <p class="parrafo-post">
           MESA ${confirmacionBean.getMesa()}
@@ -61,7 +61,7 @@
             <input type="hidden" name="habitacion" value="${confirmacionBean.getHab()}">
              <input type=hidden name="idMesa" value="${confirmacionBean.getMesa()}">
             <input
-             type=submit class="leer-mas1" value="confirmar">
+             type=submit class="leer-mas1" value="Confirmar">
 			</form>
           </p>
 
@@ -75,12 +75,12 @@
 
     <section id="sidebar">
       <section id="informacion">
-        <h2 class="encabezado-sidebar"> Información </h2>
-        <h4> Adrián José García</h4>
-        <p> Alérgico a la fruta y legumbres. </p>
+        <h2 class="encabezado-sidebar"> Informaciï¿½n </h2>
+        <h4> Adriï¿½n Josï¿½ Garcï¿½a</h4>
+        <p> Alï¿½rgico a la fruta y legumbres. </p>
 
-        <h4> Miriam Sánchez</h4>
-        <p> Alérgica al gluten. </p>
+        <h4> Miriam Sï¿½nchez</h4>
+        <p> Alï¿½rgica al gluten. </p>
 
 
 

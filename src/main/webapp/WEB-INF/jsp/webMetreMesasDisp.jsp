@@ -33,9 +33,9 @@
     <section id="publicaciones">
       <article class="post">
 
-      <a href="" class="enlace-post">
+    
         <h2 class="titulo-post">Mesas disponibles</h2>
-        </a>
+        
 	
 
         <table border="1">

@@ -35,9 +35,9 @@
   <section id="publicaciones">
     <article class="post">
 
-      <a href="" class="enlace-post">
+    
         <h2 class="titulo-post">Formulario a completar</h2>
-      </a>
+      
       <c:forEach items="${mesaBean.getListaMesas()}"
 					var="item">
 					
@@ -76,9 +76,8 @@
   <section id="publicaciones">
     <article class="post">
 
-      <a href="" class="enlace-post">
         <h2 class="titulo-post"> Tareas pendientes </h2>
-      </a>
+      
 
 
         <p class="parrafo-post">

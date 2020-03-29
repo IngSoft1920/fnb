@@ -34,9 +34,9 @@
     <section id="publicaciones">
       <article class="post">
 
-        <a href="" class="enlace-post">
+       
           <h2 class="titulo-post">Reserva</h2>
-        </a>
+        
 
         <p class="parrafo-post">
           <a href="metremesas" class="leer-mas"> Mesas disponibles </a>
