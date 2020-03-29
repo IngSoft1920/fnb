@@ -22,7 +22,7 @@
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
           <li><a href="#" class="enlace">Reserva</a></li>
-          <li><a href="#" class="enlace">Modificacion de carta</a></li>
+          <li><a href="modificacion" class="enlace">Modificacion de carta</a></li>
          
 
         </ul>
