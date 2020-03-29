@@ -48,6 +48,19 @@ header{
   display: inline-block;
   margin-top: 10px;
 }
+#menu ul li .enlace{
+  text-decoration: none;
+  padding: 5px 8px;
+  font-size: 20px;
+  color: #fff;
+
+}
+
+#menu ul li .enlace:hover{
+  background: #585858;
+  color: #fff;
+  border-radius: 5px 5px 0px 0px;
+}
 
 #menu ul li .activate-menu{
 
