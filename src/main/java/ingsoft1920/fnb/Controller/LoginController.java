@@ -61,7 +61,7 @@ public class LoginController {
 			}
 			
 			model.addAttribute("comandaBean",comandaBean);
-			return "redirect:camareros";
+			return "redirect:mesas";
 			
 		case "me1":
 			
@@ -74,7 +74,7 @@ public class LoginController {
 			
 			model.addAttribute("metreBean",null);
 			////parte de luis
-			return "redirect:metre";
+			return "redirect:indice";
 		default:
 			
 			loginBean.setHabilitated(true);

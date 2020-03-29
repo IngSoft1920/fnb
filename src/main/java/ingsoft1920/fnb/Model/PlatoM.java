@@ -35,6 +35,14 @@ public class PlatoM {
 		this.num_plato = num_plato;
 		this.nombre = nombre;
 	}
+	
+	public PlatoM(int plato_id ,int num_plato, String nombre, ElemComandaM elemComanda) {
+		this.plato_id = plato_id;
+		this.num_plato = num_plato;
+		this.nombre = nombre;
+		this.elemComanda = elemComanda;
+
+	}
 
 	public int getPlato_id() {
 		return plato_id;

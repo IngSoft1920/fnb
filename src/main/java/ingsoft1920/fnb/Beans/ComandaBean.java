@@ -3,18 +3,28 @@ package ingsoft1920.fnb.Beans;
 import java.util.ArrayList;
 
 
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import ingsoft1920.fnb.DAO.PlatoDAO;
 import ingsoft1920.fnb.Beans.platos;
 import ingsoft1920.fnb.Model.ItemM;
 import ingsoft1920.fnb.Model.PlatoM;
 import ingsoft1920.fnb.Beans.bebidas;
+
+import org.apache.coyote.Request;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 import ingsoft1920.fnb.DAO.ItemDAO;
 import ingsoft1920.fnb.Services.ConectorBBDD;
+
 @Component
 @SessionScope
 public class ComandaBean {
@@ -23,6 +33,47 @@ public class ComandaBean {
 	 Map<String, platos> cantidades;
 	 Map<String, bebidas> bebidas;
 	String nombreRestaurante="Mamma Mia";
+	int numMesa;
+	public ArrayList<String> getListaPlatos() {
+		return listaPlatos;
+	}
+
+	public void setListaPlatos(ArrayList<String> listaPlatos) {
+		this.listaPlatos = listaPlatos;
+	}
+
+	public ArrayList<String> getListaBebida() {
+		return listaBebida;
+	}
+
+	public void setListaBebida(ArrayList<String> listaBebida) {
+		this.listaBebida = listaBebida;
+	}
+
+	public String getNombreRestaurante() {
+		return nombreRestaurante;
+	}
+
+	public void setNombreRestaurante(String nombreRestaurante) {
+		this.nombreRestaurante = nombreRestaurante;
+	}
+
+	public int getNumMesa() {
+		return numMesa;
+	}
+
+	public void setNumMesa(int numMesa) {
+		this.numMesa = numMesa;
+	}
+
+	public void setCantidades(Map<String, platos> cantidades) {
+		this.cantidades = cantidades;
+	}
+
+	public void setBebidas(Map<String, bebidas> bebidas) {
+		this.bebidas = bebidas;
+	}
+
 	int cantidadNueva;
 	
 	public ComandaBean() {
@@ -65,6 +116,7 @@ public class ComandaBean {
 		}*/
 		System.out.println(bebidas.toString());
 		System.out.println(cantidades.toString());
+		 
 	}
 	
 	public String getPlatoNuevo() {
