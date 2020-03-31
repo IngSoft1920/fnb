@@ -28,9 +28,9 @@
 <section id="publicaciones">
   <article class="post">
 
-    <a href="" class="enlace-post">
+  
       <h2 class="titulo-post">Inicio</h2>
-    </a>
+    
 	<form method="GET" action="entrar">
     <p class="parrafo-post">
       Nombre de usuario

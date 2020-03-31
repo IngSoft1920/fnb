@@ -50,17 +50,17 @@ header{
 }
 
 #menu ul li .enlace{
-  text-decoration: none; <!-- quita el subrayado -->
-  padding: 10px 20px; <!-- pequeña separaci ón-->
+  text-decoration: none;
+  padding: 5px 8px;
   font-size: 20px;
-  color: #fff
+  color: #fff;
 
 }
 
 #menu ul li .enlace:hover{
-  background: #585858; <!-- color de fondo-->
-  color: #fff; <!-- color de texto-->
-  border-radius: 5px 5px 0px 0px; <!-- las esquinas-->
+  background: #585858;
+  color: #fff;
+  border-radius: 5px 5px 0px 0px;
 }
 
 #menu ul li .activate-menu{

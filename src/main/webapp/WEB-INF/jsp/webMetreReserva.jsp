@@ -4,15 +4,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lan="es">
 <head>
-  <meta charset="utf-8">	<!--Para decodificación de caracteres especiales -->
-  <title> METRERESERVA : </title> <!--Título-->
+  <meta charset="utf-8">	<!--Para decodificaciï¿½n de caracteres especiales -->
+  <title> METRERESERVA : </title> <!--Tï¿½tulo-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 
 <body>
-  <header class="header"> <!-- La parte de arriba de la página web-->
+  <header class="header"> <!-- La parte de arriba de la pï¿½gina web-->
     <div id="encabezado">
       <div id="logo">
         PORTAL METRE
@@ -33,15 +33,15 @@
     <section id="publicaciones">
       <article class="post">
 
-        <a href="" class="enlace-post">
+        
           <h2 class="titulo-post">Reserva</h2>
-        </a>
+        
 
         <table border="1">
           <thead>
           <tr>
             <th>Hora</th>
-            <th>Nº personas</th>
+            <th>Nï¿½ personas</th>
             <th>Nombre</th>
             <th>Estado</th>
           </tr>

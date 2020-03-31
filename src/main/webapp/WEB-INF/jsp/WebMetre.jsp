@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -22,7 +22,7 @@
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
           <li><a href="#" class="enlace">Reserva</a></li>
-          <li><a href="#" class="enlace">Modificacion de carta</a></li>
+          <li><a href="modificacion" class="enlace">Modificacion de carta</a></li>
          
 
         </ul>
@@ -34,9 +34,9 @@
     <section id="publicaciones">
       <article class="post">
 
-        <a href="" class="enlace-post">
+       
           <h2 class="titulo-post">Reserva</h2>
-        </a>
+        
 
         <p class="parrafo-post">
           <a href="metremesas" class="leer-mas"> Mesas disponibles </a>

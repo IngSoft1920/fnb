@@ -34,9 +34,9 @@
     <section id="publicaciones">
      <article class="post">
 
-       <a href="" class="enlace-post">
+      
          <h2 class="titulo-post">Eliminar platos</h2>
-       </a>
+       
 
        <p class="parrafo-post">
          Macarrones
@@ -80,9 +80,9 @@
  <section id="publicaciones">
    <article class="post">
 
-     <a href="" class="enlace-post">
+   
        <h2 class="titulo-post">Anadir plato</h2>
-     </a>
+     
 
      <table border="1">
        <thead>

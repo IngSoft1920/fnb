@@ -33,9 +33,9 @@
     <section id="publicaciones">
       <article class="post">
 
-      <a href="" class="enlace-post">
+    
         <h2 class="titulo-post">Mesas disponibles</h2>
-        </a>
+        
 	
 
         <table border="1">
@@ -87,7 +87,7 @@
                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 3">Habitación 3</button>
                       </form><form action="asignarHab" method="GET">
                       <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 4<">Habitación 4</button>
+                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 4">Habitación 4</button>
                       </form>  
                   </ul>
                  
