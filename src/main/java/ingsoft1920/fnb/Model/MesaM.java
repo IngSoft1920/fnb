@@ -1,7 +1,5 @@
 package ingsoft1920.fnb.Model;
 
-import java.time.LocalDateTime;
-
 public class MesaM {
 
 	private int mesa_id;

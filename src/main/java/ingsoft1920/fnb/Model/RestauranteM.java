@@ -21,6 +21,10 @@ public class RestauranteM {
 		this.hora_apertura = null;
 		this.hora_clausura = null;	}
 
+	public RestauranteM(LocalTime hora_apertura, LocalTime hora_clausura) {
+		this.hora_apertura = hora_apertura;
+		this.hora_clausura = hora_clausura;	}
+
 	public int getRestaurante_id() {
 		return restaurante_id;
 	}

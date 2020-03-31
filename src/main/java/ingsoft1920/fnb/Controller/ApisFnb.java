@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Controller;
 
 import ingsoft1920.fnb.Model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;  
@@ -174,13 +175,15 @@ public class ApisFnb {
 	Entrada:
 	{
 		'rest_nom': String,
-		'capacidad': int
+		'capacidad': int,
+		'fecha': String
 	}
 	Salida: 
 	{ 
-		'fecha_reserva': String[];
+		'horas_disp': String[];
 	} 
-	Donde fecha_reserva sigue el formato LocalDateTime [ yyyy-mm-ddThh:mm:ss ]
+	Donde fecha sigue el formato LocalDate [ yyyy-mm-dd ]
+	Donde horas_disp sigue el formato LocalTime [ hh:mm ]
 	 */ 
 	@ResponseBody 
 	@PostMapping("/checkReservRest") 
@@ -189,17 +192,31 @@ public class ApisFnb {
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
 		String rest_nom = obj.get("rest_nom").getAsString(); 
 		int capacidad = obj.get("capacidad").getAsInt();
-
+		LocalDate fecha = LocalDate.parse(obj.get("fecha").getAsString());
+				
 		JsonArray listaFechaReserva = new JsonArray(); 
 
 		//lista de items dentro del Map
-		List<Mesa_ubicacionM> listaFechas = Mesa_ubicacionDAO.horasNoDispRest(rest_nom, capacidad);
-		for (Mesa_ubicacionM fecha: listaFechas) {
-			listaFechaReserva.add(fecha.getFecha_reserva().toString());
-		}
+		List<Mesa_ubicacionM> listaFechas = Mesa_ubicacionDAO.horasNoDispRest(rest_nom, capacidad,fecha);
+		
+		RestauranteM rest = RestauranteDAO.horarioRest(rest_nom);
+		LocalDateTime fecha_limite = LocalDateTime.of(fecha,rest.getHora_clausura());
+		for(LocalDateTime fechas_dia = LocalDateTime.of(fecha,rest.getHora_apertura()); 
+				fechas_dia.isBefore(fecha_limite);fechas_dia=fechas_dia.plusMinutes(30)) {
+			boolean encontrado =false;
+			int i =0;
+			while(!encontrado & i<listaFechas.size()) {
+				encontrado = listaFechas.get(i).getFecha_reserva().equals(fechas_dia);
+				i++;
+			}
+			if(!encontrado)
+				listaFechaReserva.add(fechas_dia.toLocalTime().toString());
+			else
+				listaFechas.remove(i-1);
+		} 
 
 		JsonObject resJson = new JsonObject();
-		resJson.add("fecha_reserva", listaFechaReserva);  
+		resJson.add("horas_disp", listaFechaReserva);  
 
 		return resJson.toString();
 	}
@@ -208,10 +225,12 @@ public class ApisFnb {
 	Entrada:
 	{
 		'servicio_id': int,
+		'reserva_id': int,
 		'fecha_hora': String,
-		'id_cliente': String[],
+		'num_clientes': int,
 		'tipoUbicacion': int,
 		'ubicacion': String,
+		'habitaciones_id': int[]
 		'platos':String[],
 		'items':String[]
 	}
@@ -230,14 +249,20 @@ public class ApisFnb {
 	public static void  nuevoServicio(@RequestBody String req){
 
 		JsonObject obj = (JsonObject) JsonParser.parseString(req); 
-		int servicio_id = obj.get("servicio_id").getAsInt(); 
+		int servicio_id = obj.get("servicio_id").getAsInt();
+		int reserva_id = obj.get("reserva_id").getAsInt(); 
 		LocalDateTime fecha_hora = LocalDateTime.parse(obj.get("fecha_hora").getAsString());
-		JsonArray listaIdCliente = obj.get("id_cliente").getAsJsonArray();
+		int num_clientes = obj.get("num_clientes").getAsInt();
+		JsonArray listaHabitaciones = obj.get("habitaciones_id").getAsJsonArray();
 		int tipoUbicacion = obj.get("tipoUbicacion").getAsInt();
 		switch(tipoUbicacion) {
 		case 1: //CASO: Reserva Mesa
+			int habitaciones[] = new int[listaHabitaciones.size()];
+			for(int i =0; i<habitaciones.length; i++) {
+				habitaciones[i]=listaHabitaciones.get(i).getAsInt();
+			}
 			String rest_nomb= obj.get("ubicacion").getAsString();
-			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,listaIdCliente.size()).getMesa_id(), fecha_hora);
+			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,num_clientes).getMesa_id(), fecha_hora,habitaciones);
 			break;
 		case 2: //CASO: Pedido Habitacion
 			int habitacion_id = Integer.parseInt(obj.get("ubicacion").getAsString());

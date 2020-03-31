@@ -27,6 +27,10 @@
 <body>
 	<header class="header">
 		<!-- La parte de arriba de la página web-->
+		<%! String t1; %>
+				<%
+				t1=request.getParameter("text1");
+				%>
 		<div id="encabezado">
 			<div id="logo">PORTAL CAMAREROS</div>
 
@@ -46,9 +50,9 @@
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post">
-					<h2 class="titulo-post">Menu</h2>
-				</a>
+			
+					<h2 class="titulo-post">Platos</h2>
+				
 				<c:forEach items="${comandaBean.getCantidades().entrySet()}"
 					var="item">
 					<li><label>${item.getKey()} 
@@ -61,13 +65,15 @@
 
 						<form method="POST" action="anadirItem">
 							<input type="hidden" name="platoNuevo"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="+">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 							</form>
 							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 					</li>
 				</c:forEach>
@@ -80,52 +86,64 @@
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post">
+			
 					<h2 class="titulo-post">Bebida</h2>
-				</a>
+				
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
 					<li><label>${item.getKey()} 
-						<c:set var="val" value="${item.getValue().getUnidades()}" /> 
+						 <c:set var="val" value="${item.getValue().getUnidades()}" /> 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}
   									</c:if>
+  									
   									</label>
 						<form method="POST" action="anadirBebida">
 							<input type="hidden" name="bebidaNueva"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="+">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
-								value="${item.getValue().getId()}" /> <input type="submit"
+								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
+								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
 						</form>
 					</li>
 				</c:forEach>
+				
+				<form method="POST" action="enviarComanda">
+					<input type="hidden" name="fecha"> 
+					<input type="hidden" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
+						type="submit" value="Enviar comanda">
+				</form>
 
 			</article>
+
+		
 
 		</section>
 
 		<section id="publicaciones">
-			<article class="post">
-
-				<a href="" class="enlace-post">
-					<h2 class="titulo-post">Formulario a completar</h2>
-				</a>
-
-				<p class="parrafo-post">Mesa
-				<form method="POST" action="enviarComanda">
-					<input type="hidden" name="fecha"> <input type="text"
-						name="numMesa" placeholder="Escribe aqui"> <br> <input
-						type="submit" value="Enviar comanda">
-				</form>
-			</article>
+		
 
 		</section>
+<section id="sidebar">
+  <section id="informacion">
+    <h2 class="encabezado-sidebar"> Información </h2>
+    <h4> Adrián José García</h4>
+    <p> Alérgico a la fruta y legumbres. </p>
 
+    <h4> Miriam Sánchez</h4>
+    <p> Alérgica al gluten. </p>
+
+
+
+  </section>
+
+</section>
 	</section>
 
 
