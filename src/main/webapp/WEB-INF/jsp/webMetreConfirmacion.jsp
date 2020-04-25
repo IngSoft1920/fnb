@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lan="es">
 <head>
-  <meta charset="utf-8">	<!--Para decodificaciÛn de caracteres especiales -->
-  <title> METRECONFIRMACION : </title> <!--TÌtulo-->
+  <meta charset="utf-8">	<!--Para decodificaci√Ø¬ø¬Ωn de caracteres especiales -->
+  <title> METRECONFIRMACION : </title> <!--T√Ø¬ø¬Ωtulo-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 
 <body>
-  <header class="header"> <!-- La parte de arriba de la p·gina web-->
+  <header class="header"> <!-- La parte de arriba de la p√Ø¬ø¬Ωgina web-->
     <div id="encabezado">
       <div id="logo">
         PORTAL METRE
@@ -21,7 +21,7 @@
       <div id="menu">
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
-          <li><a href="#" class="enlace">ConfirmaciÛn</a></li>
+          <li><a href="#" class="enlace">Confirmaci√≥n</a></li>
 
 
         </ul>
@@ -32,9 +32,9 @@
   <section id="principal">
     <section id="publicaciones">
       <article class="post">
-        <a href="" class="enlace-post">
-          <h2 class="titulo-post">Confirmar asignaciÛn</h2>
-        </a>
+        
+          <h2 class="titulo-post">Confirmar asignaci√≥n</h2>
+        
 
         <p class="parrafo-post">
           MESA ${confirmacionBean.getMesa()}
@@ -61,7 +61,7 @@
             <input type="hidden" name="habitacion" value="${confirmacionBean.getHab()}">
              <input type=hidden name="idMesa" value="${confirmacionBean.getMesa()}">
             <input
-             type=submit class="leer-mas1" value="confirmar">
+             type=submit class="leer-mas1" value="Confirmar">
 			</form>
           </p>
 
@@ -75,12 +75,12 @@
 
     <section id="sidebar">
       <section id="informacion">
-        <h2 class="encabezado-sidebar"> InformaciÛn </h2>
-        <h4> Adri·n JosÈ GarcÌa</h4>
-        <p> AlÈrgico a la fruta y legumbres. </p>
+        <h2 class="encabezado-sidebar"> Informaci√≥n </h2>
+        <h4> Adri√°n Jos√© Garc√≠a</h4>
+        <p> Al√©rgico a la fruta y legumbres. </p>
 
-        <h4> Miriam S·nchez</h4>
-        <p> AlÈrgica al gluten. </p>
+        <h4> Miriam S√°nchez</h4>
+        <p> Al√©rgica al gluten. </p>
 
 
 

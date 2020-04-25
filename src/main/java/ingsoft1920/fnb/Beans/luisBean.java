@@ -22,9 +22,10 @@ public class luisBean {
 	public luisBean() {
 		
 		
-		
 		listaMesas = new ArrayList<MesaM>();
 		listaMesas = MesaDAO.mesasDisp();
+		System.out.println(listaMesas.toString());
+		
 		
 	}
 

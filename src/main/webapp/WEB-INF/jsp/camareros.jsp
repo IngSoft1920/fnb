@@ -1,4 +1,4 @@
-8<%@page import="org.apache.coyote.Request"%>
+<%@page import="org.apache.coyote.Request"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
@@ -50,9 +50,9 @@
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post">
+			
 					<h2 class="titulo-post">Platos</h2>
-				</a>
+				
 				<c:forEach items="${comandaBean.getCantidades().entrySet()}"
 					var="item">
 					<li><label>${item.getKey()} 
@@ -86,9 +86,9 @@
 		<section id="publicaciones">
 			<article class="post">
 
-				<a href="" class="enlace-post">
+			
 					<h2 class="titulo-post">Bebida</h2>
-				</a>
+				
 
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
 					<li><label>${item.getKey()} 
@@ -113,27 +113,21 @@
 						</form>
 					</li>
 				</c:forEach>
-
-			</article>
-
-		</section>
-
-		<section id="publicaciones">
-			<article class="post">
-
-				<a href="" class="enlace-post">
-					<h2 class="titulo-post">Formulario a completar</h2>
-				</a>
 				
-				<p class="parrafo-post">Mesa
 				<form method="POST" action="enviarComanda">
 					<input type="hidden" name="fecha"> 
 					<input type="hidden" name="numMesa" value="${comandaBean.getNumMesa()}"> <br> <input
 						type="submit" value="Enviar comanda">
 				</form>
-				
-				
+
 			</article>
+
+		
+
+		</section>
+
+		<section id="publicaciones">
+		
 
 		</section>
 <section id="sidebar">
