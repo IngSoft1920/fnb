@@ -340,13 +340,14 @@ public class ComandaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT mh.num_habitacion AS num_habitacion, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
+					"SELECT mh.num_habitacion AS num_habitacion, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id, h.nombre AS nom_hotel " + 
 					"FROM comanda AS c " + 
 					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
 					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
 					"JOIN mesa AS m ON mu.mesa_id= m.mesa_id " + 
 					"JOIN mesa_habitacion AS mh ON mh.mesa_id=m.mesa_id " + 
-					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " + 
+					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " +
+					"JOIN hotel AS h ON h.hotel_id= r.hotel_id " +
 					"JOIN menu ON menu.restaurante_id = r.restaurante_id " + 
 					"WHERE c.comanda_id=? ;");
 

@@ -193,6 +193,11 @@ public class MesaDAO {
 				stmt= conn.prepareStatement("DELETE FROM ubicacion WHERE ubicacion_id =?;");
 				stmt.setInt(1, ubicacion_id);
 				stmt.execute();
+				
+
+				stmt= conn.prepareStatement("DELETE FROM mesa_habitacion WHERE mesa_id =?;");
+				stmt.setInt(1, mesa_id);
+				stmt.execute();
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
