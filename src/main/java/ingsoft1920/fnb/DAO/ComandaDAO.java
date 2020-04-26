@@ -12,8 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ingsoft1920.fnb.Controller.ApisDHO;
+import ingsoft1920.fnb.Controller.MetreMesasController;
 import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.ElemComandaM;
+import ingsoft1920.fnb.Model.HotelM;
 import ingsoft1920.fnb.Model.MenuM;
 import ingsoft1920.fnb.Model.MesaHabitacionM;
 import ingsoft1920.fnb.Model.MesaM;
@@ -30,8 +33,7 @@ public class ComandaDAO {
 		if(mesa!= null) {
 			MesaDAO.desalojarMesa(mesa.getMesa_id());
 			eliminarComanda(comanda_id);
-			// TODO: llamar API DHO
-			// enviarFactura( int num_habitacion, String hotel, float Factura);
+			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
 			
 		}
 		
@@ -358,7 +360,8 @@ public class ComandaDAO {
 			if(rs.next()) {
 				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("num_habitacion"));
 				MenuM menu= new MenuM(rs.getInt("menu_id"));
-				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu);
+				HotelM hotel= new HotelM(rs.getString("nom_hotel"));
+				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu, hotel);
 			}
 			
 		}catch(SQLException ex) {
