@@ -119,6 +119,11 @@ public class IndiceMetreController {
 	public String confirmar(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("habitacion") String habitacion,Model model){
 		
 		int habitaciones[]= new int[1];
+		String hab="";
+		for (int i = 11; i < habitaciones.length; i++) {
+			hab+=habitacion.charAt(i);
+		}
+		
 		habitaciones[0]=Integer.parseInt(""+habitacion.charAt(11));
 		System.out.println("habitacion_---------"+habitaciones[0]);
 		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones);

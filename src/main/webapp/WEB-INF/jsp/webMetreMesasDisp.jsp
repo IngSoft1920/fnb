@@ -77,17 +77,17 @@
                  <form action="asignarHab" method="GET">
                       
                   	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 1">Habitación 1</button>
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 101">Habitación 101</button>
                       </form>  
                      <form action="asignarHab" method="GET">
                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 2">Habitación 2</button>
+                    <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 102">Habitación 102</button>
                       </form><form action="asignarHab" method="GET">
                       <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                     <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 3">Habitación 3</button>
+                     <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 103">Habitación 103</button>
                       </form><form action="asignarHab" method="GET">
                       <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 4">Habitación 4</button>
+                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 104">Habitación 104</button>
                       </form>  
                   </ul>
                  

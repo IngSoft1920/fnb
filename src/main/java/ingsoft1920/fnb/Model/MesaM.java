@@ -81,7 +81,7 @@ public class MesaM {
 	@Override
 	public String toString() {
 		return "MesaM [mesa_id=" + mesa_id + ", num_mesa=" + num_mesa + ", capacidad=" + capacidad + ", restaurante="
-				+ restaurante.getNombre() + ", disponible=" + disponible + "]";
+				+ ", disponible=" + disponible + "]";
 	}
 
 	public Boolean getDisponible() {
