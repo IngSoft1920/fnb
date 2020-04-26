@@ -68,6 +68,49 @@ public class MesaDAO {
 		}
 		return resultado;
 	}
+	
+	public static List<MesaHabitacionM> verHabitacion(int mesa_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		List<MesaHabitacionM> resultado= new ArrayList<MesaHabitacionM>();
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT mh.habitacion_id AS habitacion_id, r.hotel_id AS hotel_id " + 
+					"FROM mesa AS m  " + 
+					"JOIN mesa_habitacion AS mh ON  m.mesa_id = mh.mesa_id " + 
+					"JOIN restaurante AS r ON m.restaurante_id = r.restaurante_id " + 
+					"WHERE mesa_id = ?;");
+
+			stmt.setInt(1, mesa_id);
+			rs=stmt.executeQuery();
+
+			while(rs.next()) {
+				
+				resultado.add(new MesaHabitacionM(rs.getInt("habitacion_id")));
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
 	public static MesaM infoFacturas(int comanda_id) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();

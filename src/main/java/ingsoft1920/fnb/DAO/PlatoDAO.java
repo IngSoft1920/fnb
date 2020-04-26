@@ -71,7 +71,7 @@ public class PlatoDAO {
 		}
 		return resultado;
 	}
-	
+
 	public static List<PlatoIngredienteM> ingredientes(int plato_id) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
@@ -82,8 +82,8 @@ public class PlatoDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  pi.ingrediente_id AS ingrediente_id, i.nombre AS nombre, pi.cantidad AS cantidad, pi.unidad AS unidad " + 
-					"FROM plato_ingrediente AS pi " + 
-					"JOIN  ingrediente AS i ON i.ingrediente_id=pi.ingrediente_id " + 
+							"FROM plato_ingrediente AS pi " + 
+							"JOIN  ingrediente AS i ON i.ingrediente_id=pi.ingrediente_id " + 
 					"WHERE plato_id = ?;");
 
 			stmt.setInt(1,plato_id);
@@ -92,7 +92,7 @@ public class PlatoDAO {
 			while(rs.next()) {
 				IngredienteM ingrediente = new IngredienteM(rs.getInt("ingrediente_id"),rs.getString("nombre"));
 				resultado.add(new PlatoIngredienteM(ingrediente, rs.getInt("cantidad"), rs.getString("unidad")));
-				
+
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
@@ -113,5 +113,93 @@ public class PlatoDAO {
 			}
 		}
 		return resultado;
+	}
+	public static void decrementarIngrediente(Map<Integer,Integer> ingredientes,String restaurante) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		PreparedStatement stmt = null; 
+
+		try {
+			for (Map.Entry<Integer, Integer> entry : ingredientes.entrySet()) { //MAP= <INGREDIENTE_ID, CANTIDAD>
+				System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+
+				stmt = conn.prepareStatement(
+						"UPDATE ingrediente_inventario " + 
+								"SET cantidad = cantidad - ? " + 
+								"WHERE ingrediente_id = ? " + 
+								"and inventario_id = ( " + 
+								"SELECT i.inventario_id AS inventario " + 
+								"FROM inventario AS i " + 
+								"JOIN restaurante AS r ON r.restaurante_id = i.restaurante_id " + 
+								"WHERE r.nombre = ? " + 
+						") ;");
+
+				stmt.setInt(1,entry.getValue());
+				stmt.setInt(2,entry.getKey());
+				stmt.setString(3,restaurante);
+				stmt.executeUpdate();
+
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+
+
+		}
+
+	}
+	public static void decrementarItem(Map<Integer,Integer> items,String restaurante) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		PreparedStatement stmt = null; 
+
+		try {
+			for (Map.Entry<Integer, Integer> entry : items.entrySet()) { //MAP= <Item_id, cantidad>
+				System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
+
+				stmt = conn.prepareStatement(
+						"UPDATE item_inventario " + 
+								"SET cantidad = cantidad - ? " + 
+								"WHERE item_id = ? " + 
+								"and inventario_id = ( " + 
+								"SELECT i.inventario_id AS inventario " + 
+								"FROM inventario AS i " + 
+								"JOIN restaurante AS r ON r.restaurante_id = i.restaurante_id " + 
+								"WHERE r.nombre = ? " + 
+						") ;");
+
+				stmt.setInt(1,entry.getValue());
+				stmt.setInt(2,entry.getKey());
+				stmt.setString(3,restaurante);
+				stmt.executeUpdate();
+
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+
+
+		}
+
 	}
 }
