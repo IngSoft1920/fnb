@@ -23,6 +23,20 @@ import ingsoft1920.fnb.Services.ConectorBBDD;
 
 public class ComandaDAO {
 	private static Connection conn = null;
+	
+	
+	public static void checkout(int comanda_id) {
+		MesaM mesa= infoFacturas(comanda_id);
+		if(mesa!= null) {
+			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			eliminarComanda(comanda_id);
+			// TODO: llamar API DHO
+			// enviarFactura( int habitacion_id, String hotel, float Factura);
+			
+		}
+		
+		
+	}
 
 	public static List<ComandaM> comandasTareaCocina(int tareaCocina) {
 		if (conn == null)
@@ -165,6 +179,38 @@ public class ComandaDAO {
 		return precio;
 			
 	}
+	
+	public static void eliminarComanda(int comanda_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+	
+		PreparedStatement stmt = null;
+		
+		try {
+		
+				stmt= conn.prepareStatement("DELETE FROM comanda_elemComanda WHERE comanda_id =?;");
+				stmt.setInt(1, comanda_id);
+				stmt.execute();
+
+				stmt= conn.prepareStatement("DELETE FROM comanda WHERE comanda_id = ?;");
+				stmt.setInt(1, comanda_id);
+				stmt.execute();
+			
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+	}
+
 	
 	
 	public static ComandaM insertComanda(int mesa_id,String[] platos, String[] items) {
