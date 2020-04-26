@@ -2,6 +2,7 @@ package ingsoft1920.fnb.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +24,14 @@ import ingsoft1920.fnb.Beans.ComandaBean;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
 import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Model.PlatoM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
 
 @Controller
 public class ComandaController {
 	@Autowired
 	ComandaBean comandaBean;
+	Map<Integer,platos> correspondenciaIP=new HashMap<Integer, platos>();
 
 	@RequestMapping("/camareros")
 	public String showPaginaComandaGet(Model model) {
@@ -36,8 +39,23 @@ public class ComandaController {
 		
 		model.addAttribute("comandaBean", comandaBean);
 		
-		System.out.println(comandaBean.getCantidades());
 		return "camareros";
+	}
+
+	public ComandaBean getComandaBean() {
+		return comandaBean;
+	}
+
+	public void setComandaBean(ComandaBean comandaBean) {
+		this.comandaBean = comandaBean;
+	}
+
+	public Map<Integer, platos> getCorrespondenciaIP() {
+		return correspondenciaIP;
+	}
+
+	public void setCorrespondenciaIP(Map<Integer, platos> correspondenciaIP) {
+		this.correspondenciaIP = correspondenciaIP;
 	}
 
 	@PostMapping("/anadirItem")
@@ -53,7 +71,7 @@ public class ComandaController {
 		platos entrada;
 		Iterator<platos> it = comandaBean.getCantidades().values().iterator();
 		boolean found = false;
-
+		
 		while (it.hasNext() && !found) {
 			entrada = it.next();
 			if (entrada.getId() == Integer.parseInt(nuevoPlato)) {
@@ -75,6 +93,7 @@ public class ComandaController {
 				if (key != null) {
 
 					comandaBean.getCantidades().put(key, entrada);
+					
 				}
 
 			}
