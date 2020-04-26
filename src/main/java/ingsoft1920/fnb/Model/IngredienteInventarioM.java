@@ -5,20 +5,45 @@ public class IngredienteInventarioM {
 	private int cantidad;
 	private String unidad;
 	private RestauranteM restaurante;
-	public IngredienteInventarioM(int inventario_id, int cantidad, String unidad, RestauranteM restaurante) {
+	private IngredienteM ingrediente;
+	public IngredienteInventarioM(int inventario_id, int cantidad, String unidad, RestauranteM restaurante, IngredienteM ingrediente) {
 		super();
 		this.inventario_id = inventario_id;
 		this.cantidad = cantidad;
 		this.unidad = unidad;
 		this.restaurante = restaurante;
+		this.ingrediente=ingrediente;
+		
 	}
 	
 	
+	
+	public IngredienteInventarioM(int cantidad, String unidad, IngredienteM ingrediente) {
+		super();
+		this.cantidad = cantidad;
+		this.unidad = unidad;
+		this.ingrediente = ingrediente;
+	}
+
+
+
 	public IngredienteInventarioM(int cantidad, String unidad, RestauranteM restaurante) {
 		super();
 		this.cantidad = cantidad;
 		this.unidad = unidad;
 		this.restaurante = restaurante;
+	}
+
+
+
+
+	public IngredienteM getIngrediente() {
+		return ingrediente;
+	}
+
+
+	public void setIngrediente(IngredienteM ingrediente) {
+		this.ingrediente = ingrediente;
 	}
 
 

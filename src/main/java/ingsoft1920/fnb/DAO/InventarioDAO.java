@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ingsoft1920.fnb.Model.IngredienteInventarioM;
+import ingsoft1920.fnb.Model.IngredienteM;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.RestauranteM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
@@ -45,8 +46,8 @@ public class InventarioDAO {
 					rs=stmt.executeQuery();
 
 					while(rs.next()) {
-						RestauranteM restauranteTmp = new RestauranteM(rs.getString("nombre"));
-						resultado.add(new IngredienteInventarioM(rs.getInt("cantidad"), rs.getString("unidad"), restauranteTmp));
+						IngredienteM ingrediente = new IngredienteM(rs.getString("nombre"));
+						resultado.add(new IngredienteInventarioM(rs.getInt("cantidad"), rs.getString("unidad"), ingrediente));
 					}
 				}catch(SQLException ex) {
 					System.out.println("SQLException: " + ex.getMessage());
