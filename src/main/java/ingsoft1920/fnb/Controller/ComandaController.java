@@ -297,6 +297,17 @@ public class ComandaController {
 
 		return "redirect:mesas";
 	}
+	
+	@PostMapping("/enviarObservaciones")
+	public String enviarObservaciones(@Valid @RequestParam("observaciones") String observaciones, Model model) {
+		
+		System.out.println(observaciones);
+		comandaBean.setObservaciones(observaciones);
+		model.addAttribute("comandaBean", this.comandaBean);
+		
+		return "redirect:camareros";
+	}
+	
 	private static String[] GetStringArray(List<String> platos) 
     { 
   

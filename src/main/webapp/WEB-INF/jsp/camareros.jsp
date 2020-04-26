@@ -133,14 +133,15 @@
 <section id="sidebar">
   <section id="informacion">
     <h2 class="encabezado-sidebar"> Información </h2>
-    <h4> Adrián José García</h4>
-    <p> Alérgico a la fruta y legumbres. </p>
-
-    <h4> Miriam Sánchez</h4>
-    <p> Alérgica al gluten. </p>
-
-
-
+     <form method="POST" action="enviarObservaciones">
+     <c:set var="val" value="${comandaBean.getObservaciones()}" /> 
+	<c:if test="${val != ''}">
+		<p>${comandaBean.getObservaciones()}</p>
+  	</c:if>
+	<p><input type="text" name ="observaciones" value="" placeholder="Escribe aqui observaciones del cliente"></p>
+	<input type="submit" name="Enviar">
+	</form>
+	
   </section>
 
 </section>

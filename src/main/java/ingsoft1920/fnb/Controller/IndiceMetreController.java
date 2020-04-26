@@ -117,6 +117,7 @@ public class IndiceMetreController {
 		habitaciones[0]=Integer.parseInt(""+habitacion.charAt(11));
 		System.out.println("habitacion_---------"+habitaciones[0]);
 		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones);
+		
 		model.addAttribute("portalMetreBean", portalMetreBean);
 		
 		return "redirect:indice";

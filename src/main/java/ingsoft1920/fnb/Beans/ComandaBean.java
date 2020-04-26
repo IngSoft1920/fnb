@@ -34,6 +34,22 @@ public class ComandaBean {
 	 Map<String, bebidas> bebidas;
 	String nombreRestaurante="Mamma Mia";
 	int numMesa;
+	String observaciones="";
+	@Override
+	public String toString() {
+		return "ComandaBean [listaPlatos=" + listaPlatos + ", listaBebida=" + listaBebida + ", cantidades=" + cantidades
+				+ ", bebidas=" + bebidas + ", nombreRestaurante=" + nombreRestaurante + ", numMesa=" + numMesa
+				+ ", observaciones=" + observaciones + ", cantidadNueva=" + cantidadNueva + "]";
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
 	public ArrayList<String> getListaPlatos() {
 		return listaPlatos;
 	}
