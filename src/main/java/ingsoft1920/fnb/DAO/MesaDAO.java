@@ -78,7 +78,7 @@ public class MesaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT mh.habitacion_id AS habitacion_id, r.hotel_id AS hotel_id " + 
+					"SELECT mh.num_habitacion AS num_habitacion, r.hotel_id AS hotel_id " + 
 					"FROM mesa AS m  " + 
 					"JOIN mesa_habitacion AS mh ON  m.mesa_id = mh.mesa_id " + 
 					"JOIN restaurante AS r ON m.restaurante_id = r.restaurante_id " + 
@@ -89,7 +89,7 @@ public class MesaDAO {
 
 			while(rs.next()) {
 				
-				resultado.add(new MesaHabitacionM(rs.getInt("habitacion_id")));
+				resultado.add(new MesaHabitacionM(rs.getInt("num_habitacion")));
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
@@ -112,7 +112,7 @@ public class MesaDAO {
 		return resultado;
 	}
 	
-	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] habitaciones_id) {
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] num_habitaciones) {
 		if(mesa_id>0) {
 
 			if (conn == null)
@@ -135,16 +135,16 @@ public class MesaDAO {
 				stmt.execute();
 				
 				String param1 ="";
-				for (int i =0; i<habitaciones_id.length-1;i++)
+				for (int i =0; i<num_habitaciones.length-1;i++)
 					param1+="(?,?),";
 				param1+="(?,?)";
 				
 				stmt= conn.prepareStatement(
-						"INSERT INTO mesa_habitacion VALUES"+param1+";");
+						"INSERT INTO mesa_habitacion (mesa_id,num_habitacion) VALUES"+param1+";");
 				
-				for (int i =1,j=0; i<=(2*habitaciones_id.length);i+=2,j++) {
+				for (int i =1,j=0; i<=(2*num_habitaciones.length);i+=2,j++) {
 					stmt.setInt(i,mesa_id);
-					stmt.setInt(i+1,habitaciones_id[j]);
+					stmt.setInt(i+1,num_habitaciones[j]);
 				}
 				
 				stmt.execute();

@@ -31,7 +31,7 @@ public class ComandaDAO {
 			MesaDAO.desalojarMesa(mesa.getMesa_id());
 			eliminarComanda(comanda_id);
 			// TODO: llamar API DHO
-			// enviarFactura( int habitacion_id, String hotel, float Factura);
+			// enviarFactura( int num_habitacion, String hotel, float Factura);
 			
 		}
 		
@@ -340,7 +340,7 @@ public class ComandaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT mh.habitacion_id AS habitacion_id, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
+					"SELECT mh.num_habitacion AS num_habitacion, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
 					"FROM comanda AS c " + 
 					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
 					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
@@ -355,7 +355,7 @@ public class ComandaDAO {
 			rs=stmt.executeQuery();
 
 			if(rs.next()) {
-				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("habitacion_id"));
+				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("num_habitacion"));
 				MenuM menu= new MenuM(rs.getInt("menu_id"));
 				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu);
 			}

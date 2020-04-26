@@ -35,7 +35,7 @@ public class ApisDHO {
 	 * 	'id_rol': int
 	 * }
 	 *Salida:
-	 * {
+	 * { 
 	 * 	'id_empleado': int[],
 	 *	'nombre': String[]
 	 * 	'estado': boolean[]
