@@ -32,8 +32,35 @@ public class ComandaBean {
 	ArrayList<String> listaBebida;
 	 Map<String, platos> cantidades;
 	 Map<String, bebidas> bebidas;
+	 Map<String,PlatoM> listaPlat;
+	 Map<String,ItemM> listBebidas;
+	 
+	public Map<String, PlatoM> getListaPlat() {
+		return listaPlat;
+	}
+
+	public Map<String, ItemM> getListBebidas() {
+		return listBebidas;
+	}
+
 	String nombreRestaurante="Mamma Mia";
 	int numMesa;
+	String observaciones="";
+	@Override
+	public String toString() {
+		return "ComandaBean [listaPlatos=" + listaPlatos + ", listaBebida=" + listaBebida + ", cantidades=" + cantidades
+				+ ", bebidas=" + bebidas + ", nombreRestaurante=" + nombreRestaurante + ", numMesa=" + numMesa
+				+ ", observaciones=" + observaciones + ", cantidadNueva=" + cantidadNueva + "]";
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
 	public ArrayList<String> getListaPlatos() {
 		return listaPlatos;
 	}
@@ -84,20 +111,20 @@ public class ComandaBean {
 		this.listaBebida=new ArrayList<String>();
 		this.cantidades=new HashMap<String, platos>();
 		this.bebidas=new HashMap<String, bebidas>();
-		ConectorBBDD.conectar();
-		Map<String,PlatoM> listaPlat=PlatoDAO.platosRest(nombreRestaurante);
+		
+		listaPlat=PlatoDAO.platosRest(nombreRestaurante);
 		for (Entry<String,PlatoM> plato : listaPlat.entrySet()) {
-			
+	
 			this.cantidades.put(plato.getKey(),new platos(idComida++,0));
 			
 		}
-		Map<String,ItemM> listBebidas = ItemDAO.itemsRest(nombreRestaurante);
+		listBebidas = ItemDAO.itemsRest(nombreRestaurante);
 		for (Entry<String,ItemM> listaItem : listBebidas.entrySet()) {
 			
 			this.bebidas.put(listaItem.getKey(), new bebidas(idBebida++,0));
 			
 		}
-		ConectorBBDD.desconectar();
+
 		
 		/*List<String> listaPlatos = new ArrayList<String>();
 		List<String> listaBebida = new ArrayList<String>();

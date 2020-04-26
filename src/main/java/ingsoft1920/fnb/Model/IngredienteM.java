@@ -8,6 +8,12 @@ public class IngredienteM {
 		this.ingrediente_id = ingrediente_id;
 		this.nombre = nombre;
 	}
+	
+	public IngredienteM(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
 	public int getIngrediente_id() {
 		return ingrediente_id;
 	}

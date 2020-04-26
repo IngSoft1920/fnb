@@ -12,14 +12,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ingsoft1920.fnb.Controller.ApisDHO;
+import ingsoft1920.fnb.Controller.MetreMesasController;
 import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.ElemComandaM;
+import ingsoft1920.fnb.Model.HotelM;
+import ingsoft1920.fnb.Model.MenuM;
+import ingsoft1920.fnb.Model.MesaHabitacionM;
+import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.PlatoM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
 
 
 public class ComandaDAO {
 	private static Connection conn = null;
+	
+	
+	public static void checkout(int comanda_id) {
+		MesaM mesa= infoFacturas(comanda_id);
+		if(mesa!= null) {
+			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			eliminarComanda(comanda_id);
+			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
+			
+		}
+		
+		
+	}
 
 	public static List<ComandaM> comandasTareaCocina(int tareaCocina) {
 		if (conn == null)
@@ -163,6 +182,38 @@ public class ComandaDAO {
 			
 	}
 	
+	public static void eliminarComanda(int comanda_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+	
+		PreparedStatement stmt = null;
+		
+		try {
+		
+				stmt= conn.prepareStatement("DELETE FROM comanda_elemComanda WHERE comanda_id =?;");
+				stmt.setInt(1, comanda_id);
+				stmt.execute();
+
+				stmt= conn.prepareStatement("DELETE FROM comanda WHERE comanda_id = ?;");
+				stmt.setInt(1, comanda_id);
+				stmt.execute();
+			
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+	}
+
+	
 	
 	public static ComandaM insertComanda(int mesa_id,String[] platos, String[] items) {
 		if (conn == null)
@@ -282,6 +333,58 @@ public class ComandaDAO {
 		}
 		return resultado;
 	}
+	public static MesaM infoFacturas(int comanda_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		MesaM resultado= null;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT mh.num_habitacion AS num_habitacion, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id, h.nombre AS nom_hotel " + 
+					"FROM comanda AS c " + 
+					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
+					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
+					"JOIN mesa AS m ON mu.mesa_id= m.mesa_id " + 
+					"JOIN mesa_habitacion AS mh ON mh.mesa_id=m.mesa_id " + 
+					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " +
+					"JOIN hotel AS h ON h.hotel_id= r.hotel_id " +
+					"JOIN menu ON menu.restaurante_id = r.restaurante_id " + 
+					"WHERE c.comanda_id=? ;");
+
+			stmt.setInt(1,comanda_id);
+			
+			rs=stmt.executeQuery();
+
+			if(rs.next()) {
+				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("num_habitacion"));
+				MenuM menu= new MenuM(rs.getInt("menu_id"));
+				HotelM hotel= new HotelM(rs.getString("nom_hotel"));
+				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu, hotel);
+			}
+			
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
+
 	
 
 

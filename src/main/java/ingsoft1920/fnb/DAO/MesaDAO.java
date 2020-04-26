@@ -68,35 +68,29 @@ public class MesaDAO {
 		}
 		return resultado;
 	}
-	public static MesaM infoFacturas(int comanda_id) {
+	
+	public static List<MesaHabitacionM> verHabitacion(int mesa_id) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
 
-		MesaM resultado= null;
+		List<MesaHabitacionM> resultado= new ArrayList<MesaHabitacionM>();
 		PreparedStatement stmt = null; 
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT mh.habitacion_id AS habitacion_id, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
-					"FROM comanda AS c " + 
-					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
-					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
-					"JOIN mesa AS m ON mu.mesa_id= m.mesa_id " + 
-					"JOIN mesa_habitacion AS mh ON mh.mesa_id=m.mesa_id " + 
-					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " + 
-					"JOIN menu ON menu.restaurante_id = r.restaurante_id " + 
-					"WHERE c.comanda_id=? ;");
+					"SELECT mh.num_habitacion AS num_habitacion, r.hotel_id AS hotel_id " + 
+					"FROM mesa AS m  " + 
+					"JOIN mesa_habitacion AS mh ON  m.mesa_id = mh.mesa_id " + 
+					"JOIN restaurante AS r ON m.restaurante_id = r.restaurante_id " + 
+					"WHERE mesa_id = ?;");
 
-			stmt.setInt(1,comanda_id);
-			
+			stmt.setInt(1, mesa_id);
 			rs=stmt.executeQuery();
 
-			if(rs.next()) {
-				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("habitacion_id"));
-				MenuM menu= new MenuM(rs.getInt("menu_id"));
-				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu);
+			while(rs.next()) {
+				
+				resultado.add(new MesaHabitacionM(rs.getInt("num_habitacion")));
 			}
-			
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
 		}finally {
@@ -117,8 +111,8 @@ public class MesaDAO {
 		}
 		return resultado;
 	}
-
-	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] habitaciones_id) {
+	
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] num_habitaciones) {
 		if(mesa_id>0) {
 
 			if (conn == null)
@@ -141,16 +135,16 @@ public class MesaDAO {
 				stmt.execute();
 				
 				String param1 ="";
-				for (int i =0; i<habitaciones_id.length-1;i++)
+				for (int i =0; i<num_habitaciones.length-1;i++)
 					param1+="(?,?),";
 				param1+="(?,?)";
 				
 				stmt= conn.prepareStatement(
-						"INSERT INTO mesa_habitacion VALUES"+param1+";");
+						"INSERT INTO mesa_habitacion (mesa_id,num_habitacion) VALUES"+param1+";");
 				
-				for (int i =1,j=0; i<=(2*habitaciones_id.length);i+=2,j++) {
+				for (int i =1,j=0; i<=(2*num_habitaciones.length);i+=2,j++) {
 					stmt.setInt(i,mesa_id);
-					stmt.setInt(i+1,habitaciones_id[j]);
+					stmt.setInt(i+1,num_habitaciones[j]);
 				}
 				
 				stmt.execute();
@@ -198,6 +192,11 @@ public class MesaDAO {
 
 				stmt= conn.prepareStatement("DELETE FROM ubicacion WHERE ubicacion_id =?;");
 				stmt.setInt(1, ubicacion_id);
+				stmt.execute();
+				
+
+				stmt= conn.prepareStatement("DELETE FROM mesa_habitacion WHERE mesa_id =?;");
+				stmt.setInt(1, mesa_id);
 				stmt.execute();
 			}
 		}catch(SQLException ex) {

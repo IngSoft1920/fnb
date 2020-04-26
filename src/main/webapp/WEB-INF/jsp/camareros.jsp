@@ -37,10 +37,10 @@
 			<div id="menu">
 				<ul>
 					<!-- LI= lista de caracteres desordenada-->
-					<li><a href="#" class="activate-menu">Inicio</a></li>
+					<li><a href="mesas" class="activate-menu">Inicio</a></li>
 					<li><a href="#" class="enlace">Platos</a></li>
 					<li><a href="#" class="enlace">Bebida</a></li>
-					<li><a href="#" class="enlace">Formulario a completar</a></li>
+					<li><a href="pruebaliberarmesas" class="enlace">Checkout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -133,14 +133,15 @@
 <section id="sidebar">
   <section id="informacion">
     <h2 class="encabezado-sidebar"> Información </h2>
-    <h4> Adrián José García</h4>
-    <p> Alérgico a la fruta y legumbres. </p>
-
-    <h4> Miriam Sánchez</h4>
-    <p> Alérgica al gluten. </p>
-
-
-
+     <form method="POST" action="enviarObservaciones">
+     <c:set var="val" value="${comandaBean.getObservaciones()}" /> 
+	<c:if test="${val != ''}">
+		<p>${comandaBean.getObservaciones()}</p>
+  	</c:if>
+	<p><input type="text" name ="observaciones" value="" placeholder="Escribe aqui observaciones del cliente"></p>
+	<input type="submit" name="Enviar">
+	</form>
+	
   </section>
 
 </section>

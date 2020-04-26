@@ -22,9 +22,7 @@
       <div id="menu">
         <ul> <!-- LI= lista de caracteres desordenada-->
           <li><a href="#" class="activate-menu">Inicio</a></li>
-            <li><a href="#" class="enlace">Formulario a completar</a></li>
-          <li><a href="#" class="enlace">Platos</a></li>
-          <li><a href="#" class="enlace">Bebida</a></li>
+          <li><a href="pruebaliberarmesas" class="enlace">Checkout</a></li>
 
         </ul>
       </div>

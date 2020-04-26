@@ -265,7 +265,7 @@ public class ApisFnb {
 			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,num_clientes).getMesa_id(), fecha_hora,habitaciones);
 			break;
 		case 2: //CASO: Pedido Habitacion
-			int habitacion_id = Integer.parseInt(obj.get("ubicacion").getAsString());
+			int num_habitacion = Integer.parseInt(obj.get("ubicacion").getAsString());
 
 			JsonArray listaPlatos = obj.get("platos").getAsJsonArray();
 			String platos[] = new String[listaPlatos.size()];
@@ -279,7 +279,7 @@ public class ApisFnb {
 				items[i]=listaItems.get(i).getAsString();
 			}
 
-			ComandaDAO.insertComandaHab(habitacion_id, fecha_hora, platos, items);
+			ComandaDAO.insertComandaHab(num_habitacion, fecha_hora, platos, items);
 			break;
 
 		}
