@@ -14,6 +14,9 @@ import java.util.Map;
 
 import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.ElemComandaM;
+import ingsoft1920.fnb.Model.MenuM;
+import ingsoft1920.fnb.Model.MesaHabitacionM;
+import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.PlatoM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
 
@@ -282,6 +285,56 @@ public class ComandaDAO {
 		}
 		return resultado;
 	}
+	public static MesaM infoFacturas(int comanda_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		MesaM resultado= null;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT mh.habitacion_id AS habitacion_id, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
+					"FROM comanda AS c " + 
+					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
+					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
+					"JOIN mesa AS m ON mu.mesa_id= m.mesa_id " + 
+					"JOIN mesa_habitacion AS mh ON mh.mesa_id=m.mesa_id " + 
+					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " + 
+					"JOIN menu ON menu.restaurante_id = r.restaurante_id " + 
+					"WHERE c.comanda_id=? ;");
+
+			stmt.setInt(1,comanda_id);
+			
+			rs=stmt.executeQuery();
+
+			if(rs.next()) {
+				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("habitacion_id"));
+				MenuM menu= new MenuM(rs.getInt("menu_id"));
+				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu);
+			}
+			
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
+
 	
 
 
