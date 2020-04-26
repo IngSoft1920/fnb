@@ -17,7 +17,8 @@ import ingsoft1920.fnb.Services.ConectorBBDD;
 public class InventarioDAO {
 
 		private static Connection conn = null;
-		public static List<IngredienteInventarioM> inventario(int restaurante_id) {
+		
+		public static List<IngredienteInventarioM> inventario(String restaurante) {
 			
 				if (conn == null)
 					conn= ConectorBBDD.conectar();
@@ -41,8 +42,8 @@ public class InventarioDAO {
 							"JOIN restaurante AS r ON r.restaurante_id = inv.restaurante_id " + 
 							"WHERE r.nombre = ?");
 
-					stmt.setInt(1,restaurante_id);
-					stmt.setInt(2,restaurante_id);
+					stmt.setString(1,restaurante);
+					stmt.setString(2,restaurante);
 					rs=stmt.executeQuery();
 
 					while(rs.next()) {
