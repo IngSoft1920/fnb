@@ -308,7 +308,7 @@ public class ComandaDAO {
 						System.out.println(i);
 						stmt.setInt(i++, rs.getInt("elemComanda_id"));
 						System.out.println(i);
-						stmt.setInt(i++,contador.get(rs.getString("nombre")));
+						stmt.setInt(i++,contador.get(rs.getString("nombre"))-1);
 					}while(rs.next());
 				}
 				stmt.execute();
