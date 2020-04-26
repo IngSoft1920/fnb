@@ -139,7 +139,9 @@ public class TareasBean {
 		 System.out.println("comanda----->>>"+tar.getIdMesa());
 		 if(tar.getIdMesa()!=-2) {
 		 mesa=ComandaDAO.infoFacturas(tar.getIdMesa());
-		 listaMesaComanda.add(new MyEntry<Integer, Integer>(mesa.getNum_mesa(), tar.getIdMesa()));
+		 if(mesa!=null) {
+			 listaMesaComanda.add(new MyEntry<Integer, Integer>(mesa.getNum_mesa(), tar.getIdMesa()));
+		 }
 		 }
 		 break;
 	 }
@@ -148,8 +150,8 @@ public class TareasBean {
 		
 		if(idAnterior!=-1) {
 			 mesa=ComandaDAO.infoFacturas(comandas.get(i).getComanda_id());
-				System.out.println("ComandaMandada----->"+comandas.get(i).getComanda_id());
-				System.out.println("ComandaMandada----->"+mesa.getNum_mesa());
+				//System.out.println("ComandaMandada----->"+comandas.get(i).getComanda_id());
+				//System.out.println("ComandaMandada----->"+mesa.getNum_mesa());
 			//listaMesaComanda.add(new MyEntry<Integer, Integer>(mesa.getNum_mesa(), comm.getComanda_id()));
 			 
 			listaTar.add(tar);
