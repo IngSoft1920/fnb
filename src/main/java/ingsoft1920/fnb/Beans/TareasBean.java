@@ -161,7 +161,7 @@ public class TareasBean {
 		
 		//el numero de la comnada
 		 tar =  new Tarea(id_comanda, new HashMap<String, platos>(), new HashMap<String, bebidas>(), comandas.get(i).getHora());
-		 tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem()-1);
+		 tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem());
 		 
 		 
 		 idAnterior=id_comanda;
@@ -170,7 +170,7 @@ public class TareasBean {
 		 System.out.println("la bestia"+tar.toString());
 	}else {
 
-		tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem()-1);
+		tar.addPlato(comandas.get(i).getPlato().getNombre(), comandas.get(i).getPlato().getPlato_id(),comandas.get(i).getPlato().getElemComanda().getN_elem());
 		System.out.println(comandas.get(i).getPlato().getPlato_id());
 		System.out.println(comandas.get(i).getPlato().getNombre());
 		
