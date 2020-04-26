@@ -86,12 +86,12 @@ public class ApisDHO {
 
 		HttpClient client = null;
 		try {
-			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/enviarFactura","POST");
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/recibirMesa","POST");
 
 			JsonObject rqstJson = new JsonObject();
-			rqstJson.addProperty("num_habitacion", num_habitacion);
-			rqstJson.addProperty("hotel", hotel);
-			rqstJson.addProperty("factura", factura);
+			rqstJson.addProperty("habitacion", num_habitacion);
+			rqstJson.addProperty("Hotel", hotel);
+			rqstJson.addProperty("Factura", factura);
 			client.setRequestBody(rqstJson.toString());
 
 			int respCode = client.getResponseCode();
