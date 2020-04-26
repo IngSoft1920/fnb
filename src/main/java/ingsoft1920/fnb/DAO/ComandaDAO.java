@@ -449,7 +449,7 @@ public class ComandaDAO {
 					for(; i<platos.length+j;i++) {
 						stmt.setString(i, platos[i-j]);
 						n= contador.get(platos[i-j]);
-						contador.put(platos[i-j], n==null? 1:n+1);
+						contador.put(platos[i-j], n==null? 1:(n+1));
 					}
 				}
 
@@ -460,7 +460,7 @@ public class ComandaDAO {
 					for(; i<items.length+k;i++) {
 						stmt.setString(i, items[i-k]);
 						n= contador.get(items[i-k]);
-						contador.put(items[i-k], n==null? 1:n+1);
+						contador.put(items[i-k], n==null? 1:(n+1));
 					}
 
 				}
