@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ingsoft1920.fnb.Model.IngredienteInventarioM;
+import ingsoft1920.fnb.Model.IngredienteM;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.RestauranteM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
@@ -16,7 +17,8 @@ import ingsoft1920.fnb.Services.ConectorBBDD;
 public class InventarioDAO {
 
 		private static Connection conn = null;
-		public static List<IngredienteInventarioM> inventario(int restaurante_id) {
+		
+		public static List<IngredienteInventarioM> inventario(String restaurante) {
 			
 				if (conn == null)
 					conn= ConectorBBDD.conectar();
@@ -40,13 +42,13 @@ public class InventarioDAO {
 							"JOIN restaurante AS r ON r.restaurante_id = inv.restaurante_id " + 
 							"WHERE r.nombre = ?");
 
-					stmt.setInt(1,restaurante_id);
-					stmt.setInt(2,restaurante_id);
+					stmt.setString(1,restaurante);
+					stmt.setString(2,restaurante);
 					rs=stmt.executeQuery();
 
 					while(rs.next()) {
-						RestauranteM restauranteTmp = new RestauranteM(rs.getString("nombre"));
-						resultado.add(new IngredienteInventarioM(rs.getInt("cantidad"), rs.getString("unidad"), restauranteTmp));
+						IngredienteM ingrediente = new IngredienteM(rs.getString("nombre"));
+						resultado.add(new IngredienteInventarioM(rs.getInt("cantidad"), rs.getString("unidad"), ingrediente));
 					}
 				}catch(SQLException ex) {
 					System.out.println("SQLException: " + ex.getMessage());

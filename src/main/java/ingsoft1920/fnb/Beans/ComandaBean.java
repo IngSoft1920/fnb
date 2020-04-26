@@ -111,7 +111,7 @@ public class ComandaBean {
 		this.listaBebida=new ArrayList<String>();
 		this.cantidades=new HashMap<String, platos>();
 		this.bebidas=new HashMap<String, bebidas>();
-		ConectorBBDD.conectar();
+		
 		listaPlat=PlatoDAO.platosRest(nombreRestaurante);
 		for (Entry<String,PlatoM> plato : listaPlat.entrySet()) {
 	
@@ -124,7 +124,7 @@ public class ComandaBean {
 			this.bebidas.put(listaItem.getKey(), new bebidas(idBebida++,0));
 			
 		}
-		ConectorBBDD.desconectar();
+
 		
 		/*List<String> listaPlatos = new ArrayList<String>();
 		List<String> listaBebida = new ArrayList<String>();

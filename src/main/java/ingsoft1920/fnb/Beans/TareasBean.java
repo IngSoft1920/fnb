@@ -8,12 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.DAO.InventarioDAO;
+import ingsoft1920.fnb.DAO.PlatoDAO;
 import ingsoft1920.fnb.Model.ComandaM;
+import ingsoft1920.fnb.Model.IngredienteInventarioM;
+import ingsoft1920.fnb.Model.PlatoIngredienteM;
+import ingsoft1920.fnb.Model.PlatoM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
@@ -38,6 +44,8 @@ public class TareasBean {
 
 	Map<Integer, Tarea> listaTareas;
 	List<Tarea> listaTar;
+	List<IngredienteInventarioM> listaInventario;
+	
 
 
 	public Map<Integer, Tarea> getListaTareas() {
@@ -54,7 +62,7 @@ public class TareasBean {
 	}
 
 	public TareasBean() {
-
+	
 		// query
 		/*
 		List<String> listaPlatos = new ArrayList<String>();
@@ -147,13 +155,40 @@ public class TareasBean {
 	
 	
 	 }
-	 System.out.println("he salido------------------------------------------------------");
-	 System.out.println(listaTar.toString());
+	// System.out.println("he salido------------------------------------------------------");
+	//System.out.println(listaTar.toString());
+	 
+	 
+	 listaInventario=InventarioDAO.inventario("Mamma Mia");
+	 
+	 System.out.println("INVENTARIOO");
+	 System.out.println(listaInventario.toString());
+	 
+	 
+	 
 	
 	 
 	
 	}
 	
+	public List<IngredienteInventarioM> getListaInventario() {
+		return listaInventario;
+	}
+
+	public void setListaInventario(List<IngredienteInventarioM> listaInventario) {
+		this.listaInventario = listaInventario;
+	}
+
+	public List<Tarea> getListaTar() {
+		return listaTar;
+	}
+
+	public void setListaTar(List<Tarea> listaTar) {
+		this.listaTar = listaTar;
+	}
+
+
+
 	public List<Tarea> getLista(){
 		return listaTar;
 	}
