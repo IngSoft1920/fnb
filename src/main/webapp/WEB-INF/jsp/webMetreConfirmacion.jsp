@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lan="es">
 <head>
+<<<<<<< HEAD
   <meta charset="utf-8">	<!--Para decodificaci�n de caracteres especiales -->
   <title> METRECONFIRMACION : </title> <!--Título-->
+=======
+  <meta charset="utf-8">	<!--Para decodificaciï¿½n de caracteres especiales -->
+  <title> METRECONFIRMACION : </title> <!--Tï¿½tulo-->
+>>>>>>> release
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
 </head>
 
 <body>
-  <header class="header"> <!-- La parte de arriba de la p�gina web-->
+  <header class="header"> <!-- La parte de arriba de la pï¿½gina web-->
     <div id="encabezado">
       <div id="logo">
         PORTAL METRE

@@ -90,11 +90,12 @@
     };    
     
     var consulta= new Array();
-    
-    <c:forEach items="${luisBean.getListaMesas()}" var="country"> 
+    var aux;
+    <c:forEach items="${luisMesa.getListaMesas()}" var="country"> 
     countryDetails = new Object();
-    countryDetails.id = ${country.getMesa_id()};
-    countryDetails.op = ${country.getDisponible()};
+    countryDetails.id = "${country.getMesa_id()}";
+    countryDetails.op = "${country.getDisponible()}";
+   // aux="Nombre del restaurante:"+"${country.getRestaurante().getNombre()}";
     consulta.push(countryDetails);
 </c:forEach> 
     
@@ -252,7 +253,7 @@
     		text('ASEOS',380,90);
     		text('COCINA',1050,105);
     		text('COMEDOR',690,200);
-    	
+    		//text(aux,100,100);
     	
         }
     	

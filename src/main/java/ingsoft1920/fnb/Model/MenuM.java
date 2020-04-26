@@ -14,7 +14,12 @@ public class MenuM {
 		this.disponible = disponible;
 		this.titulo = titulo;
 	}
+	
 
+	public MenuM(int menu_id) {
+		super();
+		this.menu_id = menu_id;
+	}
 	public int getMenu_id() {
 		return menu_id;
 	}

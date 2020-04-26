@@ -7,7 +7,16 @@ public class MesaM {
 	private int capacidad;
 	private RestauranteM restaurante;
 	private Boolean disponible;
+	private MesaHabitacionM habitacion;
+	private MenuM menu;
 
+	public MesaM(int mesa_id, int num_mesa, MesaHabitacionM habitacion, MenuM menu) {
+		super();
+		this.mesa_id = mesa_id;
+		this.num_mesa = num_mesa;
+		this.habitacion = habitacion;
+		this.menu = menu;
+	}
 
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
 		this.mesa_id = mesa_id;
@@ -25,6 +34,14 @@ public class MesaM {
 		this.disponible = disponible;
 	}
 
+
+	public MesaHabitacionM getHabitacion() {
+		return habitacion;
+	}
+
+	public void setHabitacion(MesaHabitacionM habitacion) {
+		this.habitacion = habitacion;
+	}
 
 	public MesaM(int mesa_id) {
 		this.mesa_id = mesa_id;

@@ -93,6 +93,77 @@ public class ComandaDAO {
 			}
 		}
 	}
+	
+	public static float calcularPrecio(int comanda_id, int menu_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+		float res1, res2, precio =0;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, pm.precio AS precio " 
+					+ "FROM  comanda_elemComanda AS ce " 
+					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
+					+ "JOIN plato AS p ON  p.elemComanda_id = e.elemComanda_id " 
+					+ "JOIN plato_menu AS pm ON pm.plato_id= p.plato_id "
+					+ "WHERE ce.comanda_id=? AND  pm.menu_id=?;");
+			stmt.setInt(1, comanda_id);
+			stmt.setInt(2, menu_id);
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+			res1=rs.getInt("numVeces");
+			res2=rs.getFloat("precio");
+			System.out.println(res1);
+			System.out.println(res2);
+			precio += res1*res2;
+			}
+			
+			
+			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, im.precio AS precio " 
+					+ "FROM comanda_elemComanda AS ce " 
+					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
+					+ "JOIN item AS i ON  i.elemComanda_id = e.elemComanda_id "
+					+ "JOIN item_menu AS im ON im.item_id= i.item_id "
+					+ "WHERE ce.comanda_id=? AND  im.menu_id=?;");
+			
+			stmt.setInt(1, comanda_id);
+			stmt.setInt(2, menu_id);
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+			res1=rs.getInt("numVeces");
+			res2=rs.getFloat("precio");
+			System.out.println(res1);
+			System.out.println(res2);
+			precio += res1*res2;
+			}
+			
+		} catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+			
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		
+		return precio;
+			
+	}
+	
+	
 	public static ComandaM insertComanda(int mesa_id,String[] platos, String[] items) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
@@ -211,6 +282,8 @@ public class ComandaDAO {
 		}
 		return resultado;
 	}
+	
+
 
 	public static ComandaM insertComandaHab(int habitacion_id,LocalDateTime fecha_hora, String[] platos, String[] items) {
 		if (conn == null)
@@ -334,5 +407,10 @@ public class ComandaDAO {
 			}
 		}
 		return resultado;
+	}
+	public static void main(String[] args) {
+		
+		System.out.println(calcularPrecio(83,1));
+		
 	}
 }
