@@ -39,6 +39,11 @@ public class IndiceMetreController {
 		
 		return "webMetreConfirmacion";
 	}
+	@RequestMapping("/liberarmesas")
+	public String show15(Model model) {
+		
+		return "webMetreConfirmacion";
+	}
 	@RequestMapping("/mesasdisponibles")
 	public String show10(Model model) {
 		

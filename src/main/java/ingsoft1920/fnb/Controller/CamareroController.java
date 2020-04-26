@@ -40,6 +40,8 @@ public class CamareroController {
 		return listaPlatos;
 		
 	}
+	
+	
 	@GetMapping("/camareros")
 	public String platos(Model model) {
 		
