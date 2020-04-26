@@ -9,13 +9,15 @@ public class MesaM {
 	private Boolean disponible;
 	private MesaHabitacionM habitacion;
 	private MenuM menu;
+	private HotelM hotel;
 
-	public MesaM(int mesa_id, int num_mesa, MesaHabitacionM habitacion, MenuM menu) {
+	public MesaM(int mesa_id, int num_mesa, MesaHabitacionM habitacion, MenuM menu, HotelM hotel) {
 		super();
 		this.mesa_id = mesa_id;
 		this.num_mesa = num_mesa;
 		this.habitacion = habitacion;
 		this.menu = menu;
+		this.hotel=hotel;
 	}
 
 	public MesaM(int mesa_id, int num_mesa, int capacidad) {
@@ -39,12 +41,28 @@ public class MesaM {
 		return habitacion;
 	}
 
+	public HotelM getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(HotelM hotel) {
+		this.hotel = hotel;
+	}
+
 	public void setHabitacion(MesaHabitacionM habitacion) {
 		this.habitacion = habitacion;
 	}
 
 	public MesaM(int mesa_id) {
 		this.mesa_id = mesa_id;
+	}
+
+	public MenuM getMenu() {
+		return menu;
+	}
+
+	public void setMenu(MenuM menu) {
+		this.menu = menu;
 	}
 
 	public int getMesa_id() {

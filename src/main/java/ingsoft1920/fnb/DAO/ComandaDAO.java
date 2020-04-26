@@ -12,8 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ingsoft1920.fnb.Controller.ApisDHO;
+import ingsoft1920.fnb.Controller.MetreMesasController;
 import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.ElemComandaM;
+import ingsoft1920.fnb.Model.HotelM;
 import ingsoft1920.fnb.Model.MenuM;
 import ingsoft1920.fnb.Model.MesaHabitacionM;
 import ingsoft1920.fnb.Model.MesaM;
@@ -30,8 +33,7 @@ public class ComandaDAO {
 		if(mesa!= null) {
 			MesaDAO.desalojarMesa(mesa.getMesa_id());
 			eliminarComanda(comanda_id);
-			// TODO: llamar API DHO
-			// enviarFactura( int habitacion_id, String hotel, float Factura);
+			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
 			
 		}
 		
@@ -340,13 +342,14 @@ public class ComandaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT mh.habitacion_id AS habitacion_id, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id " + 
+					"SELECT mh.num_habitacion AS num_habitacion, m.mesa_id AS mesa_id, m.num_mesa AS num_mesa, menu.menu_id AS menu_id, h.nombre AS nom_hotel " + 
 					"FROM comanda AS c " + 
 					"JOIN ubicacion AS u ON u.ubicacion_id= c.ubicacion_id " + 
 					"JOIN mesa_ubicacion AS mu ON mu.ubicacion_id = u.ubicacion_id " + 
 					"JOIN mesa AS m ON mu.mesa_id= m.mesa_id " + 
 					"JOIN mesa_habitacion AS mh ON mh.mesa_id=m.mesa_id " + 
-					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " + 
+					"JOIN restaurante AS r ON r.restaurante_id = m.restaurante_id " +
+					"JOIN hotel AS h ON h.hotel_id= r.hotel_id " +
 					"JOIN menu ON menu.restaurante_id = r.restaurante_id " + 
 					"WHERE c.comanda_id=? ;");
 
@@ -355,9 +358,10 @@ public class ComandaDAO {
 			rs=stmt.executeQuery();
 
 			if(rs.next()) {
-				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("habitacion_id"));
+				MesaHabitacionM habitacion = new MesaHabitacionM(rs.getInt("num_habitacion"));
 				MenuM menu= new MenuM(rs.getInt("menu_id"));
-				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu);
+				HotelM hotel= new HotelM(rs.getString("nom_hotel"));
+				resultado= new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"), habitacion, menu, hotel);
 			}
 			
 		}catch(SQLException ex) {

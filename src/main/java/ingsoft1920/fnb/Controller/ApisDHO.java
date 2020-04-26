@@ -18,7 +18,7 @@ public class ApisDHO {
 	 * Flujo de ejecucion:
 	 * 1. Instancio esta clase
 	 * 	HttpClient client= new HttpClient("piedrafita.ls.fi.upm.es:7001/getLoQueSea","GET");
-	 * 2. Establzco el cuerpo de la peticion
+	 * 2. Establezco el cuerpo de la peticion
 	 * 	client.setRequestBody(cuerpoDeLaPeticionEnJson);
 	 * 3. Envio y obtengo codigo respuesta
 	 * 	int respCode = client.getResponseCode();
@@ -70,5 +70,39 @@ public class ApisDHO {
 			e.printStackTrace();
 		}
 		return resultado;
+	}
+	
+	/*Entrada:
+	 * {
+	 * 	'num_habitacion': int
+	 * 	'hotel' : String
+	 * 	'factura': float
+	 * 	
+	 * }
+	 *Salida:
+	 */
+	public static void enviarFactura(int num_habitacion, String hotel, float factura){
+		
+
+		HttpClient client = null;
+		try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/enviarFactura","POST");
+
+			JsonObject rqstJson = new JsonObject();
+			rqstJson.addProperty("num_habitacion", num_habitacion);
+			rqstJson.addProperty("hotel", hotel);
+			rqstJson.addProperty("factura", factura);
+			client.setRequestBody(rqstJson.toString());
+
+			int respCode = client.getResponseCode();
+
+			if(respCode == 200) {
+				System.out.println("Factura enviada");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
 }
