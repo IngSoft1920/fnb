@@ -25,7 +25,7 @@
 				<ul>
 					<!-- LI= lista de caracteres desordenada-->
 					<li><a href="#" class="activate-menu">Inicio</a></li>
-					<li><a href="#" class="enlace">Comandas</a></li>
+					<li><a href="mesas" class="enlace">Mesas</a></li>
 
 				</ul>
 			</div>
