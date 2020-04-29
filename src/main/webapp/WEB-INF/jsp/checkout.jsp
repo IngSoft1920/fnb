@@ -58,6 +58,7 @@
 			
 					</section>
 					</c:forEach>
+							
 			</c:if>
 			<c:if
 							test="${val != false}">

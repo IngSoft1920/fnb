@@ -12,14 +12,10 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 @SessionScope
 public class CheckoutBean {
-	ArrayList<MyEntry<Integer,Integer>> listaComandasListas;
+	ArrayList<MyEntry<Integer,Integer>> listaComandasListas= new ArrayList<MyEntry<Integer,Integer>>();
 	
 	public CheckoutBean() {
-		
-		listaComandasListas= new ArrayList<MyEntry<Integer,Integer>>();
-		
-		
-		
+	
 	}
 	
 	
