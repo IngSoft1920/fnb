@@ -126,7 +126,7 @@ public class PlatoDAO {
 
 				stmt = conn.prepareStatement(
 						"UPDATE ingrediente_inventario " + 
-								"SET cantidad = cantidad - ? " + 
+								"SET cantidad = (CASE WHEN cantidad - ? < 0 THEN 0 ELSE cantidad - ? END) " + 
 								"WHERE ingrediente_id = ? " + 
 								"and inventario_id = ( " + 
 								"SELECT i.inventario_id AS inventario " + 
@@ -135,9 +135,11 @@ public class PlatoDAO {
 								"WHERE r.nombre = ? " + 
 						") ;");
 
+				System.out.println(restaurante);
 				stmt.setInt(1,entry.getValue());
-				stmt.setInt(2,entry.getKey());
-				stmt.setString(3,restaurante);
+				stmt.setInt(2,entry.getValue());
+				stmt.setInt(3,entry.getKey());
+				stmt.setString(4,restaurante);
 				stmt.executeUpdate();
 
 			}
@@ -170,7 +172,7 @@ public class PlatoDAO {
 
 				stmt = conn.prepareStatement(
 						"UPDATE item_inventario " + 
-								"SET cantidad = cantidad - ? " + 
+								"SET cantidad = (CASE WHEN cantidad - ? < 0 THEN 0 ELSE cantidad - ? END) " + 
 								"WHERE item_id = ? " + 
 								"and inventario_id = ( " + 
 								"SELECT i.inventario_id AS inventario " + 
@@ -180,8 +182,9 @@ public class PlatoDAO {
 						") ;");
 
 				stmt.setInt(1,entry.getValue());
-				stmt.setInt(2,entry.getKey());
-				stmt.setString(3,restaurante);
+				stmt.setInt(2,entry.getValue());
+				stmt.setInt(3,entry.getKey());
+				stmt.setString(4,restaurante);
 				stmt.executeUpdate();
 
 			}
@@ -202,4 +205,12 @@ public class PlatoDAO {
 		}
 
 	}
+	public static void main(String[]args) {
+		HashMap<Integer,Integer> m = new HashMap<Integer,Integer>();
+		m.put(1, 10);
+		m.put(5,4);
+		decrementarItem(m,"Mamma Mia");
+		
+	}
+
 }
