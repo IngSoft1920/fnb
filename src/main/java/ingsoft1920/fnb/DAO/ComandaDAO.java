@@ -31,9 +31,16 @@ public class ComandaDAO {
 	public static void checkout(int comanda_id) {
 		MesaM mesa= infoFacturas(comanda_id);
 		if(mesa!= null) {
-			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			
 			eliminarComanda(comanda_id);
+			
+			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			
 			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
+			
+			
+			
+			
 			
 		}
 		

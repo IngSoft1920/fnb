@@ -14,16 +14,16 @@ import ingsoft1920.fnb.Beans.TareasBean;
 import ingsoft1920.fnb.DAO.ComandaDAO;
 @Controller
 public class CheckoutController {
-	@Autowired
 	
-	TareasBean tareasBean;
+	
+	CheckoutBean checkOut;
 	
 	
 	@RequestMapping("/pruebaliberarmesas")
 	public String showcheckout(Model model) {
 		
-		tareasBean= new TareasBean();
-		model.addAttribute("tareasBean",tareasBean);
+		checkOut= new CheckoutBean();
+		model.addAttribute("tareasBean",checkOut);
 		
 		return "checkout";
 				
@@ -32,11 +32,11 @@ public class CheckoutController {
 	
 	@PostMapping("/chekinOut")
 	public String checkOut( @Valid @RequestParam("checkOut") String checkOut, Model model){
+		// necesita hacerse un bucle sobre la lista para quitar todas las comandas de una mesa
 		
 		ComandaDAO.checkout(Integer.parseInt(checkOut));
-		tareasBean.removeMesa(Integer.parseInt(checkOut));
-		
-		model.addAttribute("tareasBean",tareasBean);
+		this.checkOut= new CheckoutBean();
+		model.addAttribute("tareasBean",this.checkOut);
 		
 		
 		return "checkout";
