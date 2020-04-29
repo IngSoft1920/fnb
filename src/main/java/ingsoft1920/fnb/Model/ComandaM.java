@@ -15,7 +15,15 @@ public class ComandaM {
 	private int tarea_cocinera;
 	private LocalDateTime hora;
 	private PlatoM plato;
-
+	private MesaM mesa;
+	
+	
+	public ComandaM(int comanda_id, LocalDateTime hora,MesaM mesa) {
+		super();
+		this.comanda_id = comanda_id;
+		this.hora = hora;
+		this.mesa = mesa;
+	}
 	public ComandaM(int comanda_id, Boolean estado_acabado, UbicacionM ubicacion, int tarea_cocinera,
 			LocalDateTime hora) {
 		super();
@@ -29,6 +37,13 @@ public class ComandaM {
 		this.comanda_id = comanda_id;
 		this.hora = hora;
 		this.plato = plato;
+	}
+	
+	public MesaM getMesa() {
+		return mesa;
+	}
+	public void setMesa(MesaM mesa) {
+		this.mesa = mesa;
 	}
 	
 	public ComandaM(int comanda_id) {

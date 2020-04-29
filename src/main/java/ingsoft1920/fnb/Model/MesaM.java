@@ -36,6 +36,13 @@ public class MesaM {
 		this.disponible = disponible;
 	}
 
+	
+	
+	public MesaM(int mesa_id, int num_mesa) {
+		super();
+		this.mesa_id = mesa_id;
+		this.num_mesa = num_mesa;
+	}
 
 	public MesaHabitacionM getHabitacion() {
 		return habitacion;
