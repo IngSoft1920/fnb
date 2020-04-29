@@ -8,37 +8,29 @@ import java.util.Map.Entry;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Model.ComandaM;
+
 
 @Component
 @SessionScope
 public class CheckoutBean {
-	ArrayList<MyEntry<Integer,Integer>> listaComandasListas;
+	java.util.List<ComandaM> listaComandasListas;
 	
 	public CheckoutBean() {
-		
-		listaComandasListas= new ArrayList<MyEntry<Integer,Integer>>();
-		
-		
-		
-	}
-	
-	
-	public void addElement(int mesa,int comandaId) {
-		
-		listaComandasListas.add(new MyEntry<Integer, Integer>(mesa, comandaId));
-		
-		
+		listaComandasListas= ComandaDAO.comandasCompletadasCocina(3);
 	}
 
-
-	public ArrayList<MyEntry<Integer, Integer>> getListaComandasListas() {
+	public java.util.List<ComandaM> getListaComandasListas() {
 		return listaComandasListas;
 	}
 
-
-	public void setListaComandasListas(ArrayList<MyEntry<Integer, Integer>> listaComandasListas) {
+	public void setListaComandasListas(java.util.List<ComandaM> listaComandasListas) {
 		this.listaComandasListas = listaComandasListas;
 	}
+	
+	
+	
 	
 
 }

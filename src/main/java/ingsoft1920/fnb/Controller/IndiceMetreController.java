@@ -120,12 +120,12 @@ public class IndiceMetreController {
 		
 		int habitaciones[]= new int[1];
 		String hab="";
-		for (int i = 11; i < habitaciones.length; i++) {
+		for (int i = 11; i < habitacion.length(); i++) {
 			hab+=habitacion.charAt(i);
 		}
-		
-		habitaciones[0]=Integer.parseInt(""+habitacion.charAt(11));
-		System.out.println("habitacion_---------"+habitaciones[0]);
+		System.out.println("habitacion_---------"+hab);
+		habitaciones[0]=Integer.parseInt(hab);
+
 		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones);
 		
 		model.addAttribute("portalMetreBean", portalMetreBean);

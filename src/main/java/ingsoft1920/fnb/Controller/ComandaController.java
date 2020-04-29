@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ingsoft1920.fnb.Beans.CheckoutBean;
 import ingsoft1920.fnb.Beans.ComandaBean;
 import ingsoft1920.fnb.Beans.bebidas;
 import ingsoft1920.fnb.Beans.platos;
@@ -35,6 +36,7 @@ import ingsoft1920.fnb.Services.ConectorBBDD;
 public class ComandaController {
 	@Autowired
 	ComandaBean comandaBean;
+	//CheckoutBean checkOut;
 	
 
 	@RequestMapping("/camareros")
@@ -42,6 +44,7 @@ public class ComandaController {
 		
 		
 		model.addAttribute("comandaBean", comandaBean);
+		//model.addAttribute("chequeo",checkOut);
 		
 		return "camareros";
 	}
@@ -345,8 +348,9 @@ public class ComandaController {
 		System.out.println( Arrays.toString(GetStringArray(items))+"+---------12345");
 		System.out.println(Arrays.toString(GetStringArray(platos))+"+123456");
 		ComandaDAO.insertComanda(Integer.parseInt(numMesa),GetStringArray(platos), GetStringArray(items));
+		System.out.println();
 		PlatoDAO.decrementarIngrediente(inventarioPlatos, this.comandaBean.getNombreRestaurante());
-		PlatoDAO.decrementarItem(inventarioPlatos, this.comandaBean.getNombreRestaurante());
+		PlatoDAO.decrementarItem(inventarioBebidas, this.comandaBean.getNombreRestaurante());
 
 
 		this.comandaBean = new ComandaBean();
@@ -354,7 +358,7 @@ public class ComandaController {
 			comandaBean.setNumMesa(Integer.parseInt(numMesa));
 			}
 		model.addAttribute("comandaBean", this.comandaBean);
-
+		//model.addAttribute("chequeos",checkOut);
 		return "redirect:mesas";
 	}
 	

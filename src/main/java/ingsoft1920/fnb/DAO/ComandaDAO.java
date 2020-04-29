@@ -31,9 +31,16 @@ public class ComandaDAO {
 	public static void checkout(int comanda_id) {
 		MesaM mesa= infoFacturas(comanda_id);
 		if(mesa!= null) {
-			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			
 			eliminarComanda(comanda_id);
+			
+			MesaDAO.desalojarMesa(mesa.getMesa_id());
+			
 			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
+			
+			
+			
+			
 			
 		}
 		
@@ -66,6 +73,52 @@ public class ComandaDAO {
 				ElemComandaM elemCtmp = new ElemComandaM(0,rs.getInt("n_elem"));
 				PlatoM platoTmp = new PlatoM(rs.getInt("plato_id") ,rs.getInt("num_plato"), rs.getString("nombre_plato"), elemCtmp);
 				resultado.add(new ComandaM(rs.getInt("comanda_id"), rs.getObject("hora", LocalDateTime.class), platoTmp));
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
+	
+	public static List<ComandaM> comandasCompletadasCocina(int tareaCocina) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		List<ComandaM> resultado= new ArrayList<ComandaM>();
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT c.comanda_id AS comanda_id, c.hora as hora, "
+							+ "m.mesa_id AS mesa_id, m.num_mesa AS num_mesa "
+							+ "FROM comanda AS c "
+							+ "JOIN ubicacion AS u ON u.ubicacion_id = c.ubicacion_id "
+							+ "JOIN mesa_ubicacion AS mu ON mu.ubicacion_id= u.ubicacion_id "
+							+ "JOIN mesa AS m ON m.mesa_id=mu.mesa_id "
+							+ "WHERE c.tarea_cocinero_id=? and estado_acabado = TRUE "
+							+ "ORDER BY c.hora;");
+
+			stmt.setInt(1, tareaCocina);
+			rs=stmt.executeQuery();
+
+			while(rs.next()) {
+				MesaM mesa = new MesaM(rs.getInt("mesa_id"),rs.getInt("num_mesa"));
+				resultado.add(new ComandaM(rs.getInt("comanda_id"), rs.getObject("hora", LocalDateTime.class), mesa));
 			}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: " + ex.getMessage());
