@@ -83,6 +83,33 @@
 							No hay mas tareas
 							
 			</c:if>
+			
+			<section id="publicaciones">
+			<article class="post">
+			<table border="1"> 
+			<tr>
+	        <th>ingrediente</th>
+	        <th>cantidad</th>
+	        <th> unidades </th>
+	        </tr>
+	        <tbody>
+	        
+			<c:forEach items="${tareasBean.getListaInventario()}" var="ingrediente">
+			<tr>
+			
+	        <td>${ingrediente.getIngrediente().getNombre()} </td>  
+	        <td> ${ingrediente.getCantidad()}</td> 
+			<td>${ingrediente.getUnidad()}</td>
+			</tr>
+			
+			</c:forEach>
+			
+			
+		</tbody>
+		</table>
 		
+		</article>
+			
+		</section>
 	
 	</body>

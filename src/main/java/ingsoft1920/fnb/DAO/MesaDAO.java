@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ingsoft1920.fnb.Model.ComandaM;
+import ingsoft1920.fnb.Model.MenuM;
+import ingsoft1920.fnb.Model.MesaHabitacionM;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.RestauranteM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
@@ -66,9 +68,51 @@ public class MesaDAO {
 		}
 		return resultado;
 	}
+	
+	public static List<MesaHabitacionM> verHabitacion(int mesa_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
 
+		List<MesaHabitacionM> resultado= new ArrayList<MesaHabitacionM>();
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT mh.num_habitacion AS num_habitacion, r.hotel_id AS hotel_id " + 
+					"FROM mesa AS m  " + 
+					"JOIN mesa_habitacion AS mh ON  m.mesa_id = mh.mesa_id " + 
+					"JOIN restaurante AS r ON m.restaurante_id = r.restaurante_id " + 
+					"WHERE mesa_id = ?;");
 
-	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] habitaciones_id) {
+			stmt.setInt(1, mesa_id);
+			rs=stmt.executeQuery();
+
+			while(rs.next()) {
+				
+				resultado.add(new MesaHabitacionM(rs.getInt("num_habitacion")));
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
+	
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] num_habitaciones) {
 		if(mesa_id>0) {
 
 			if (conn == null)
@@ -91,16 +135,16 @@ public class MesaDAO {
 				stmt.execute();
 				
 				String param1 ="";
-				for (int i =0; i<habitaciones_id.length-1;i++)
+				for (int i =0; i<num_habitaciones.length-1;i++)
 					param1+="(?,?),";
 				param1+="(?,?)";
 				
 				stmt= conn.prepareStatement(
-						"INSERT INTO mesa_habitacion VALUES"+param1+";");
+						"INSERT INTO mesa_habitacion (mesa_id,num_habitacion) VALUES"+param1+";");
 				
-				for (int i =1,j=0; i<=(2*habitaciones_id.length);i+=2,j++) {
+				for (int i =1,j=0; i<=(2*num_habitaciones.length);i+=2,j++) {
 					stmt.setInt(i,mesa_id);
-					stmt.setInt(i+1,habitaciones_id[j]);
+					stmt.setInt(i+1,num_habitaciones[j]);
 				}
 				
 				stmt.execute();
@@ -148,6 +192,11 @@ public class MesaDAO {
 
 				stmt= conn.prepareStatement("DELETE FROM ubicacion WHERE ubicacion_id =?;");
 				stmt.setInt(1, ubicacion_id);
+				stmt.execute();
+				
+
+				stmt= conn.prepareStatement("DELETE FROM mesa_habitacion WHERE mesa_id =?;");
+				stmt.setInt(1, mesa_id);
 				stmt.execute();
 			}
 		}catch(SQLException ex) {

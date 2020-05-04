@@ -17,6 +17,7 @@
 	crossorigin="anonymous"></script>
 	
 <meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!--Para decodificación de caracteres especiales -->
 <title>CAMAREROS :</title>
 <!--Título-->
@@ -25,6 +26,75 @@
 </style>
 <!--carpeta donde se encuentra el estilo css-->
 <body>
+<script type="text/javascript">
+$(document).ready(function (e) {
+    let UrlsObj = localStorage.getItem('rememberScroll');
+    let ParseUrlsObj = JSON.parse(UrlsObj);
+    let windowUrl = window.location.href;
+
+    if (ParseUrlsObj == null) {
+        return false;
+    }
+
+    ParseUrlsObj.forEach(function (el) {
+        if (el.url === windowUrl) {
+            let getPos = el.scroll;
+            $(window).scrollTop(getPos);
+        }
+    });
+
+});
+
+function RememberScrollPage(scrollPos) {
+
+    let UrlsObj = localStorage.getItem('rememberScroll');
+    let urlsArr = JSON.parse(UrlsObj);
+
+    if (urlsArr == null) {
+        urlsArr = [];
+    }
+
+    if (urlsArr.length == 0) {
+        urlsArr = [];
+    }
+
+    let urlWindow = window.location.href;
+    let urlScroll = scrollPos;
+    let urlObj = {url: urlWindow, scroll: scrollPos};
+    let matchedUrl = false;
+    let matchedIndex = 0;
+
+    if (urlsArr.length != 0) {
+        urlsArr.forEach(function (el, index) {
+
+            if (el.url === urlWindow) {
+                matchedUrl = true;
+                matchedIndex = index;
+            }
+
+        });
+
+        if (matchedUrl === true) {
+            urlsArr[matchedIndex].scroll = urlScroll;
+        } else {
+            urlsArr.push(urlObj);
+        }
+
+
+    } else {
+        urlsArr.push(urlObj);
+    }
+
+    localStorage.setItem('rememberScroll', JSON.stringify(urlsArr));
+
+}
+
+$(window).scroll(function (event) {
+    let topScroll = $(window).scrollTop();
+    console.log('Scrolling', topScroll);
+    RememberScrollPage(topScroll);
+});
+</script>
 	<header class="header">
 		<!-- La parte de arriba de la página web-->
 		<%! String t1; %>
@@ -37,10 +107,10 @@
 			<div id="menu">
 				<ul>
 					<!-- LI= lista de caracteres desordenada-->
-					<li><a href="#" class="activate-menu">Inicio</a></li>
+					<li><a href="mesas" class="activate-menu">Inicio</a></li>
 					<li><a href="#" class="enlace">Platos</a></li>
 					<li><a href="#" class="enlace">Bebida</a></li>
-					<li><a href="#" class="enlace">Formulario a completar</a></li>
+					<li><a href="pruebaliberarmesas" class="enlace">Checkout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -133,14 +203,15 @@
 <section id="sidebar">
   <section id="informacion">
     <h2 class="encabezado-sidebar"> Información </h2>
-    <h4> Adrián José García</h4>
-    <p> Alérgico a la fruta y legumbres. </p>
-
-    <h4> Miriam Sánchez</h4>
-    <p> Alérgica al gluten. </p>
-
-
-
+     <form method="POST" action="enviarObservaciones">
+     <c:set var="val" value="${comandaBean.getObservaciones()}" /> 
+	<c:if test="${val != ''}">
+		<p>${comandaBean.getObservaciones()}</p>
+  	</c:if>
+	<p><input type="text" name ="observaciones" value="" placeholder="Escribe aqui observaciones del cliente"></p>
+	<input type="submit" name="Enviar">
+	</form>
+	
   </section>
 
 </section>

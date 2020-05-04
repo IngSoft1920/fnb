@@ -4,8 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html lan="es">
 <head>
-  <meta charset="utf-8">	<!--Para decodificaciï¿½n de caracteres especiales -->
-  <title> METRECONFIRMACION : </title> <!--Tï¿½tulo-->
+
+  <meta charset="utf-8">	<!--Para decodificaci�n de caracteres especiales -->
+  <title> METRECONFIRMACION : </title> <!--Título-->
   <link rel="stylesheet" type="text/css" href="css/estilo3.css"> <!--carpeta donde se encuentra el estilo css-->
 <style><%@include file="./css/estilo3.css"%></style>
 
