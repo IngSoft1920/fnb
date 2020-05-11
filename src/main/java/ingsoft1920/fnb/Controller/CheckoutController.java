@@ -34,7 +34,7 @@ public class CheckoutController {
 	public String checkOut( @Valid @RequestParam("checkOut") String checkOut, Model model){
 		// necesita hacerse un bucle sobre la lista para quitar todas las comandas de una mesa
 		
-		ComandaDAO.checkout(Integer.parseInt(checkOut));
+		ComandaDAO.checkout(Integer.parseInt(checkOut), true);
 		this.checkOut= new CheckoutBean();
 		model.addAttribute("tareasBean",this.checkOut);
 		

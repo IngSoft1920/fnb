@@ -28,9 +28,9 @@ public class ComandaDAO {
 	private static Connection conn = null;
 	
 	
-	public static void checkout(int comanda_id) {
+	public static void checkout(int comanda_id, boolean terminar) {
 		MesaM mesa= infoFacturas(comanda_id);
-		if(mesa!= null) {
+		if(mesa!= null && terminar==true) {
 			
 			eliminarComanda(comanda_id);
 			
