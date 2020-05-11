@@ -253,7 +253,7 @@
     		text('ASEOS',380,90);
     		text('COCINA',1050,105);
     		text('COMEDOR',690,200);
-    		//text(aux,100,100);
+    		text(aux,100,100);
     	
         }
     	
