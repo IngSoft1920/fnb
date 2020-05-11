@@ -21,6 +21,7 @@ import ingsoft1920.fnb.Model.MenuM;
 import ingsoft1920.fnb.Model.MesaHabitacionM;
 import ingsoft1920.fnb.Model.MesaM;
 import ingsoft1920.fnb.Model.PlatoM;
+import ingsoft1920.fnb.Model.Plato_menuM;
 import ingsoft1920.fnb.Services.ConectorBBDD;
 
 
@@ -234,6 +235,78 @@ public class ComandaDAO {
 		return precio;
 			
 	}
+	
+	public static float calcularPrecioVIP(int comanda_id, int menu_id) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+		List<PlatoM> resultado= new ArrayList<PlatoM>();
+		float res1, res2, precio =0;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, pm.precio AS precio , p.nombre AS nombre" 
+					+ "FROM  comanda_elemComanda AS ce " 
+					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
+					+ "JOIN plato AS p ON  p.elemComanda_id = e.elemComanda_id " 
+					+ "JOIN plato_menu AS pm ON pm.plato_id= p.plato_id "
+					+ "WHERE ce.comanda_id=? AND  pm.menu_id=? AND pm.vip=1;");
+			stmt.setInt(1, comanda_id);
+			stmt.setInt(2, menu_id);
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+			res1=rs.getInt("numVeces");
+			res2=rs.getFloat("precio");
+			System.out.println(res1);
+			System.out.println(res2);
+			resultado.add(new PlatoM(rs.getString("nombre"),new Plato_menuM(res1*res2)));
+			}
+			
+			
+			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, im.precio AS precio, i.nombre as nombre " 
+					+ "FROM comanda_elemComanda AS ce " 
+					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
+					+ "JOIN item AS i ON  i.elemComanda_id = e.elemComanda_id "
+					+ "JOIN item_menu AS im ON im.item_id= i.item_id "
+					+ "WHERE ce.comanda_id=? AND  im.menu_id=?, im.vip=1;");
+			
+			stmt.setInt(1, comanda_id);
+			stmt.setInt(2, menu_id);
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+			res1=rs.getInt("numVeces");
+			res2=rs.getFloat("precio");
+			System.out.println(res1);
+			System.out.println(res2);
+			//Estamos realmente metiendo items en objetos platoM 
+			resultado.add(new PlatoM(rs.getString("nombre"),new Plato_menuM(res1*res2)));
+			}
+			
+		} catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+			
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		
+		return precio;
+			
+	}
+	
 	
 	public static void eliminarComanda(int comanda_id) {
 		if (conn == null)
