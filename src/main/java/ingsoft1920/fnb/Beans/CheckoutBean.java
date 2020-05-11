@@ -25,7 +25,7 @@ public class CheckoutBean {
 		ArrayList<ComandaM> aux = new ArrayList<ComandaM>();
 		
 		
-		if(lista.size()>1) {
+		if(lista.size()>=1) {
 			
 			aux= new ArrayList<ComandaM>();
 			aux.add(lista.get(0));
@@ -48,12 +48,11 @@ public class CheckoutBean {
 					aux.add(listaAnterior.get(j));
 				}
 				
-				listaComandas.put(lista.get(0).getMesa().getNum_mesa(),aux);
+				listaComandas.put(lista.get(i-1).getMesa().getNum_mesa(),aux);
 				
 				aux= new ArrayList<ComandaM>();
-				
-				
-				
+				aux.add(lista.get(i));	
+				listaComandas.put(lista.get(i).getMesa().getNum_mesa(), aux);
 				
 			}
 			
@@ -62,7 +61,8 @@ public class CheckoutBean {
 		}
 		}
 		
-		
+		System.out.println(listaComandas.toString());
+		System.out.println(lista.toString());
 		
 	}
 
@@ -73,6 +73,12 @@ public class CheckoutBean {
 	public void setListaComandas(Map<Integer, ArrayList<ComandaM>> listaComandas) {
 		this.listaComandas = listaComandas;
 	}
+	
+	public ArrayList<ComandaM> list(int id){
+		
+		return this.listaComandas.get(id);
+	}
+	
 
 
 	

@@ -27,13 +27,9 @@ public class CheckoutController {
 	public String showcheckout(Model model) {
 		
 		checkOut= new CheckoutBean();
-		for (Entry<Integer, ArrayList<ComandaM>> iterable_element : checkOut.getListaComandas().entrySet()) {
-		
-			
-		}
 		
 		
-		model.addAttribute("tareasBean",checkOut);
+		model.addAttribute("checkOutBean",checkOut);
 		
 		return "checkout";
 				
@@ -44,7 +40,15 @@ public class CheckoutController {
 	public String checkOut( @Valid @RequestParam("checkOut") String checkOut, Model model){
 		// necesita hacerse un bucle sobre la lista para quitar todas las comandas de una mesa
 		
-		ComandaDAO.checkout(Integer.parseInt(checkOut), true);
+		ArrayList<ComandaM> list = this.checkOut.list(Integer.parseInt(checkOut));
+		
+		for (int i = 0; i < list.size()-1; i++) {
+			
+			ComandaDAO.checkout(list.get(i).getComanda_id(), false);
+			
+		}
+		
+		ComandaDAO.checkout(list.get(list.size()-1).getComanda_id(), true);
 		this.checkOut= new CheckoutBean();
 		model.addAttribute("tareasBean",this.checkOut);
 		
