@@ -1,5 +1,8 @@
 package ingsoft1920.fnb.Controller;
 
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ingsoft1920.fnb.Beans.CheckoutBean;
 import ingsoft1920.fnb.Beans.TareasBean;
 import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Model.ComandaM;
 @Controller
 public class CheckoutController {
 	
@@ -23,6 +27,12 @@ public class CheckoutController {
 	public String showcheckout(Model model) {
 		
 		checkOut= new CheckoutBean();
+		for (Entry<Integer, ArrayList<ComandaM>> iterable_element : checkOut.getListaComandas().entrySet()) {
+		
+			
+		}
+		
+		
 		model.addAttribute("tareasBean",checkOut);
 		
 		return "checkout";
