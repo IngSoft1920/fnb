@@ -34,7 +34,7 @@ public class PlatoDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato, "
-							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato"
+							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato, pm.vip as vip"
 							+ " FROM plato as p"
 							+ " JOIN plato_menu as pm ON p.plato_id= pm.plato_id"
 							+ " JOIN menu as m ON m.menu_id = pm.menu_id"
@@ -47,7 +47,7 @@ public class PlatoDAO {
 
 			while(rs.next()) {
 				MenuM menuTmp = new MenuM(rs.getString("nombre_menu"));
-				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getFloat("precio_plato"));
+				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getFloat("precio_plato"),rs.getBoolean("vip"));
 				resultado.put(rs.getString("nombre_plato"),new PlatoM(rs.getInt("plato_id"), rs.getString("tipo_plato"), rs.getInt("num_plato"),
 						rs.getString("nombre_plato"), menuTmp, plato_menuTmp));
 			}

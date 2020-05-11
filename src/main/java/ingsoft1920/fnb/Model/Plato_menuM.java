@@ -5,11 +5,26 @@ public class Plato_menuM {
 	private PlatoM plato;
 	private MenuM menu;
 	private float precio;
+	private boolean vip;
 
+	public Plato_menuM(float precio,boolean vip) {
+		super();
+		this.precio = precio;
+		this.vip=vip;
+	}
+	
 	public Plato_menuM(float precio) {
 		super();
 		this.precio = precio;
 	}
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}
+
 	public Plato_menuM(PlatoM plato, MenuM menu, float precio) {
 		super();
 		this.plato = plato;
