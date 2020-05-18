@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import ingsoft1920.fnb.Controller.ApisDHO;
+import ingsoft1920.fnb.Controller.ApisEM;
 import ingsoft1920.fnb.Controller.MetreMesasController;
 import ingsoft1920.fnb.Model.ComandaM;
 import ingsoft1920.fnb.Model.ElemComandaM;
@@ -30,21 +31,16 @@ public class ComandaDAO {
 	
 	
 	public static void checkout(int comanda_id, boolean terminar) {
-		MesaM mesa= infoFacturas(comanda_id);
-		if(mesa!= null && terminar==true) {
+		MesaM mesa= infoFacturas(comanda_id);			
 			
-			eliminarComanda(comanda_id);
-			
-			MesaDAO.desalojarMesa(mesa.getMesa_id());
-			
-			ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
-			
-			
-			
-			
-			
-		}
+		ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()));
+		ApisEM.productoVip(comanda_id, mesa.getMenu().getMenu_id());
+		eliminarComanda(comanda_id);
 		
+		
+		if(mesa!= null && terminar==true) {
+			MesaDAO.desalojarMesa(mesa.getMesa_id());
+		}
 		
 	}
 
@@ -236,15 +232,15 @@ public class ComandaDAO {
 			
 	}
 	
-	public static float calcularPrecioVIP(int comanda_id, int menu_id) {
+	public static  List<PlatoM> calcularPrecioVIP(int comanda_id, int menu_id) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
 		List<PlatoM> resultado= new ArrayList<PlatoM>();
-		float res1, res2, precio =0;
+		float res1, res2 =0;
 		PreparedStatement stmt = null; 
 		ResultSet rs = null;
 		try {
-			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, pm.precio AS precio , p.nombre AS nombre" 
+			stmt= conn.prepareStatement("SELECT ce.n_elem AS numVeces, pm.precio AS precio , p.nombre AS nombre " 
 					+ "FROM  comanda_elemComanda AS ce " 
 					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
 					+ "JOIN plato AS p ON  p.elemComanda_id = e.elemComanda_id " 
@@ -268,7 +264,7 @@ public class ComandaDAO {
 					+ "JOIN elemComanda AS e ON  e.elemComanda_id = ce.elemComanda_id " 
 					+ "JOIN item AS i ON  i.elemComanda_id = e.elemComanda_id "
 					+ "JOIN item_menu AS im ON im.item_id= i.item_id "
-					+ "WHERE ce.comanda_id=? AND  im.menu_id=?, im.vip=1;");
+					+ "WHERE ce.comanda_id=? AND  im.menu_id=? AND im.vip=1;");
 			
 			stmt.setInt(1, comanda_id);
 			stmt.setInt(2, menu_id);
@@ -303,7 +299,7 @@ public class ComandaDAO {
 			}
 		}
 		
-		return precio;
+		return resultado;
 			
 	}
 	
