@@ -41,7 +41,7 @@ public class CheckoutController {
 		// necesita hacerse un bucle sobre la lista para quitar todas las comandas de una mesa
 		
 		ArrayList<ComandaM> list = this.checkOut.list(Integer.parseInt(checkOut));
-		
+		System.out.println("lista checkout-->"+list.toString());
 		for (int i = 0; i < list.size()-1; i++) {
 			
 			ComandaDAO.checkout(list.get(i).getComanda_id(), false);

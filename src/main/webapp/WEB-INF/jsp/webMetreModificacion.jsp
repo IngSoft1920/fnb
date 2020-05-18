@@ -81,67 +81,39 @@
    <article class="post">
 
    
-       <h2 class="titulo-post">Anadir plato</h2>
+       <h2 class="titulo-post">Visualizar carta</h2>
      
 
      <table border="1">
        <thead>
        <tr>
          <th>Nombre plato</th>
-         <th>Precio</th>
+         <th>Ingredientes</th>
        </tr>
        </thead>
 
        <tbody>
+       <c:forEach items="${cartaBean.getPlatosIngre()}"
+					var="item">
        <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
 
+      <td>${item.getKey()}</td>
+         <td>
+         <ul class="menu">
+         <nav class="nav">
+         <c:forEach items="${item.getValue()}"
+					var="ingredientes">
+         <p>  ${ingredientes.getIngrediente().getNombre()}  ${ingredientes.getCantidad()}    
+         </c:forEach>
+          </nav>
+          </ul>
+          
+          </td>
+         
+         
 
        </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
+       </c:forEach>
 
        </tbody>
      </table>
