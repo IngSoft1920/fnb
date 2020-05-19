@@ -175,7 +175,7 @@ public class MesaDAO {
 				stmt.setInt(1, mesa_id);
 				stmt.setInt(2,resultado.getComanda_id());
 				stmt.setString(3, fecha_hora == null ? LocalDateTime.now().toString() : fecha_hora.toString());
-				stmt.setInt(1, enpersona);
+				stmt.setInt(4, enpersona);
 				stmt.execute();
 				
 				String param1 ="";
