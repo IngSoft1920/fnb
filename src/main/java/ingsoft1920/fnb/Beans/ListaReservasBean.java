@@ -40,7 +40,6 @@ public class ListaReservasBean {
 	}
 	
 	public ListaReservasBean() {
-		
 		listaMesas= new ArrayList<MesaM>();
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
@@ -55,7 +54,6 @@ public class ListaReservasBean {
 		
 		
 	}
-
 	public Map<Integer, String> getMapAsign() {
 		return mapAsign;
 	}

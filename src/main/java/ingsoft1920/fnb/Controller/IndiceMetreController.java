@@ -81,9 +81,6 @@ public class IndiceMetreController {
 		model.addAttribute("confirmacionBean",confirmacionBean);
 		
 		
-		
-		
-		
 		return "webMetreConfirmacion";
 	}
 	
