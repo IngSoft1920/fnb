@@ -21,6 +21,47 @@ public class MesaDAO {
 
 	private static Connection conn = null;
 
+	
+	public static boolean enPersona(int idMesa) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		boolean  resultado=false;
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT  enPersona FROM mesa_ubicacion WHERE mesa_id = ?;");
+
+			stmt.setInt(1,idMesa);
+			rs=stmt.executeQuery();
+
+			if(rs.next()) {
+				resultado = rs.getBoolean("enPersona");
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+		return resultado;
+	}
+	
+	
+	
 	public static List<MesaM> mesasDisp() {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
@@ -112,7 +153,7 @@ public class MesaDAO {
 		return resultado;
 	}
 	
-	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] num_habitaciones) {
+	public static void alojarMesa(int mesa_id, LocalDateTime fecha_hora,int [] num_habitaciones, int enpersona) {
 		if(mesa_id>0) {
 
 			if (conn == null)
@@ -128,10 +169,11 @@ public class MesaDAO {
 				if(rs.next())
 					resultado=new ComandaM(rs.getInt(1));
 				stmt= conn.prepareStatement(
-						"INSERT INTO mesa_ubicacion VALUES (?,?,?);");
+						"INSERT INTO mesa_ubicacion VALUES (?,?,?,?);");
 				stmt.setInt(1, mesa_id);
 				stmt.setInt(2,resultado.getComanda_id());
 				stmt.setString(3, fecha_hora == null ? LocalDateTime.now().toString() : fecha_hora.toString());
+				stmt.setInt(1, enpersona);
 				stmt.execute();
 				
 				String param1 ="";
