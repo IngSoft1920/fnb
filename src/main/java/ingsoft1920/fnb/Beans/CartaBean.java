@@ -19,10 +19,15 @@ public class CartaBean {
 
     Map<String, PlatoM> platosRest = PlatoDAO.platosRest("Mamma Mia");
     ArrayList<MyEntry<String,List<PlatoIngredienteM>>> carta;
+    String unidad;
+    String cantidad;
+    String producto;
     public CartaBean() {
 
         carta= new ArrayList<>();
-        
+        this.unidad="Unidad";
+        this.cantidad="";
+        this.producto="";
         for (Entry<String, PlatoM> plato : platosRest.entrySet()) {
            
             List<PlatoIngredienteM> list = PlatoDAO.ingredientes(plato.getValue().getPlato_id());
@@ -39,6 +44,36 @@ public class CartaBean {
 
         return carta;
 
+    }
+
+    public void setUnidad(String unidad){
+
+        this.unidad=unidad;
+    }
+
+    public String getCantidad(){
+
+        return this.cantidad;
+    }
+    
+    public void setCantidades(String cantidad){
+
+         this.cantidad=cantidad;
+    }
+
+    public void setProducto(String producto){
+
+        this.producto=producto;
+
+    }
+    public String getProducto(){
+
+        return this.producto;
+    }
+
+    public String getUnidad(){
+    
+        return this.unidad;
     }
 
 
