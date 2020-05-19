@@ -45,6 +45,7 @@
             <th>Nº personas</th>
             <th>Asignación mesas</th>
             <th>Confirmación</th>
+            <th>Nombre Reserva</th>
 
           </tr>
           </thead>
@@ -106,6 +107,9 @@
 				</form>
             </p>
           </td>
+          <td><p class="parrafo-post1">
+          
+          </td>
 
           </tr>
           </c:if>
@@ -120,18 +124,30 @@
           </td>
             <td><p class="parrafo-post1">
               <strong><i> ${item.getCapacidad()}</i></strong>
-
+              
             </p>
-          </td>
-
-            <td>
-               
+            </td>
+            
+		
+				<c:if test="${item.filtro(item.getMesa_id())==false}">
+					<td><p class="parrafo-post1">
+					</p>
+					</td>
+					<td><p class="parrafo-post1">
+					</p>
+					</td>
+					<td><p class="parrafo-post1">
+					<strong><i>$(item.apinombre(item.numhabitacion()))</i></strong>
+					</p>
+					</td>   
+				</c:if>
+              
              
                  
 
               
             
-            </td>
+            
             
        
             <td>
@@ -141,6 +157,7 @@
           </tr>
           
           </c:if>
+          
           
 		</c:forEach>
           </tbody>

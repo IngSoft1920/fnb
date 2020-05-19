@@ -32,7 +32,7 @@ public class MesaDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  enPersona FROM mesa_ubicacion "
-					+ "WHERE mesa_id = ? AND WHERE ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30;");
+					+ "WHERE mesa_id = ? AND  ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30;");
 
 			stmt.setInt(1,idMesa);
 			stmt.setString(2, LocalDateTime.now().toString());
@@ -59,6 +59,7 @@ public class MesaDAO {
 				conn=null;
 			}
 		}
+		System.out.println("El resultado es : "+resultado);
 		return resultado;
 	}
 	
