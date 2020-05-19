@@ -262,7 +262,7 @@ public class ApisFnb {
 				habitaciones[i]=listaHabitaciones.get(i).getAsInt();
 			}
 			String rest_nomb= obj.get("ubicacion").getAsString();
-			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,num_clientes).getMesa_id(), fecha_hora,habitaciones);
+			MesaDAO.alojarMesa(MesaDAO.mesaDisp(rest_nomb, fecha_hora,num_clientes).getMesa_id(), fecha_hora,habitaciones,0);
 			break;
 		case 2: //CASO: Pedido Habitacion
 			int num_habitacion = Integer.parseInt(obj.get("ubicacion").getAsString());
@@ -284,4 +284,8 @@ public class ApisFnb {
 
 		}
 	}
+	
+	
+
+	
 } 
