@@ -31,9 +31,11 @@ public class MesaDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(
-					"SELECT  enPersona FROM mesa_ubicacion WHERE mesa_id = ?;");
+					"SELECT  enPersona FROM mesa_ubicacion "
+					+ "WHERE mesa_id = ? AND WHERE ABS(TIMESTAMPDIFF(MINUTE,?,fecha_reserva))<30;");
 
 			stmt.setInt(1,idMesa);
+			stmt.setString(2, LocalDateTime.now().toString());
 			rs=stmt.executeQuery();
 
 			if(rs.next()) {
