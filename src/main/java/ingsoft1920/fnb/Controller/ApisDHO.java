@@ -81,7 +81,7 @@ public class ApisDHO {
 	 * }
 	 *Salida:
 	 */
-	public static void enviarFactura(int num_habitacion, String hotel, float factura){
+	public static void enviarFactura(int num_habitacion, String hotel, float factura, String tipo){
 		
 
 		HttpClient client = null;
@@ -92,6 +92,8 @@ public class ApisDHO {
 			rqstJson.addProperty("habitacion", num_habitacion);
 			rqstJson.addProperty("Hotel", hotel);
 			rqstJson.addProperty("Factura", factura);
+			rqstJson.addProperty("Tipo", tipo);
+			
 			client.setRequestBody(rqstJson.toString());
 
 			int respCode = client.getResponseCode();
