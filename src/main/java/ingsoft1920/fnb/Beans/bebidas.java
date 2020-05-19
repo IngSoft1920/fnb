@@ -10,6 +10,7 @@ public class bebidas {
 	private int id;
 	private String nombre;
 	private int unidades=0;
+	private boolean isVip;
 	public int getId() {
 		return id;
 	}
@@ -18,6 +19,10 @@ public class bebidas {
 	}
 	public String getNombre() {
 		return nombre;
+	}
+	public boolean getVip(){
+
+		return this.isVip;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -32,6 +37,12 @@ public class bebidas {
 	
 		this.id = id;
 		this.unidades = unidades;
+	}
+	public bebidas(int id, int unidades,boolean vip) {
+	
+		this.id = id;
+		this.unidades = unidades;
+		this.isVip= vip;
 	}
 	
 	public bebidas() {}

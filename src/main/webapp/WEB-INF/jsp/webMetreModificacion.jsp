@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
   <header class="header"> <!-- La parte de arriba de la página web-->
     <div id="encabezado">
       <div id="logo">
@@ -74,8 +75,61 @@
 
        </p>
      </article>
+  </section>
 
+
+  <section class="publicaciones">
+   <article class="post">
+       <h2 class="titulo-post">Rellenar inventario</h2>
+        <table border="1">
+       <thead>
+       <tr>
+         
+         
+       <form action="pedidoRecibido" method="POST">
+       <th><input type="text" name="producto" value="" placeholder="Escriba aqui el producto deseado" ></th>
+       <th><input type="text" name="cantidad" value="" placeholder ="Escriba aqui la cantidad"></th>
+      <th>     <p class="parrafo-post">
+              <nav class="nav">
+              <ul class="menu">
+             <li> <a href="a" name="medida"> ${cartaBean.getUnidad()}</a>
+                <ul class="submenu">
+                  	<form action="asignarUnidad" method="GET">
+                  	<input type="hidden" name="idMesa"  value="g"/> 
+                      <li><button name="hab1" class="leer-mas" id="g" value="g">g</button>
+                      </form>  
+                     <form action="asignarUnidad" method="GET">
+                     <input type="hidden" name="idMesa"  value="ml" /> 
+                    <li><button name="hab1" class="leer-mas" id="ml" value="ml">ml</button>
+                      </form><form action="asignarUnidad" method="GET">
+                      <input type="hidden" name="idMesa"  value="unidad" /> 
+                     <li><button name="hab1" class="leer-mas" id="unidad" value="unidad">unidad</button>
+                      </form>  
+                  </ul>
+                 
+
+            
+              
+              
+             </ul> 
+            </nav> 
+            </li>
+        
+        </tr>
+        </th>
+        </form>
+       </thead>
+       </table>
+       <br>
+       <form action="Adho" method="GET">
+        <input type="submit" value="Proveedores" >
+</form>
+       </article>
  </section>
+ 
+ 
+
+ 
 
  <section id="publicaciones">
    <article class="post">
@@ -119,8 +173,8 @@
      </table>
 
    </article>
+  
 </section>
 
 
-
- </section>
+</body>

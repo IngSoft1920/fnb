@@ -119,35 +119,45 @@ $(window).scroll(function (event) {
 	<section id="principal">
 		<section id="publicaciones">
 			<article class="post">
-
+				<style>
+  				 form { display: inline; }
+				</style>
 			
 					<h2 class="titulo-post">Platos</h2>
 				
 				<c:forEach items="${comandaBean.getCantidades().entrySet()}"
 					var="item">
-					<li><label>${item.getKey()} 
+					<p> <c:set var="vip" value="${item.getValue().getVip()}" />
+					 <c:if test="${vip != false}" >
+					 <img src="/img/streyita 3.0.png" height="2%" weight="2%"> 
+					 </c:if>
+					  ${item.getKey()}  
 						<c:set var="val" value="${item.getValue().getUnidades()}" /> 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}
   									</c:if>
-  									</label>
-
+  									
+						
 						<form method="POST" action="anadirItem">
+						
 							<input type="hidden" name="platoNuevo"
-								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
-								value="+">
-								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
+								value="${item.getValue().getId()}" />
+								<input type="submit" class="leer-mas" value="+"> 
+								<input type="hidden" name="numMesa" value=<%=t1%>> 
 							</form>
 							<form method="POST" action="quitarItem">
 							<input type="hidden" name="platoNuevo"
 								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
-								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
+								<input type="hidden" name="numMesa" value=<%=t1%>> 
+
 						</form>
-					</li>
+						
+						
+					</p>
 				</c:forEach>
-				<br>
+				
 
 			</article>
 
@@ -156,13 +166,23 @@ $(window).scroll(function (event) {
 		<section id="publicaciones">
 			<article class="post">
 
-			
+			<style>
+  				 form { display: inline; }
+				</style>
+
 					<h2 class="titulo-post">Bebida</h2>
 				
-
 				<c:forEach items="${comandaBean.getBebidas().entrySet()}" var="item">
-					<li><label>${item.getKey()} 
+					<p>
+					<label>
+					<c:set var="vip" value="${item.getValue().getVip()}" />
+					<c:if test="${vip != false}" >
+					 <img src="/img/streyita 3.0.png" height="2%" weight="2%"> 
+					 </c:if>
+					${item.getKey()} 
 						 <c:set var="val" value="${item.getValue().getUnidades()}" /> 
+						 
+					 
 						<c:if
 							test="${val != '0'}">
     									${item.getValue().getUnidades()}
@@ -173,15 +193,15 @@ $(window).scroll(function (event) {
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="+">
-								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
+								<input type="hidden" name="numMesa" value=<%=t1%>> 
 						</form>
 						<form method="POST" action="quitarBebida">
 							<input type="hidden" name="bebidaNueva"
 								value="${item.getValue().getId()}" /> <input type="submit" class="leer-mas"
 								value="-">
-								<input type="hidden" name="numMesa" value=<%=t1%>> <br>
+								<input type="hidden" name="numMesa" value=<%=t1%>> 
 						</form>
-					</li>
+					</p>
 				</c:forEach>
 				
 				<form method="POST" action="enviarComanda">

@@ -50,6 +50,12 @@ public class ComandaController {
 	}
 
 	public ComandaBean getComandaBean() {
+		for (Entry<String, platos> entry : comandaBean.getCantidades().entrySet()) {
+			platos p =entry.getValue();
+			p.getVip();
+			
+		}
+
 		return comandaBean;
 	}
 
