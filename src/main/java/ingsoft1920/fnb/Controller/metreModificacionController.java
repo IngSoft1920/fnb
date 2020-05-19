@@ -35,6 +35,7 @@ public class metreModificacionController {
 
 		cartaBean= new CartaBean();
 		
+		
 		model.addAttribute("cartaBean",cartaBean);
 		
 		
@@ -44,16 +45,20 @@ public class metreModificacionController {
 
 
 	@GetMapping("/asignarUnidad")
-	public String asignarUnidad(@Valid @RequestParam("idMesa") String unidad,@Valid @RequestParam("producto") String producto,@Valid @RequestParam("cantidad") String cantidad, Model model){
+	public String asignarUnidad(@Valid @RequestParam("w") String unidad,@Valid @RequestParam("producto") String producto,@Valid @RequestParam("cantidad") String cantidad, Model model){
+		System.out.println(producto+"Hola");
+		System.out.println(cantidad+"WTF");
+		System.out.println(unidad+"Unidad");
 		cartaBean.setUnidad(unidad);
 		cartaBean.setCantidades(cantidad);
 		cartaBean.setProducto(producto);
+		System.out.println(cartaBean.getProducto()+"Esto es");
 		model.addAttribute("cartaBean",cartaBean);
 		return "webMetreModificacion";
 	}
 	@PostMapping("/pedidoRecibido")
 	public String pedidoRecibido(@Valid @RequestParam("producto") String producto,@Valid @RequestParam("cantidad") String cantidad,Model model){
-		System.out.println(producto);
+		System.out.println(producto+"Hola2");
 		System.out.println(cantidad);
 		String unit =cartaBean.getUnidad();
 		Map<String, PlatoM>  listPlat =PlatoDAO.platosRest("Mamma Mia");
@@ -84,6 +89,7 @@ public class metreModificacionController {
 
 		}
 		
+		model.addAttribute("cartaBean",cartaBean);
 		
 		return "webMetreModificacion";
 	}
