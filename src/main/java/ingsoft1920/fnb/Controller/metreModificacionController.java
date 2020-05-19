@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import ingsoft1920.fnb.Beans.CartaBean;
+import ingsoft1920.fnb.DAO.InventarioDAO;
 import ingsoft1920.fnb.DAO.ItemDAO;
 import ingsoft1920.fnb.DAO.PlatoDAO;
+import ingsoft1920.fnb.Model.IngredienteInventarioM;
 import ingsoft1920.fnb.Model.IngredienteM;
 import ingsoft1920.fnb.Model.ItemM;
 import ingsoft1920.fnb.Model.PlatoIngredienteM;
@@ -61,32 +63,38 @@ public class metreModificacionController {
 		System.out.println(producto+"Hola2");
 		System.out.println(cantidad);
 		String unit =cartaBean.getUnidad();
-		Map<String, PlatoM>  listPlat =PlatoDAO.platosRest("Mamma Mia");
-		Map<String, ItemM> listBeb =ItemDAO.itemsRest("Mamma Mia");
+		List<IngredienteInventarioM> list = InventarioDAO.inventario("Mamma Mia");
+		Map<String, ItemM> listBeb=ItemDAO.itemsRest("Mamma Mia");
 		int cant;
-		if(listPlat.containsKey(producto)){
+		
+		for (IngredienteInventarioM ingredienteInventarioM : list) {
+			if(ingredienteInventarioM.getIngrediente().getNombre().equals(producto)){
 
-			PlatoDAO.ingredientes(listPlat.get(producto).getPlato_id());
-			for (PlatoIngredienteM iterable_element : PlatoDAO.ingredientes(listPlat.get(producto).getPlato_id())) {
-				if(iterable_element.getUnidad().equals(unit)){
-					try {  
-						cant= Integer.parseInt(cantidad);  
-					 } catch(NumberFormatException nfe) {  
-						 // Log exception.
-						 cant= 0;
-					 } 
-					if(cant>0){ 
-					PlatoDAO.updateIngrediente(producto, cant, unit);
-					}
-				}
+				try {  
+					cant= Integer.parseInt(cantidad); 
+					
+					if(listBeb.containsKey(producto)){
+
+						PlatoDAO.updateItem(producto, Integer.parseInt(cantidad));
+		
+						}else {
+
+							PlatoDAO.updateIngrediente(producto, cant, unit);
+		
+						}
+
+				 } catch(NumberFormatException nfe) {  
+					 // Log exception.
+					 cant= 0;
+				 } 
+
+				
+
 			}
 			
 		}
-
-		if(listBeb.containsKey(producto)){
-
-			PlatoDAO.updateItem(producto, Integer.parseInt(cantidad));
-
+		for (IngredienteInventarioM ingredienteInventarioM : list) {
+			
 		}
 		
 		model.addAttribute("cartaBean",cartaBean);
