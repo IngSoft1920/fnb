@@ -107,4 +107,33 @@ public class ApisDHO {
 		}
 	
 	}
+	
+	
+	public static String nombreHabitacion(int num_habitacion){
+		
+		
+		String resultado = "";
+		HttpClient client = null;
+		try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/nombrePorHabitacion","POST");
+
+			JsonObject rqstJson = new JsonObject();
+			rqstJson.addProperty("num_habitacion", num_habitacion);
+		
+			client.setRequestBody(rqstJson.toString());
+
+			int respCode = client.getResponseCode();
+
+			if(respCode == 200) {
+				 resultado = client.getResponseBody();
+				
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	
 }
