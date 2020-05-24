@@ -137,7 +137,7 @@
 					</p>
 					</td>
 					<td><p class="parrafo-post1">
-					<strong><i>$(item.apinombre(item.numhabitacion()))</i></strong>
+					<strong><i>${item.apinombre(item.numhabitacion())}</i></strong>
 					</p>
 					</td>   
 				</c:if>
