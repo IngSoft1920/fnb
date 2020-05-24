@@ -142,7 +142,7 @@
   									</label>
                   <ul class="submenu">
                   
-                   <c:forEach items="${listaReservasBean.getListaMesas()}"
+                   <c:forEach items="${listaReservasBean.getListaHabReservadas()}"
 					var="habitacionesReservadas">
                   
                  <form action="asignarHab" method="GET">

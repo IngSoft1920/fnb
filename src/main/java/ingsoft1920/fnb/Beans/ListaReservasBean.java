@@ -44,7 +44,7 @@ public class ListaReservasBean {
 	
 	public ListaReservasBean() {
 		listaMesas= new ArrayList<MesaM>();
-		mesasReservadas= ApisDHO.habitacionesReservas();
+		mesasReservadas= ApisDHO.habitacionesReservadas();
 		
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
