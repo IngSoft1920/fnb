@@ -130,6 +130,7 @@
               
             </p>
             </td>
+            
             <td>
             
             
@@ -144,7 +145,7 @@
                  <form action="asignarHab" method="GET">
                       
                   	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 101">Habitación 101</button>
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 307">Habitación 307</button>
                       </form>  
                      <form action="asignarHab" method="GET">
                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
@@ -165,27 +166,37 @@
               </p>
             
             </td>
+            <td>
+            
+            <c:if test="${item.filtro(item.getMesa_id())==false}">
+				
+
+					<p class="parrafo-post1">
+            <form method="POST" action="alojarMesa" >
+        	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+              <input type="submit" class="leer-mas" value="OK">
+				</form>
+            </p>
+					  
+				</c:if>
+            
+            </td>
             
 			<td>
 				<c:if test="${item.filtro(item.getMesa_id())==false}">
-					<p class="parrafo-post1">
-					</p>
-					</td>
-					<td><p class="parrafo-post1">
-					</p>
-					</td>
-					<td><p class="parrafo-post1">
-					<strong><i>${listaReservasBean.getNombre(item.getNumMesa())}</i></strong>
-					</p>
-					   
+				
+					
+					<strong><i>${listaReservasBean.getNombre(item.getNum_mesa())}</i></strong>
+					
+					  
 				</c:if>
               
-             </td>
-                 
+             
+               </td>   
 
               
             
-            < 
+            
        
            
 

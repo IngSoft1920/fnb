@@ -115,7 +115,7 @@ public class ApisDHO {
 		String resultado = "";
 		HttpClient client = null;
 		try {
-			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/nombrePorHabitacion","POST");
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/nombrePorHabitacion/"+num_habitacion,"POST");
 
 			JsonObject rqstJson = new JsonObject();
 			rqstJson.addProperty("num_habitacion", num_habitacion);
