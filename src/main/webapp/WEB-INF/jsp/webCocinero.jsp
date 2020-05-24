@@ -26,7 +26,7 @@
 					<!-- LI= lista de caracteres desordenada-->
 					<li><a href="#" class="activate-menu">Inicio</a></li>
 					<li><a href="#" class="enlace">Comandas</a></li>
-					<li><a href="inventario" class="enlace">inventario</a></li>
+					<li><a href="inventario" class="enlace">Inventario</a></li>
 
 				</ul>
 			</div>
