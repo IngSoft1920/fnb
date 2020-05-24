@@ -136,4 +136,33 @@ public class ApisDHO {
 	}
 	
 	
+
+
+ public static List<Integer> habitacionesReservas(){
+	 
+	 String resultado = "";
+	 HttpClient client = null;
+	 
+	 try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/habitacionReservada","POST");
+			int m = 0;
+			JsonObject rqstJson = new JsonObject();
+			rqstJson.addProperty("habitacion_id",m);
+		
+			client.setRequestBody(rqstJson.toString());
+
+			int respCode = client.getResponseCode();
+
+			if(respCode == 200) {
+				 resultado = client.getResponseBody();
+				
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	 
+ }
+ 
 }
