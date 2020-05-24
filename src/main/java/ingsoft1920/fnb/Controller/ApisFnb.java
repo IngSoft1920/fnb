@@ -280,6 +280,8 @@ public class ApisFnb {
 			}
 
 			ComandaDAO.insertComandaHab(num_habitacion, fecha_hora, platos, items);
+			ApisDHO.enviarFactura(num_habitacion, "New York",  17, "habitacion");
+
 			break;
 
 		}
