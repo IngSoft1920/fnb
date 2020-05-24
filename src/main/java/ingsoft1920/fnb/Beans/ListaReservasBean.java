@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import ingsoft1920.fnb.Controller.ApisDHO;
 import ingsoft1920.fnb.Controller.ApisFnb;
 import ingsoft1920.fnb.DAO.MesaDAO;
 import ingsoft1920.fnb.Model.MesaM;
@@ -24,6 +25,7 @@ public class ListaReservasBean {
 	Map<Integer,String> mapAsign;
 	Map<Integer,String> mapAsignRes;
 	Map<Integer,String> mapNombreCliente;
+	List<Integer> mesasReservadas;
 	//ArrayList<reservas>listareservas;
 	//JSONObject rs;
 
@@ -42,6 +44,8 @@ public class ListaReservasBean {
 	
 	public ListaReservasBean() {
 		listaMesas= new ArrayList<MesaM>();
+		mesasReservadas= ApisDHO.habitacionesReservas();
+		
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
 		mapAsignRes= new HashMap<Integer, String>();
@@ -57,6 +61,13 @@ public class ListaReservasBean {
 		
 		
 	}
+	
+	
+	public List<Integer> getListaHabReservadas(){
+		
+		return this.mesasReservadas;
+	}
+	
 	public void  putNombre(int idMesa,String nombre) {
 		
 		mapNombreCliente.put(idMesa, nombre);
