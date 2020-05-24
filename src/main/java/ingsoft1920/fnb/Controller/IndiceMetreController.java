@@ -88,6 +88,22 @@ public class IndiceMetreController {
 	public String asignarHab(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("hab1") String hab1,Model model) {
 		
 		this.listaReservasBean.getMapAsign().put(Integer.parseInt(idMesa), hab1);
+		String aux =this.listaReservasBean.getNombre(Integer.parseInt(idMesa));
+		
+		if(aux.equals("")) {
+			
+			for (int i = 11; i < hab1.length(); i++) {
+				aux+=hab1.charAt(i);
+			}
+			
+			this.listaReservasBean.putNombre(Integer.parseInt(idMesa), ApisDHO.nombreHabitacion(Integer.parseInt(aux)));
+			
+		}
+		
+		
+		
+		
+		
 		model.addAttribute("listaReservasBean",listaReservasBean);
 		
 		return "webMetreMesasDisp";

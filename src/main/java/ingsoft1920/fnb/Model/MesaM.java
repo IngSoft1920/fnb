@@ -123,8 +123,16 @@ public class MesaM {
 		System.out.println("el valor es tal tal");
 		return MesaDAO.enPersona(mesaid);
 	}
-	public String apinombre(int numero) {
-		return ApisDHO.nombreHabitacion(numero);
+	public String apinombre(String numero) {
+		
+		if(numero.equals("Asignar")) {
+			
+			return "";
+			
+		}else {
+		
+		return ApisDHO.nombreHabitacion(Integer.parseInt(numero));
+		}
 	}
 	public int numhabitación() {
 		return habitacion.getNum_habitacion();

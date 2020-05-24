@@ -23,6 +23,7 @@ public class ListaReservasBean {
 	List<MesaM> listaMesas;
 	Map<Integer,String> mapAsign;
 	Map<Integer,String> mapAsignRes;
+	Map<Integer,String> mapNombreCliente;
 	//ArrayList<reservas>listareservas;
 	//JSONObject rs;
 
@@ -44,16 +45,35 @@ public class ListaReservasBean {
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
 		mapAsignRes= new HashMap<Integer, String>();
+		mapNombreCliente= new HashMap<Integer, String>();
 		for (MesaM mesa : list) {
 			if(mesa.getRestaurante().getNombre().equals("Mamma Mia")) {
 			listaMesas.add(mesa);
 			mapAsign.put(mesa.getNum_mesa(),"Asignar");
 			mapAsignRes.put(mesa.getNum_mesa(), "Asignar reserva");
+			mapNombreCliente.put(mesa.getNum_mesa(),"");
 			}
 		}
 		
 		
 	}
+	public void  putNombre(int idMesa,String nombre) {
+		
+		mapNombreCliente.put(idMesa, nombre);
+		
+		
+		
+		
+	} 
+	
+	public String getNombre(int idMesa) {
+		
+		return mapNombreCliente.get(idMesa);
+		
+		
+	}
+	
+	
 	public Map<Integer, String> getMapAsign() {
 		return mapAsign;
 	}
