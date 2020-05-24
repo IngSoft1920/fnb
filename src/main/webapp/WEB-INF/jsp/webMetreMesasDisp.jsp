@@ -75,21 +75,14 @@
   									</label>
                   <ul class="submenu">
                   
+                 <c:forEach items="${listaReservasBean.getListaHabReservadas()}"
+					var="habitacionesReservadas">
+                  
                  <form action="asignarHab" method="GET">
-                      
                   	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 101">Habitación 101</button>
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion ${habitacionesReservadas}">Habitación ${habitacionesReservadas} </button></li>
                       </form>  
-                     <form action="asignarHab" method="GET">
-                     <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 102">Habitación 102</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                     <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 103">Habitación 103</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 104">Habitación 104</button>
-                      </form>  
+                      </c:forEach>
                   </ul>
                  
 
@@ -150,16 +143,6 @@
                       <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion ${habitacionesReservadas}">Habitación ${habitacionesReservadas} </button></li>
                       </form>  
                       </c:forEach>
-                     <form action="asignarHab" method="GET">
-                     <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 102">Habitación 102</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                     <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 103">Habitación 103</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 104">Habitación 104</button>
-                      </form>  
                   </ul>
                  
 
