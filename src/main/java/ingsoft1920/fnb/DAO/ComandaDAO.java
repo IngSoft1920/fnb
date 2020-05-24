@@ -31,15 +31,19 @@ public class ComandaDAO {
 	
 	
 	public static void checkout(int comanda_id, boolean terminar) {
-		MesaM mesa= infoFacturas(comanda_id);			
+		MesaM mesa= infoFacturas(comanda_id);
+		if(mesa!=null) {
 		ApisDHO.enviarFactura(mesa.getHabitacion().getNum_habitacion(), mesa.getHotel().getNombre(),  calcularPrecio(comanda_id, mesa.getMenu().getMenu_id()), comprobar_mesa(mesa));
 		ApisEM.productoVip(comanda_id, mesa.getMenu().getMenu_id());
 		eliminarComanda(comanda_id);
-		
-		
-		if(mesa!= null && terminar==true) {
+		if(terminar==true) {
 			MesaDAO.desalojarMesa(mesa.getMesa_id());
 		}
+		}else { 
+			eliminarComanda(comanda_id);
+		}
+		
+		
 	}
 	
 	public static String comprobar_mesa(MesaM mesa) {
