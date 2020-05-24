@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import ingsoft1920.fnb.Beans.EmpleadoBean;
 import ingsoft1920.fnb.Beans.TareaEmpleadoBean;
 
 
@@ -134,6 +135,37 @@ public class ApisDHO {
 		}
 		return resultado;
 	}
+	
+	
+	public static List<Integer>  habitacionesReservadas(){
+		
+		
+		List<Integer> resultado =new ArrayList<Integer>();
+		HttpClient client = null;
+		try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/habitacionReservada","POST");
+
+		
+			int respCode = client.getResponseCode();
+
+
+			if(respCode == 200) {
+				 String resp = client.getResponseBody();
+
+					JsonObject resJson = (JsonObject) JsonParser.parseString(resp);
+					JsonArray habitacion_id = resJson.get("habitacion_id").getAsJsonArray();
+					
+					for (int i =0; i<habitacion_id.size(); i++) {
+						resultado.add(habitacion_id.get(i).getAsInt());
+					}
+				 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
 	
 	
 }
