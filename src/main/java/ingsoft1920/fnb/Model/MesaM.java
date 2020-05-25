@@ -1,4 +1,7 @@
 package ingsoft1920.fnb.Model;
+import ingsoft1920.fnb.DAO.MesaDAO;
+import ingsoft1920.fnb.Controller.ApisDHO;
+import ingsoft1920.fnb.Model.MesaHabitacionM;
 
 public class MesaM {
 
@@ -10,7 +13,7 @@ public class MesaM {
 	private MesaHabitacionM habitacion;
 	private MenuM menu;
 	private HotelM hotel;
-
+	
 	public MesaM(int mesa_id, int num_mesa, MesaHabitacionM habitacion, MenuM menu, HotelM hotel) {
 		super();
 		this.mesa_id = mesa_id;
@@ -115,6 +118,24 @@ public class MesaM {
 
 	public void setDisponible(Boolean disponible) {
 		this.disponible = disponible;
+	}
+	public boolean filtro(int mesaid) {
+		System.out.println("el valor es tal tal");
+		return MesaDAO.enPersona(mesaid);
+	}
+	public String apinombre(String numero) {
+		
+		if(numero.equals("Asignar")) {
+			
+			return "";
+			
+		}else {
+		
+		return ApisDHO.nombreHabitacion(Integer.parseInt(numero));
+		}
+	}
+	public int numhabitación() {
+		return habitacion.getNum_habitacion();
 	}
 
 

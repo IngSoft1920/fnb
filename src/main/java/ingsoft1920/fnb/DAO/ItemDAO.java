@@ -27,7 +27,7 @@ public class ItemDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  m.titulo AS nombre_menu, i.item_id AS item_id,"
-							+ " i.tipo AS tipo_item, i.nombre AS nombre_item, im.precio as precio_item"
+							+ " i.tipo AS tipo_item, i.nombre AS nombre_item, im.precio as precio_item, im.vip as vip"
 							+ " FROM item as i"
 							+ " JOIN item_menu as im ON i.item_id= im.item_id "
 							+ "JOIN menu as m ON m.menu_id = im.menu_id "
@@ -40,7 +40,7 @@ public class ItemDAO {
 
 			while(rs.next()) {
 				MenuM menuTmp = new MenuM(rs.getString("nombre_menu"));
-				Item_menuM item_menuTmp = new Item_menuM(rs.getFloat("precio_item"));
+				Item_menuM item_menuTmp = new Item_menuM(rs.getFloat("precio_item"),rs.getBoolean("vip"));
 				resultado.put(rs.getString("nombre_item"),new  ItemM(rs.getInt("item_id"), 
 						rs.getString("tipo_item"),rs.getString("nombre_item"), menuTmp, item_menuTmp));
 			}

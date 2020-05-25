@@ -14,6 +14,13 @@ public class PlatoM {
 	private MenuM menu;
 	private Plato_menuM plato_menu;
 
+	
+	public PlatoM(String nombre, Plato_menuM plato_menu) {
+		super();
+		this.nombre = nombre;
+		this.plato_menu = plato_menu;
+	}
+	
 	public PlatoM(int plato_id, String tipo, int num_plato, String nombre, ElemComandaM elemComanda) {
 		this.plato_id = plato_id;
 		this.tipo = tipo;

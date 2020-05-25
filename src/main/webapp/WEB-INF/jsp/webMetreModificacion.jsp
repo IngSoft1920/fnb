@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
   <header class="header"> <!-- La parte de arriba de la página web-->
     <div id="encabezado">
       <div id="logo">
@@ -74,81 +75,92 @@
 
        </p>
      </article>
+  </section>
 
+
+  <section class="publicaciones">
+   <article class="post">
+       <h2 class="titulo-post">Rellenar inventario</h2>
+        <form action="pedidoRecibido" method="POST">
+        <table border="1">
+       <thead>
+       <tr>
+               
+       <th><input type="text" name="producto" value="" placeholder="Escriba aqui el producto deseado"></th>
+       <th><input type="text" name="cantidad" value="" placeholder ="Escriba aqui la cantidad"></th>
+       
+      <th> 
+              <select name="w" id="dropdown">
+  <option value="g"selectedg>g</option>
+  <option value="mg">mg</option>
+  <option value="unidad">unidad</option>
+</select>
+
+	
+        </th>
+       
+       </thead>
+       </table>
+       <input type="submit" value="manda" >
+        </form>
+       <br>
+       
+        <br>
+       
+       <form action="Adho" method="GET">
+        <input type="submit" value="Proveedores" >
+</form>
+       </article>
  </section>
+ 
+ 
+
+ 
 
  <section id="publicaciones">
    <article class="post">
 
    
-       <h2 class="titulo-post">Anadir plato</h2>
+       <h2 class="titulo-post">Visualizar carta</h2>
      
 
      <table border="1">
        <thead>
        <tr>
          <th>Nombre plato</th>
-         <th>Precio</th>
+         <th>Ingredientes</th>
        </tr>
        </thead>
 
        <tbody>
+       <c:forEach items="${cartaBean.getPlatosIngre()}"
+					var="item">
        <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
 
+      <td>${item.getKey()}</td>
+         <td>
+         <ul class="menu">
+         <nav class="nav">
+         <c:forEach items="${item.getValue()}"
+					var="ingredientes">
+         <p>  ${ingredientes.getIngrediente().getNombre()}  ${ingredientes.getCantidad()}    
+         </c:forEach>
+          </nav>
+          </ul>
+          
+          </td>
+         
+         
 
        </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
-       <tr>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-         <td><input type="text" name="buscar" placeholder="Escribe aqui"></td>
-
-
-       </tr>
+       </c:forEach>
 
        </tbody>
      </table>
 
    </article>
+  
 </section>
 
 
-
- </section>
+</body>

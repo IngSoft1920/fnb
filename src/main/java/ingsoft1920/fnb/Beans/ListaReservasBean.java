@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
+import ingsoft1920.fnb.Controller.ApisDHO;
 import ingsoft1920.fnb.Controller.ApisFnb;
 import ingsoft1920.fnb.DAO.MesaDAO;
 import ingsoft1920.fnb.Model.MesaM;
@@ -23,6 +24,8 @@ public class ListaReservasBean {
 	List<MesaM> listaMesas;
 	Map<Integer,String> mapAsign;
 	Map<Integer,String> mapAsignRes;
+	Map<Integer,String> mapNombreCliente;
+	List<Integer> mesasReservadas;
 	//ArrayList<reservas>listareservas;
 	//JSONObject rs;
 
@@ -40,22 +43,48 @@ public class ListaReservasBean {
 	}
 	
 	public ListaReservasBean() {
-		
 		listaMesas= new ArrayList<MesaM>();
+		mesasReservadas= ApisDHO.habitacionesReservadas();
+		
 		List<MesaM> list = MesaDAO.mesasDisp();
 		mapAsign =  new HashMap<Integer, String>();
 		mapAsignRes= new HashMap<Integer, String>();
+		mapNombreCliente= new HashMap<Integer, String>();
 		for (MesaM mesa : list) {
 			if(mesa.getRestaurante().getNombre().equals("Mamma Mia")) {
 			listaMesas.add(mesa);
 			mapAsign.put(mesa.getNum_mesa(),"Asignar");
 			mapAsignRes.put(mesa.getNum_mesa(), "Asignar reserva");
+			mapNombreCliente.put(mesa.getNum_mesa(),"");
 			}
 		}
 		
 		
 	}
-
+	
+	
+	public List<Integer> getListaHabReservadas(){
+		
+		return this.mesasReservadas;
+	}
+	
+	public void  putNombre(int idMesa,String nombre) {
+		
+		mapNombreCliente.put(idMesa, nombre);
+		
+		
+		
+		
+	} 
+	
+	public String getNombre(int idMesa) {
+		
+		return mapNombreCliente.get(idMesa);
+		
+		
+	}
+	
+	
 	public Map<Integer, String> getMapAsign() {
 		return mapAsign;
 	}

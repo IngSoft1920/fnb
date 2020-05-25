@@ -45,6 +45,7 @@
             <th>Nº personas</th>
             <th>Asignación mesas</th>
             <th>Confirmación</th>
+            <th>Nombre Reserva</th>
 
           </tr>
           </thead>
@@ -74,21 +75,14 @@
   									</label>
                   <ul class="submenu">
                   
+                 <c:forEach items="${listaReservasBean.getListaHabReservadas()}"
+					var="habitacionesReservadas">
+                  
                  <form action="asignarHab" method="GET">
-                      
                   	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 101">Habitación 101</button>
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion ${habitacionesReservadas}">Habitación ${habitacionesReservadas} </button></li>
                       </form>  
-                     <form action="asignarHab" method="GET">
-                     <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 102">Habitación 102</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                     <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion 103">Habitación 103</button>
-                      </form><form action="asignarHab" method="GET">
-                      <input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
-                    <li> <button name="hab1" class="leer-mas" id="hab1" value="Habitacion 104">Habitación 104</button>
-                      </form>  
+                      </c:forEach>
                   </ul>
                  
 
@@ -106,41 +100,96 @@
 				</form>
             </p>
           </td>
+          <td><p class="parrafo-post1">
+          
+          </td>
 
           </tr>
           </c:if>
           
           <c:if test="${item.getDisponible()==false}">
-          
+         
           <tr bgcolor="#f17c73">
             <td><p class="parrafo-post1">
               <strong><i>Mesa ${item.getNum_mesa()} </i></strong>
 				
             </p>
           </td>
+          
+          
+          
             <td><p class="parrafo-post1">
               <strong><i> ${item.getCapacidad()}</i></strong>
-
+              
             </p>
-          </td>
-
+            </td>
+            
             <td>
+            
+            
+           <p class="parrafo-post">
+              <nav class="nav">
+              <ul class="menu">
                
-             
+              <li><a href="a" name="habitacion" id="habitacion" > ${listaReservasBean.getMapAsign().get(item.getNum_mesa())}</a>
+  									</label>
+                  <ul class="submenu">
+                  
+                   <c:forEach items="${listaReservasBean.getListaHabReservadas()}"
+					var="habitacionesReservadas">
+                  
+                 <form action="asignarHab" method="GET">
+                  	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+                      <li><button name="hab1" class="leer-mas" id="hab1" value="Habitacion ${habitacionesReservadas}">Habitación ${habitacionesReservadas} </button></li>
+                      </form>  
+                      </c:forEach>
+                  </ul>
                  
 
-              
+              </li>
+              </ul>
+              </nav>
+              </p>
+            
+            </td>
+            <td>
+            
+            <c:if test="${item.filtro(item.getMesa_id())==false}">
+				
+
+					<p class="parrafo-post1">
+            <form method="POST" action="alojarMesa" >
+        	<input type="hidden" name="idMesa"  value="${item.getMesa_id()}" /> 
+              <input type="submit" class="leer-mas" value="OK">
+				</form>
+            </p>
+					  
+				</c:if>
             
             </td>
             
-       
-            <td>
+			<td>
+				<c:if test="${item.filtro(item.getMesa_id())==false}">
+				
+					
+					<strong><i>${listaReservasBean.getNombre(item.getNum_mesa())}</i></strong>
+					
+					  
+				</c:if>
+              
+             
+               </td>   
+
+              
             
-          </td>
+            
+       
+           
 
           </tr>
           
           </c:if>
+          
           
 		</c:forEach>
           </tbody>

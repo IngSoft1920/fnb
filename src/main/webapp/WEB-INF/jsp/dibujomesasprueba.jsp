@@ -12,7 +12,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
   
   
-  <label>esto funciona</label>
+  
   
   	<script type="text/javascript">
 	
@@ -253,7 +253,7 @@
     		text('ASEOS',380,90);
     		text('COCINA',1050,105);
     		text('COMEDOR',690,200);
-    		//text(aux,100,100);
+    		text(aux,100,100);
     	
         }
     	

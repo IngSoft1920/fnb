@@ -2,7 +2,7 @@ package ingsoft1920.fnb.Beans;
 
 import java.util.Map;
 
-final class MyEntry<K, V> implements Map.Entry<K, V> {
+public class MyEntry<K, V> implements Map.Entry<K, V> {
     private final K key;
     private V value;
 

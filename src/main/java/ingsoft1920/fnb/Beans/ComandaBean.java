@@ -115,13 +115,13 @@ public class ComandaBean {
 		listaPlat=PlatoDAO.platosRest(nombreRestaurante);
 		for (Entry<String,PlatoM> plato : listaPlat.entrySet()) {
 	
-			this.cantidades.put(plato.getKey(),new platos(idComida++,0));
+			this.cantidades.put(plato.getKey(),new platos(idComida++,0,plato.getValue().getPlato_menu().isVip()));
 			
 		}
 		listBebidas = ItemDAO.itemsRest(nombreRestaurante);
 		for (Entry<String,ItemM> listaItem : listBebidas.entrySet()) {
 			
-			this.bebidas.put(listaItem.getKey(), new bebidas(idBebida++,0));
+			this.bebidas.put(listaItem.getKey(), new bebidas(idBebida++,0,listaItem.getValue().getItem_menu().isVip()));
 			
 		}
 

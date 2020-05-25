@@ -10,6 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import ingsoft1920.fnb.Beans.EmpleadoBean;
+import ingsoft1920.fnb.DAO.ComandaDAO;
+import ingsoft1920.fnb.Model.PlatoM;
 
 @Controller
 public class ApisEM {
@@ -64,11 +66,11 @@ public class ApisEM {
 				JsonArray listaIdEmpleado = resJson.get("id_empleado").getAsJsonArray();
 				JsonArray listaNombre = resJson.get("nombre").getAsJsonArray();
 				JsonArray listaEstado = resJson.get("estado").getAsJsonArray();
-				
+
 				for (int i =0; i<listaIdEmpleado.size(); i++) {
 					resultado.add(new EmpleadoBean(listaIdEmpleado.get(i).getAsInt(),
-													listaNombre.get(i).getAsString(),
-													listaEstado.get(i).getAsBoolean()));
+							listaNombre.get(i).getAsString(),
+							listaEstado.get(i).getAsBoolean()));
 				}
 
 			}
@@ -77,5 +79,37 @@ public class ApisEM {
 		}
 		return resultado;
 	}
-}
 
+
+	public static void productoVip(int comanda_id, int menu_id){
+		List<PlatoM> resultado= ComandaDAO.calcularPrecioVIP(comanda_id, menu_id);
+		HttpClient client = null;
+		for (PlatoM p:resultado) {
+			try {
+				client = new HttpClient("http://piedrafita.ls.fi.upm.es:7002/incentivos","POST");
+
+				JsonObject rqstJson = new JsonObject();
+				rqstJson.addProperty("id_empleado", 1);
+				rqstJson.addProperty("descripcion", p.getNombre());
+				rqstJson.addProperty("valor", p.getPlato_menu().getPrecio());
+				client.setRequestBody(rqstJson.toString());
+
+				int respCode = client.getResponseCode();
+				System.out.println(client.getResponseBody());
+
+				if(respCode != 200) {
+					break;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public static void main(String []args) {
+		productoVip(174, 1);
+	}
+	
+	
+}

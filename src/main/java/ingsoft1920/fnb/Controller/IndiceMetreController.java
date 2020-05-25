@@ -59,7 +59,7 @@ public class IndiceMetreController {
 		System.out.println(listaReservasBean.getMapAsign().toString());
 		System.out.println(listaReservasBean.getMapAsign().get("1"));
 		model.addAttribute("listaReservasBean", listaReservasBean);
-		
+	
 		return "webMetreMesasDisp";
 	}
 	
@@ -81,9 +81,6 @@ public class IndiceMetreController {
 		model.addAttribute("confirmacionBean",confirmacionBean);
 		
 		
-		
-		
-		
 		return "webMetreConfirmacion";
 	}
 	
@@ -91,6 +88,25 @@ public class IndiceMetreController {
 	public String asignarHab(@Valid @RequestParam("idMesa") String idMesa,@Valid @RequestParam("hab1") String hab1,Model model) {
 		
 		this.listaReservasBean.getMapAsign().put(Integer.parseInt(idMesa), hab1);
+		String aux =this.listaReservasBean.getNombre(Integer.parseInt(idMesa));
+		System.out.println("-->>"+aux);
+		System.out.println("--->"+idMesa);
+		if(aux.equals("")) {
+			
+			
+			for (int i = 11; i < hab1.length(); i++) {
+				aux+=hab1.charAt(i);
+			}
+		
+			this.listaReservasBean.putNombre(Integer.parseInt(idMesa), ApisDHO.nombreHabitacion(Integer.parseInt(aux)));
+		
+			System.out.println("Nombre-->"+ApisDHO.nombreHabitacion(Integer.parseInt(aux)));
+		}
+		
+		
+		
+		
+		
 		model.addAttribute("listaReservasBean",listaReservasBean);
 		
 		return "webMetreMesasDisp";
@@ -126,7 +142,7 @@ public class IndiceMetreController {
 		System.out.println("habitacion_---------"+hab);
 		habitaciones[0]=Integer.parseInt(hab);
 
-		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones);
+		MesaDAO.alojarMesa(Integer.parseInt(idMesa), LocalDateTime.now(),habitaciones,1);
 		
 		model.addAttribute("portalMetreBean", portalMetreBean);
 		

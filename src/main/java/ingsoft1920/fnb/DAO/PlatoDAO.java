@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class PlatoDAO {
 		try {
 			stmt = conn.prepareStatement(
 					"SELECT  m.titulo AS nombre_menu, p.plato_id AS plato_id, p.num_plato as num_plato, "
-							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato"
+							+ "p.tipo AS tipo_plato, p.nombre AS nombre_plato, pm.precio as precio_plato, pm.vip as vip"
 							+ " FROM plato as p"
 							+ " JOIN plato_menu as pm ON p.plato_id= pm.plato_id"
 							+ " JOIN menu as m ON m.menu_id = pm.menu_id"
@@ -47,7 +48,7 @@ public class PlatoDAO {
 
 			while(rs.next()) {
 				MenuM menuTmp = new MenuM(rs.getString("nombre_menu"));
-				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getFloat("precio_plato"));
+				Plato_menuM plato_menuTmp = new Plato_menuM(rs.getFloat("precio_plato"),rs.getBoolean("vip"));
 				resultado.put(rs.getString("nombre_plato"),new PlatoM(rs.getInt("plato_id"), rs.getString("tipo_plato"), rs.getInt("num_plato"),
 						rs.getString("nombre_plato"), menuTmp, plato_menuTmp));
 			}
@@ -114,6 +115,130 @@ public class PlatoDAO {
 		}
 		return resultado;
 	}
+
+
+
+	public static void updateItem(String nombre,int cantidad) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT item_id " + 
+							"FROM item " + 
+					"WHERE nombre =?;");
+			stmt.setString(1, nombre);
+			rs=stmt.executeQuery();
+			if (rs.next()) {
+				stmt = conn.prepareStatement(
+						"UPDATE item_inventario " + 
+								"SET cantidad =  cantidad + ?  " + 
+								"WHERE item_id = ? " + 
+						"and inventario_id = 1 ;");
+
+				stmt.setInt(1,cantidad);
+				stmt.setInt(2,rs.getInt("item_id"));
+				stmt.executeUpdate();
+			}else {
+				stmt = conn.prepareStatement("INSERT INTO item(nombre) VALUES (?);",Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1, nombre);
+				stmt.execute();
+				rs=stmt.getGeneratedKeys();
+				if(rs.next()) {
+					stmt = conn.prepareStatement("INSERT INTO item_inventario VALUES (?, 1, ?);");
+					stmt.setInt(1, rs.getInt(1));
+					stmt.setInt(2, cantidad);
+					stmt.execute();
+				}
+
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+
+	}
+
+
+	public static void updateIngrediente(String nombre,int cantidad,String unidades) {
+		if (conn == null)
+			conn= ConectorBBDD.conectar();
+
+		PreparedStatement stmt = null; 
+		ResultSet rs = null;
+
+		try {
+			stmt = conn.prepareStatement(
+					"SELECT ingrediente_id " + 
+							"FROM ingrediente " + 
+					"WHERE nombre =?;");
+			stmt.setString(1, nombre);
+			rs=stmt.executeQuery();
+			if (rs.next()) {
+				stmt = conn.prepareStatement(
+						"UPDATE ingrediente_inventario " + 
+								"SET cantidad =  cantidad + ?  " + 
+								"WHERE ingrediente_id = ? " + 
+						"and inventario_id = 1 ;");
+
+				stmt.setInt(1,cantidad);
+				stmt.setInt(2,rs.getInt("ingrediente_id"));
+				stmt.executeUpdate();
+			}else {
+				stmt = conn.prepareStatement("INSERT INTO ingrediente(nombre) VALUES (?);",Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1, nombre);
+				stmt.execute();
+				rs=stmt.getGeneratedKeys();
+				if(rs.next()) {
+					stmt = conn.prepareStatement("INSERT INTO ingrediente_inventario VALUES (?, 1, ?, ?);");
+					stmt.setInt(1, rs.getInt(1));
+					stmt.setInt(2, cantidad);
+					stmt.setString(3, unidades);
+					stmt.execute();
+				}
+
+			}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		}finally {
+			if (rs!=null){
+				try{rs.close();
+				}catch(SQLException sqlEx){}
+				rs=null;
+			}
+			if (stmt!=null){
+				try{stmt.close();
+				}catch(SQLException sqlEx){}
+				stmt=null;
+			}
+			if (conn!=null){
+				ConectorBBDD.desconectar();
+				conn=null;
+			}
+		}
+
+	}
+
+
+
+
 	public static void decrementarIngrediente(Map<Integer,Integer> ingredientes,String restaurante) {
 		if (conn == null)
 			conn= ConectorBBDD.conectar();
@@ -210,7 +335,7 @@ public class PlatoDAO {
 		m.put(1, 10);
 		m.put(5,4);
 		decrementarItem(m,"Mamma Mia");
-		
+
 	}
 
 }

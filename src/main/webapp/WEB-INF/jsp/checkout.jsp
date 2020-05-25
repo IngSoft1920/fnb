@@ -33,21 +33,21 @@
 	</header>
 
 	
-				<c:set var="val" value="${tareasBean.getListaComandasListas().isEmpty()}" /> 
+				<c:set var="val" value="${checkOutBean.getListaComandas().isEmpty()}" /> 
 						<c:if
 							test="${val != true}">
     									
   									
 				<c:forEach
 				
-						items="${tareasBean.getListaComandasListas()}" var="entry">
+						items="${checkOutBean.getListaComandas().entrySet()}" var="entry">
 		<section id="publicaciones">
 			<article class="post">
 
 				<form method="POST" action="chekinOut">
-						<h2 class="titulo-post">Mesa ${entry.getMesa().getNum_mesa()}</h2>
-						<p>  Comanda ${entry.getComanda_id()}  </p>
-						<input type="hidden" name="checkOut" value="${entry.getComanda_id()}">
+						<h2 class="titulo-post">Mesa ${entry.getKey()}</h2>
+						<p>  Comanda <c:forEach items="${entry.getValue()}" var="comanda"> :${comanda.getComanda_id()}</c:forEach>  </p>
+						<input type="hidden" name="checkOut" value="${entry.getKey()}">
 							<input type="submit" value="CheckOut"
 								/>
 						</form>

@@ -187,11 +187,11 @@ public class TareasBean {
 	 }
 	// System.out.println("he salido------------------------------------------------------");
 	//System.out.println(listaTar.toString());
-	 listaInventario=InventarioDAO.inventario("Mamma Mia");
+	 //listaInventario=InventarioDAO.inventario("Mamma Mia");
 	 
-	 System.out.println("INVENTARIOO");
-	 System.out.println(listaInventario.toString());
-	 
+	 //System.out.println("INVENTARIOO");
+	 //System.out.println(listaInventario.toString());
+	 /*
 	 idAnterior=-1;
 	 
 	 comandas= ComandaDAO.comandasTareaCocina(3);
@@ -204,7 +204,7 @@ public class TareasBean {
 		idAnterior=comm.getComanda_id();
 		 }
 		 
-	 }
+	 }*/
 	
 	}
 	

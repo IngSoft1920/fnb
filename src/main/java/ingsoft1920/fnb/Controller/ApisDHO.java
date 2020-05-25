@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import ingsoft1920.fnb.Beans.EmpleadoBean;
 import ingsoft1920.fnb.Beans.TareaEmpleadoBean;
 
 
@@ -81,7 +82,7 @@ public class ApisDHO {
 	 * }
 	 *Salida:
 	 */
-	public static void enviarFactura(int num_habitacion, String hotel, float factura){
+	public static void enviarFactura(int num_habitacion, String hotel, float factura, String tipo){
 		
 
 		HttpClient client = null;
@@ -92,6 +93,8 @@ public class ApisDHO {
 			rqstJson.addProperty("habitacion", num_habitacion);
 			rqstJson.addProperty("Hotel", hotel);
 			rqstJson.addProperty("Factura", factura);
+			rqstJson.addProperty("Tipo", tipo);
+			
 			client.setRequestBody(rqstJson.toString());
 
 			int respCode = client.getResponseCode();
@@ -105,4 +108,64 @@ public class ApisDHO {
 		}
 	
 	}
+	
+	
+	public static String nombreHabitacion(int num_habitacion){
+		
+		
+		String resultado = "";
+		HttpClient client = null;
+		try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/nombrePorHabitacion/"+num_habitacion,"POST");
+
+			JsonObject rqstJson = new JsonObject();
+			rqstJson.addProperty("num_habitacion", num_habitacion);
+		
+			client.setRequestBody(rqstJson.toString());
+
+			int respCode = client.getResponseCode();
+
+			if(respCode == 200) {
+				 resultado = client.getResponseBody();
+				
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	
+	public static List<Integer>  habitacionesReservadas(){
+		
+		
+		List<Integer> resultado =new ArrayList<Integer>();
+		HttpClient client = null;
+		try {
+			client = new HttpClient("http://piedrafita.ls.fi.upm.es:7001/habitacionReservada","POST");
+
+		
+			int respCode = client.getResponseCode();
+
+
+			if(respCode == 200) {
+				 String resp = client.getResponseBody();
+
+					JsonObject resJson = (JsonObject) JsonParser.parseString(resp);
+					JsonArray habitacion_id = resJson.get("habitacion_id").getAsJsonArray();
+					
+					for (int i =0; i<habitacion_id.size(); i++) {
+						resultado.add(habitacion_id.get(i).getAsInt());
+					}
+				 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	
+	
 }
